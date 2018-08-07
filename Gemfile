@@ -71,4 +71,10 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
   gem 'enum_help'
 
 編集しました
+わからない
+
+
+
+
+
 
