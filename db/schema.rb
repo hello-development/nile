@@ -13,7 +13,6 @@
 ActiveRecord::Schema.define(version: 2018_08_09_105608) do
 
   create_table "addresses", force: :cascade do |t|
-    t.integer "address_id"
     t.string "postal_code"
     t.text "address"
     t.string "address_name"
@@ -23,7 +22,6 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
   end
 
   create_table "admins", force: :cascade do |t|
-    t.integer "admin_id", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.datetime "created_at", null: false
@@ -37,10 +35,10 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
     t.string "artist_image_id"
     t.text "artist_contents", null: false
     t.datetime "deleted_at", null: false
+    t.index ["artist_name"], name: "index_artists_on_artist_name"
   end
 
   create_table "cart_items", force: :cascade do |t|
-    t.integer "cart_items_id", null: false
     t.integer "units", default: 0, null: false
     t.integer "cart_id", null: false
     t.integer "item_id", null: false
@@ -49,14 +47,12 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "cart_id", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "disks", force: :cascade do |t|
-    t.integer "disk_id"
     t.integer "disk_number"
     t.integer "item_id"
     t.datetime "created_at", null: false
@@ -68,10 +64,10 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "genre_name"
+    t.index ["genre_name"], name: "index_genres_on_genre_name"
   end
 
   create_table "items", force: :cascade do |t|
-    t.integer "item_id"
     t.string "item_name"
     t.string "artist_id"
     t.integer "genre_id"
@@ -83,12 +79,15 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
+    t.index ["item_name"], name: "index_items_on_item_name"
+    t.index ["price"], name: "index_items_on_price"
   end
 
   create_table "labels", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "label_name"
+    t.index ["label_name"], name: "index_labels_on_label_name"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -137,8 +136,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email"
-    t.string "encrypted_password"
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -147,14 +146,6 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.integer "user_id"
-    t.string "last_name"
-    t.string "first_name"
-    t.string "last_name_kana"
-    t.string "first_name_kana"
-    t.string "phone_number"
-    t.integer "artist_id"
-    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
