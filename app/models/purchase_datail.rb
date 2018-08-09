@@ -1,0 +1,2 @@
+class PurchaseDatail < ApplicationRecord
+end
