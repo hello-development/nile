@@ -10,7 +10,41 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_091648) do
+ActiveRecord::Schema.define(version: 2018_08_09_082945) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "address_id"
+    t.string "postal_code"
+    t.text "address"
+    t.string "address_name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "disks", force: :cascade do |t|
+    t.integer "disk_id"
+    t.integer "disk_number"
+    t.integer "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.integer "item_id"
+    t.string "item_name"
+    t.string "artist_id"
+    t.integer "genre_id"
+    t.integer "price"
+    t.integer "inventory"
+    t.text "item_contents"
+    t.string "label_id"
+    t.string "item_image_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "deleted_at"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
