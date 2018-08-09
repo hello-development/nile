@@ -4,6 +4,7 @@ class CreateArtists < ActiveRecord::Migration[5.2]
 
       t.timestamps
       t.string :artist_name
+      t.index :artist_name
       t.string :artist_image_id
       t.text :artist_contents, null: false
       t.datetime :deleted_at, null: false
