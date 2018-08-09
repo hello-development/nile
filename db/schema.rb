@@ -10,7 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_07_091648) do
+ActiveRecord::Schema.define(version: 2018_08_09_085648) do
+
+  create_table "likes", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "purchase_datails", force: :cascade do |t|
+    t.integer "item_id", null: false
+    t.integer "price", null: false
+    t.integer "quantity", null: false
+    t.integer "purchase_id", null: false
+    t.datetime "purchase_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.datetime "purchased_date", null: false
+    t.integer "total_price", null: false
+    t.integer "status", limit: 1, default: 0, null: false
+    t.string "delivery_address", default: "", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "comment", default: "", null: false
+    t.integer "item_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
