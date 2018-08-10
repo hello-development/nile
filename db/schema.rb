@@ -147,7 +147,6 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.integer "user_id"
     t.string "last_name"
     t.string "first_name"
     t.string "last_name_kana"
@@ -158,6 +157,8 @@ ActiveRecord::Schema.define(version: 2018_08_09_105608) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name"], name: "index_users_on_first_name"
+    t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
