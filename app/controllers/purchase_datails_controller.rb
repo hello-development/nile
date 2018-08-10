@@ -1,0 +1,2 @@
+class PurchaseDatailsController < ApplicationController
+end
