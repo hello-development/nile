@@ -4,6 +4,7 @@ class CreateLabels < ActiveRecord::Migration[5.2]
 
       t.timestamps
       t.string :label_name
+      t.index :label_name
     end
   end
 end
