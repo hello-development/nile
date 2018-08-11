@@ -41,5 +41,4 @@ devise_for :users, controllers: {
 
 
 
-
 end
