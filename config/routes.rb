@@ -19,7 +19,7 @@ devise_for :users, controllers: {
   get 'carts/confirmation'
   get 'artists/admin_index'
   get 'items/admin_index'
-  
+
   resources :users, only: [:show, :edit, :update, :index]do
     resources :addresses, only: [:new, :create, :edit, :show, :update, :destroy]
     resource :carts, only: [:show]
