@@ -10,6 +10,16 @@ devise_for :users, controllers: {
   passwords:     'users/passwords',
   registrations: 'users/registrations'
 }
+  root 'items#index'
+
+  get 'carts/register'
+  get 'carts/add_item'
+  get 'carts/update_item'
+  get 'carts/delete_item'
+  get 'carts/confirmation'
+  get 'artists/admin_index'
+  get 'items/admin_index'
+  
   resources :users, only: [:show, :edit, :update, :index]do
     resources :addresses, only: [:new, :create, :edit, :show, :update, :destroy]
     resource :carts, only: [:show]
@@ -29,15 +39,7 @@ devise_for :users, controllers: {
     resource :purchase_datails, only: [:new, :create, :index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'items#index'
 
-  get 'carts/register'
-  get 'carts/add_item'
-  get 'carts/update_item'
-  get 'carts/delete_item'
-  get 'carts/confirmation'
-  get 'artists/admin_index'
-  get 'items/admin_index'
 
 
 
