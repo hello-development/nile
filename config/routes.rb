@@ -31,14 +31,13 @@ devise_for :users, controllers: {
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root 'items#index'
 
-  get 'carts#register'
-  get 'carts#add_item'
-  get 'carts#update_item'
-  get 'carts#delete_item'
-  get 'carts#confirmation'
-
-  get 'atrists#admin_index'
-  get 'items#admin_index'
+  get 'carts/register'
+  get 'carts/add_item'
+  get 'carts/update_item'
+  get 'carts/delete_item'
+  get 'carts/confirmation'
+  get 'artists/admin_index'
+  get 'items/admin_index'
 
 
 
