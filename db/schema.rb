@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_11_063417) do
+ActiveRecord::Schema.define(version: 2018_08_12_090225) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "postal_code"
@@ -41,10 +41,10 @@ ActiveRecord::Schema.define(version: 2018_08_11_063417) do
   create_table "artists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "artist_name"
-    t.string "artist_image_id"
+    t.string "artist_name", null: false
+    t.text "artist_image_id"
     t.text "artist_contents", null: false
-    t.datetime "deleted_at", null: false
+    t.datetime "deleted_at"
     t.index ["artist_name"], name: "index_artists_on_artist_name"
   end
 
@@ -138,10 +138,10 @@ ActiveRecord::Schema.define(version: 2018_08_11_063417) do
   create_table "songs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "song_name"
-    t.integer "song_order"
+    t.string "song_name", null: false
+    t.integer "song_order", null: false
     t.integer "disk_id"
-    t.datetime "deleted_at", null: false
+    t.datetime "deleted_at"
     t.index ["song_name"], name: "index_songs_on_song_name"
   end
 
