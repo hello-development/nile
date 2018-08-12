@@ -8,7 +8,10 @@ class Item < ApplicationRecord
 	has_many :likes, dependent: :destroy
 	has_many :reviews, dependent: :destroy
 
-	validates :artist :label :genre ,  presence: true
+	validates :artist, presence: true
+	validates :label, presence: true
+	validates :genre, presence: true
+
 	attachment :item_image
 
 end
