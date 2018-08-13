@@ -1,0 +1,44 @@
+<header>
+</header>
+<div class='box'>
+	<div class='row'>
+
+		<div  class="col-md-4 col-sm-4">
+			<h3> アーティスト登録</h3>
+			<div class="box2">
+				<%= form_for(@artist) do |f| %>
+				<h4> アーティスト名</h4>
+				<%= f.text_field :artist_name %>
+				<h4> アーティスト説明文</h4>
+				<%= f.text_area :artist_contents %>
+				<h4> アーティスト写真</h4>
+				<%= f.attachment_field :artist_image, placeholder: "アーティスト画像" %>
+				<%= f.submit %>
+				<% end %>
+			</div>
+		</div>
+
+		<div  class="col-md-8 col-sm-8">
+			<h1> アーティスト一覧</h1>
+			<table  class="table-hover table">
+				<thead>
+					<tr>
+						<th>並び替え▼</th>
+						<th>○○順</th>
+					</tr>
+				</thead>
+				<tbody>
+					<% @artists.each do |artist| %>
+					<tr>
+						<td><%= attachment_image_tag artist, :artist_image, :fill, 50, 50, format: 'jpeg' %></td>
+						<td><%= artist.artist_name %></td>
+						<td><%= artist.artist_contents %></td>
+						<td><button class="btn btn-default btn-success">編集</button></td>
+						<td><%= link_to artist_path(artist.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="btn btn-default btn-danger">削除</button><% end %></td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
