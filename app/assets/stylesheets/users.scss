@@ -1,3 +1,23 @@
 // Place all the styles related to the Users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.login_title {
+	margin-top: 100px;
+	text-align: center;
+}
+.users_signup {
+	margin-top: 100px;
+	text-align: center;
+}
+
+.field {
+	margin: 5px 0px 5px 0px;
+}
+.actions {
+	margin: 5px 0px 50px 0px;
+}
+
+.users_data {
+	margin-top: 100px;
+}
