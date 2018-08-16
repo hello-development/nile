@@ -1,6 +1,6 @@
-親の商品名が表示されます<br>
+<%= @item.item_name %> <br>
 ディスクの追加
-<%= form_for @disk, url: item_disks_path do |f| %>
+<%= form_for [@item, @disk], url: item_disks_path do |f| %>
 
 ディスクNo.<br>
 <%= f.number_field :disk_number %><br>
