@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_12_090225) do
+ActiveRecord::Schema.define(version: 2018_08_13_020601) do
 
   create_table "addresses", force: :cascade do |t|
-    t.string "postal_code"
-    t.text "address"
+    t.string "postal_code", null: false
+    t.text "address", null: false
     t.string "address_name"
-    t.integer "user_id"
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -63,8 +63,8 @@ ActiveRecord::Schema.define(version: 2018_08_12_090225) do
   end
 
   create_table "disks", force: :cascade do |t|
-    t.integer "disk_number"
-    t.integer "item_id"
+    t.integer "disk_number", null: false
+    t.integer "item_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -78,14 +78,14 @@ ActiveRecord::Schema.define(version: 2018_08_12_090225) do
   end
 
   create_table "items", force: :cascade do |t|
-    t.string "item_name"
-    t.string "artist_id"
+    t.string "item_name", null: false
+    t.integer "artist_id", null: false
     t.integer "genre_id"
-    t.integer "price"
-    t.integer "inventory"
+    t.integer "price", null: false
+    t.integer "inventory", default: 0, null: false
     t.text "item_contents"
-    t.string "label_id"
-    t.string "item_image_id"
+    t.integer "label_id"
+    t.string "item_image_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -140,7 +140,7 @@ ActiveRecord::Schema.define(version: 2018_08_12_090225) do
     t.datetime "updated_at", null: false
     t.string "song_name", null: false
     t.integer "song_order", null: false
-    t.integer "disk_id"
+    t.integer "disk_id", null: false
     t.datetime "deleted_at"
     t.index ["song_name"], name: "index_songs_on_song_name"
   end
