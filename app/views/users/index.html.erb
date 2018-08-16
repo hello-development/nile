@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>NILE</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+<p>ユーザー検索</p>
+
+
+<div class="users_data">
+	<table>
+		<tr></tr>
+		<thead>
+			<tr>
+				<th> ID </th>
+				<th> ユーザー名 </th>
+				<th> メールアドレス </th>
+				<th> 編集 </th>
+				<th> 退会 </th>
+			</tr>
+		</thread>
+		<tbody>
+			<tr>
+				<td> ID </td>
+				<td> <%= link_to "ユーザー名" %> </td>
+				<td> メールアドレス </td>
+				<td> <%#= link_to "編集", user_path, class: 'btn btn-default' %> <%= button_to "編集", class: 'btn' %> </td>
+				<td> <%= button_to "退会", class: 'btn' %> </td>
+			</tr>
+		</tbody>>
+	</table>
+</div>
+
+</body>
+</html>
