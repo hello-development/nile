@@ -6,10 +6,13 @@ class DisksController < ApplicationController
     end
 
     def create
+      @item = Item.find params[:item_id]
       @disk = Disk.new(disk_params)
-      if @disk.save!
+      @disk.item_id = @item.id
+      if @disk.save
       	redirect_to item_disks_path, notice: "Disk created successfully"
       else
+        @disks = @item.disks
       	render :index
       end
     end
