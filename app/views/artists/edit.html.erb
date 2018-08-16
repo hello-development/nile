@@ -1,1 +1,27 @@
-<h1>こんにちは</h1>
+
+<div  class="container">
+	<div  class="row">
+		<h1  class="artist_edit_headline">アーティスト情報変更</h1>
+		<div  class="box2">
+			<% if @artist.errors.any? %>
+				<div id="error_explanation" class="alert alert-danger">
+					<h2  class="alert_h2"><%= pluralize(@artist.errors.count, "error") %> prohibited this artist from being saved:</h2>
+					<ul>
+						<% @artist.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
+			<% end %>
+			<%= form_for(@artist) do |f| %>
+			<h4> アーティスト名</h4>
+			<%= f.text_field :artist_name, autofocus:true, placeholder:"アーティスト名", class:"artist_data" %>
+			<h4> アーティスト説明文</h4>
+			<%= f.text_area :artist_contents, autofocus:true, placeholder:"アーティスト説明文", class:"artist_data" %>
+			<h4> アーティスト写真</h4>
+			<%= f.attachment_field :artist_image, class:"artist_data" %>
+			<%= f.submit class:"btn btn-primary artist_data" %>
+			<% end %>
+		</div>
+	</div>
+</div>
