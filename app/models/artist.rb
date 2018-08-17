@@ -3,6 +3,9 @@ class Artist < ApplicationRecord
 	has_many :items, dependent: :destroy
 	has_many :users
 
+	belongs_to :genre
+	belongs_to :label
+
 	attachment :artist_image
 
 	validates :artist_name, presence: true

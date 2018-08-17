@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
 .login_title {
 	margin-top: 100px;
 	text-align: center;
@@ -23,10 +29,21 @@
 }
 
 
-.users_names {
+
+
+.users_show_left {
+	background-color: pink;
+	width: 20%;
 	float: left;
 }
 
-.favorite_artists {
+.users_show_right {
+	background-color: orange;
+	width: 80%;
 	float: left;
+}
+
+.users_show_bottom {
+	width: 100%;
+	background-color: green;
 }
