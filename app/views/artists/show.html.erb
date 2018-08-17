@@ -1,2 +1,53 @@
-<h1>aaaaaa</h1>
-<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+
+<div class='box'>
+	<div class='row'>
+		<div  class="col-md-8 col-sm-8">
+			<% if flash[:notice] %>
+			<p class="notice"><%= flash[:notice] %></p>
+			<% end %>
+			<h1> <%= @artist.artist_name %></h1>
+			<div  class="clearfix">
+				<%= attachment_image_tag @artist, :artist_image, :fill, 250, 250, format: 'jpeg', class: "artist_show_image" %>
+				<h3  class="artist_profile">・プロフィール</h3>
+				<div  class="artist_contents_box">
+				<p  class="artist_contents"><%= @artist.artist_contents %></p>
+				</div>
+				<%= link_to edit_artist_path(@artist.id), class: "artist_button" do %><button class="btn btn-default btn-success">このアーティストを編集する</button><% end %>
+				<%= link_to artist_path(@artist.id), method: :delete, class: "artist_button", "data-confirm" => "本当に削除しますか？" do %><button class="btn btn-default btn-danger">このアーティストを削除する</button><% end %>
+			</div>
+			<P> このアーティストをお気に入り登録する<span class="glyphicon glyphicon-star" aria-hidden="true"></span></P>
+		</div>
+		<div class='col-md-4 col-sm-4'>
+			<h3><%= @artist.artist_name %></h3>
+			<h3>CDいいねランキング</h3>
+			<table  class="table-hover table">
+				<tbody>
+					<tr>
+						<td>１</td>
+						<td><%= image_tag('no_image50x50.jpg') %></td>
+						<td>アーティスト名</td>
+						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>111</td>
+						<td>ジャンル</td>
+						<td>レーベル</td>
+					</tr>
+					<tr>
+						<td>２</td>
+						<td><%= image_tag('no_image50x50.jpg') %></td>
+						<td>アーティスト名</td>
+						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>99</td>
+						<td>ジャンル</td>
+						<td>レーベル</td>
+					</tr>
+					<tr>
+						<td>３</td>
+						<td><%= image_tag('no_image50x50.jpg') %></td>
+						<td>アーティスト名</td>
+						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>88</td>
+						<td>ジャンル</td>
+						<td>レーベル</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
