@@ -9,10 +9,16 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body> マイページ　
-<div> ユーザー名 </div>
-<div> お気に入りアーティスト </div>
-<div> 購入履歴 </div>
+  <body>
+
+<div class="users_names"> ユーザー名
+<%= link_to "編集", edit_user_path, class: 'btn btn-default' %>
+<%= link_to "退会", edit_user_path, class: 'btn btn-default' %>
+</div>
+
+<div class="favorite_artists"> お気に入りアーティスト </div>
+
+<div class="purchase_histories"> 購入履歴 </div>
 
   </body>
 
