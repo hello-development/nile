@@ -1,42 +1,54 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <title>NILE</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+	<head>
+	    <title>NILE</title>
+	    <%= csrf_meta_tags %>
+	    <%= csp_meta_tag %>
+	    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+	</head>
 
-  <body>
+	<body>
 
-<p>ユーザー検索</p>
+	<div class="users_data">
+		<p>ユーザー検索</p>
+		<div class=search_box>
+	      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	      <form method="get" action="#" class="search_container">
+	        <input type="text" size="25" placeholder="ユーザー名">
+	        <input type="submit" value="&#xf002">
+	      </form>
+	    </div>
+	</div>
 
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th> ID </th>
+					<th colspan="2"> ユーザー名 </th>
+					<th> メールアドレス </th>
+					<th colspan="2"> </th>
+					<th colspan="2"> </th>
+				</tr>
+			</thread>
 
-<div class="users_data">
-	<table>
-		<tr></tr>
-		<thead>
-			<tr>
-				<th> ID </th>
-				<th> ユーザー名 </th>
-				<th> メールアドレス </th>
-				<th> 編集 </th>
-				<th> 退会 </th>
-			</tr>
-		</thread>
-		<tbody>
-			<tr>
-				<td> ID </td>
-				<td> <%= link_to "ユーザー名" %> </td>
-				<td> メールアドレス </td>
-				<td> <%#= link_to "編集", user_path, class: 'btn btn-default' %> <%= button_to "編集", class: 'btn' %> </td>
-				<td> <%= button_to "退会", class: 'btn' %> </td>
-			</tr>
-		</tbody>>
-	</table>
-</div>
+			<tbody>
+
+				<tr>
+					<td> ID </td>
+					<td colspan="2"> <%= link_to "ユーザー名" %> </td>
+					<td> メールアドレス </td>
+					<td colspan="2"> <%#= link_to "編集", user_path, class: 'btn btn-default' %> <%= button_to "編集", class: 'btn' %> </td>
+					<td colspan="2"> <%= button_to "退会", class: 'btn' %> </td>
+				</tr>
+
+			</tbody>>
+
+		</table>
+
+	</div>
 
 </body>
 </html>
