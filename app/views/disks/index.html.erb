@@ -1,3 +1,4 @@
+<div>
 <%= @item.item_name %> <br>
 ディスクの追加
 <%= form_for [@item, @disk], url: item_disks_path do |f| %>
@@ -11,6 +12,7 @@
 
 <% @disks.each do |disk| %>
 	<%= disk.id %>
-	<%= disk.disk_number %><br>
+	<%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %>
+	<%= link_to "削除", item_disk_path(@item, disk), method: :delete %><br>
 
 <% end %>

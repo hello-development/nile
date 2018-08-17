@@ -17,6 +17,14 @@ class DisksController < ApplicationController
       end
     end
 
+    def destroy
+      @item = Item.find params[:item_id]
+      @disk = Disk.find_by(item_id: params[:item_id], id: params[:id])
+      @disks = @item.disks
+      @disk.destroy
+      redirect_to item_disks_path, notice: "Disk delete successfully"
+    end
+
       private
 
         def disk_params
