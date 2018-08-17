@@ -7,6 +7,8 @@ class ArtistsController < ApplicationController
 
 	def index
 		@artists = Artist.all
+		@genres = Genre.all
+		@labels = Label.all
 	end
 
 	def new
@@ -50,6 +52,6 @@ class ArtistsController < ApplicationController
 
 	private
 	def artist_params
-		params.require(:artist).permit(:artist_name, :artist_image, :artist_contents)
+		params.require(:artist).permit(:artist_name, :artist_image, :artist_contents,:genre_id, :label_id)
 	end
 end

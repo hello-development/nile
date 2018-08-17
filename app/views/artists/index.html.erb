@@ -14,9 +14,20 @@
 					<tbody>
 						<% @artists.each do |artist| %>
 						<tr>
-							<td><%= link_to artist_path(artist.id) do %><%= attachment_image_tag artist, :artist_image, :fill, 100, 100, format: "jpg" %><% end %></td>
-							<td><%= link_to artist_path(artist.id) do %><%= artist.artist_name %><% end %></td>
-							<td>ジャンル</td>
+							<td>
+								<%= link_to artist_path(artist.id) do %><%= attachment_image_tag artist, :artist_image, :fill, 100, 100, format: "jpg" %><% end %>
+							</td>
+							<td>
+								<%= link_to artist_path(artist.id) do %><%= artist.artist_name %><% end %>
+							</td>
+							<td>
+								<% @genres.each do |genre| %>
+								<% if artist.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %>
+							</td>
+							<td>
+								<% @labels.each do |label| %>
+								<% if artist.label_id == label.id %><%= label.label_name %><% end %><% end %>
+							</td>
 						</tr>
 						<% end %>
 					</tbody>
