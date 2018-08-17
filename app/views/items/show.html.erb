@@ -1,2 +1,112 @@
-<h1>商品詳細<h1>
-	
+
+<body>
+	<div class='container'>
+		<div class='row'>
+			<h1>商品詳細</h1>
+			<div class="col-md-8">
+				<div class="col-md-2">
+					<a><%= image_tag('no_image100x100.jpg') %></a>
+				</div>
+				<div class="col-md-5">
+					<p>シングル/アルバム名</p>
+					<p>アーティスト名</p>
+					<p>ジャンル</p>
+					<p>価格</p>
+					<p>在庫数</p>
+					<p>カートに入れる</p>
+					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+	</p>	
+				</div>
+				<div class="col-md-1">
+				<button type="button" class="btn btn-success active">s編集(商品編集へリンク)</button>
+		    	</div>
+				<div class="col-md-8">
+					<h3>収録曲</h3>
+	 				<table class="table table-striped">
+	 					<thead>
+	 						<tr>
+	 							<th></th>
+								<th>タイトル</th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<th>時間</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<th>1</th>
+								<td>WILL</td>
+								<th></th>
+								<th></th>
+								<td></td>
+								<td><p>1:00:00</p></td>
+							</tr>
+							<tr>
+								<th>2</th>
+								<td>虹を待つ人</td>
+								<th></th>
+								<th></th>
+								<td></td>
+								<td><p>1:00:00</p></td>
+							</tr>
+							<tr>
+								<th>3</th>
+								<td>ray</td>
+								<th></th>
+								<th></th>
+								<td></td>
+								<td><p>1:00:00</p></td>
+							</tr>
+							<tr>
+								<th>4</th>
+								<td>サザンクロス</td>
+								<th></th>
+								<th></th>
+								<td></td>
+								<td><p>1:00:00</p></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="col-md-4">
+			<h3><br>いいねランキング</h3>
+				<table  class="table-hover table">
+					<tbody>
+						<tr>
+							<td>１</td>
+							<td><%= image_tag('no_image100x100.jpg') %></td>
+							<td>アーティスト名</td>
+							<td></span>111</td>
+							<td>ジャンル</td>
+							<td>レーベル</td>
+							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+							<td>レビュー</td>
+						</tr>
+						<tr>
+							<td>２</td>
+							<td><%= image_tag('no_image100x100.jpg') %></td>
+							<td>アーティスト名</td>
+							<td></td>
+							<td>ジャンル</td>
+							<td>レーベル</td>
+							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+							<td>レビュー</td>
+						</tr>
+						<tr>
+							<td>３</td>
+							<td><%= image_tag('no_image100x100.jpg') %></td>
+							<td>アーティスト名</td>
+							<td></span>88</td>
+							<td>ジャンル</td>
+							<td>レーベル</td>
+							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+							<td>レビュー</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	     </div>
+	</div>
+</body>
