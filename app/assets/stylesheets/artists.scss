@@ -2,25 +2,62 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
- .col-md-4 {
- 	background-color: #dff0d8;
- }
- .col-sm-4 {
- 	background-color: #dff0d8;
- }
- .col-md-8 {
- 	background-color: #d9edf7;
- }
- .col-sm-8 {
- 	background-color: #d9edf7;
- }
+ .clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
  .box {
  margin : 0 40px;
  }
  .box2 {
- margin : 10px;
  border:1px;
  border-style:solid;
  border-color:#999;
  text-align: center;
+ padding-bottom : 30px;
+ }
+ .artist_contents_box {
+ border:1px;
+ border-style:solid;
+ border-color:#999;
+ width: 630px;
+ float: right;
+ padding: 10px;
+ margin-bottom: 20px;
+ }
+ .artist_show_image {
+ float : left;
+ }
+ .artist_profile {
+ margin: 0 auto;
+ }
+ .artist_button {
+ margin-left: 20px;
+ }
+ .artist_data {
+ width: 80%;
+ margin: 0 auto;
+ margin-bottom: 20px;
+ }
+ .artist_edit_headline {
+ margin:30px;
+ }
+ .artist_over_1 {
+ width: 900px;
+ height: 600px;
+ overflow: scroll;
+ direction:rtl;
+}
+ .artist_over_2 {
+ width: 900px;
+ height: 600px;
+ overflow: scroll;
+}
+ .artist_directory {
+ direction:ltr;
+ }
+ .notice {
+ color: green;
  }
