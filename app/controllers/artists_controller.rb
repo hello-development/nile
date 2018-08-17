@@ -9,6 +9,12 @@ class ArtistsController < ApplicationController
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all
+		if params[:genre_id].present?
+			@artists = @artists.get_by_genre_id params[:genre_id]
+		end
+		if params[:label_id].present?
+			@artists = @artists.get_by_label_id params[:label_id]
+		end
 	end
 
 	def new
@@ -48,6 +54,10 @@ class ArtistsController < ApplicationController
 		@artist = Artist.find(params[:id])
 		@artist.destroy
 		redirect_to artists_admin_index_path
+	end
+
+	def search
+		genre_name_ids = Submit.where("genre_name = ?", params[:genre_id]) .pluck(:id)
 	end
 
 	private
