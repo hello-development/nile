@@ -33,3 +33,5 @@ genre_name = %w(
 genre_name.each do |gn|
   Genre.find_or_create_by(genre_name: gn)
 end
+
+# User.create!(email: "a@a", last_name: "苗字", first_name: "氏名", last_name_kana: "ﾐｮｳｼﾞ", first_name_kana: "ｼﾒｲ", phone_number: "12312341234")
