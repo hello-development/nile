@@ -18,13 +18,14 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		@user = User.new(user_params)
+		# @user = User.new(user_params)
+		@user = User.all
 		@user.user_id = current_user.id
     if  @user.save
         redirect_to new_user_address_path(@user.id)
     else
     	@users = User.all
-    	@user = current_user
+    	# @user = current_user
 	    render :new
 	end
 	end

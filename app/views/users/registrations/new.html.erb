@@ -8,19 +8,19 @@
   <div class="field">
    <!--  <%#= f.label :名前（漢字） %><br /> -->
     <p> 名前（漢字） </p>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "姓" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "名" %>
+    <%= f.text_field :last_name, autofocus: true, autocomplete: "last_name", placeholder: "姓" %>
+    <%= f.text_field :first_name, autofocus: true, autocomplete: "first_name", placeholder: "名" %>
   </div>
 
   <div class="field">
-    <p> 名前フリガナ（半角） </p>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "セイ" %>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メイ" %>
+    <p> 名前フリガナ（全角カナ） </p>
+    <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", placeholder: "セイ" %>
+    <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", placeholder: "メイ" %>
   </div>
 
   <div class="field">
     <p> 電話番号（半角・ハイフン無し） </p>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.number_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
   </div>
 
   <div class="field">
@@ -31,9 +31,9 @@
   <div class="field">
     <span> パスワード（半角英数字6桁以上） </span>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+<!--     <em>(<%#= @minimum_password_length %> characters minimum)</em> -->
     <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.text_field :password, autocomplete: "off" %>
   </div>
 
   <div class="field">
