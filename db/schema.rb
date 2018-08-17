@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_13_020601) do
+ActiveRecord::Schema.define(version: 2018_08_17_052944) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "postal_code", null: false
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 2018_08_13_020601) do
     t.text "artist_image_id"
     t.text "artist_contents", null: false
     t.datetime "deleted_at"
+    t.integer "genre_id"
+    t.integer "label_id"
     t.index ["artist_name"], name: "index_artists_on_artist_name"
   end
 
