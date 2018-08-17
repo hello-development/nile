@@ -27,13 +27,13 @@
               <%= link_to "CD", items_path %>
             </li>
             <li class="li">
-              <%= link_to "マイページ", user_path %>
+              <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
             <li class="li">
               <%= link_to "ログアウト", items_path %>
             </li>
             <li class="li">
-              <%= link_to "カート", user_carts_path %>
+              <%= link_to "カート", user_carts_path(current_user.id) %>
             </li>
 
           <% else %>
