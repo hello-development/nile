@@ -30,9 +30,9 @@ class User < ApplicationRecord
     presence: true
 
     validates :password,
-    presence: true,
-    uniqueness: true,
-    length: { minimum: 6 },
+    # presence: true,
+    # uniqueness: true,
+    # length: { minimum: 6 },
     format: { with: /\A[a-z0-9]+\z/i }
 
 end
