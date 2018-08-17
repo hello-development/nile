@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
 	end
 	def create
 		@item = Item.new(item_params)
-		@item.save!
+		@item.save
 		redirect_to items_admin_index_path
 	end
 
@@ -18,6 +18,9 @@ class ItemsController < ApplicationController
 	def admin_index
 		@items = Item.all
 		@item = Item.new
+		@artists = Artist.all
+		@genres = Genre.all
+		@labels = Label.all
 	end
 
 	def edit
@@ -38,7 +41,11 @@ class ItemsController < ApplicationController
 
 	private
 	def item_params
-		params.require(:item).permit(:item_name, :price, :inventory, :item_contents)
+		params.require(:item).permit(:item_name, :artist_id, :genre_id, :price, :inventory, :item_contents, :label_id, :item_image)
 	end
 
 end
+
+
+
+

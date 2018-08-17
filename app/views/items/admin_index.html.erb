@@ -30,23 +30,31 @@
   </div>
 
   <div class="row">
-   <div class="col-lg-9" style="">
-
-    <% @items.each do |item| %>
-      <tr>
-        <td></td>
-        <td><%= item.item_name %></td>
-        <td><%= iten.item_contents %></td>
-        <td><%= price %></td>
-        <td><%= inventory %></td>
-        <td><button class="btn btn-default btn-success">編集</button></td>
-        <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn btn-default btn-danger">削除</button><% end %></td>
-      </tr>
-      <% end %>
-
-
+    <div class="col-lg-9" style="">
+      <table  class="table-hover table">
+        <thead>
+          <tr>
+            <th>並び替え▼</th>
+            <th>○○順</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></td>
+            <td><%= item.item_name %></td>
+            <td><%= item.item_contents %></td>
+            <td><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
+            <td><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
+            <td><%= item.price %></td>
+            <td><%= item.inventory %></td>
+            <td><button class="btn btn-default btn-success">編集</button></td>
+            <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn     btn-default btn-danger">削除</button><% end %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
    </div>
   </div>
-
- </div>
 </body>
