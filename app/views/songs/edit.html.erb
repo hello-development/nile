@@ -1,0 +1,23 @@
+<% if @song.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @song.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<%= @item.item_name %> > <%= @disk.disk_number %> <br>
+曲情報変更<br>
+<%= form_for [@disk, @song], url: item_disk_song_path do |f| %>
+
+曲名登録<br>
+曲順<br>
+<%= f.number_field :song_order %><br>
+曲名<br>
+<%= f.text_field :song_name %><br>
+
+<%= f.submit '上記の内容で変更する' %>
+
+<% end %>
