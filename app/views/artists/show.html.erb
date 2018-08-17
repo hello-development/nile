@@ -2,6 +2,9 @@
 <div class='box'>
 	<div class='row'>
 		<div  class="col-md-8 col-sm-8">
+			<% if flash[:notice] %>
+			<p class="notice"><%= flash[:notice] %></p>
+			<% end %>
 			<h1> <%= @artist.artist_name %></h1>
 			<div  class="clearfix">
 				<%= attachment_image_tag @artist, :artist_image, :fill, 250, 250, format: 'jpeg', class: "artist_show_image" %>

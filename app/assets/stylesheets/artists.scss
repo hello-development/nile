@@ -7,20 +7,8 @@
   display: block;
   clear: both;
 }
- .col-md-4 {
- 	background-color: #dff0d8;
- }
- .col-sm-4 {
- 	background-color: #dff0d8;
- }
- .col-md-8 {
- 	background-color: #d9edf7;
- }
- .col-sm-8 {
- 	background-color: #d9edf7;
- }
  .box {
- margin : 0 40px;
+ margin : 78px 40px 0;
  }
  .box2 {
  border:1px;
@@ -68,4 +56,7 @@
 }
  .artist_directory {
  direction:ltr;
+ }
+ .notice {
+ color: green;
  }
