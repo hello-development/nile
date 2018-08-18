@@ -3,10 +3,12 @@ class UsersController < ApplicationController
 	# before_action :authenticate_user!, except: [:top, :about, :new_user_session_path, :new_user_registration_path]
 
 	def index
+		@user = User.all
+
 	end
 
 	def show
-		@users = User.all
+		@user = User.all
 	end
 
 	def edit
@@ -27,7 +29,7 @@ class UsersController < ApplicationController
     if  @user.save
         redirect_to new_user_address_path(@user.id)
     else
-    	@users = User.all
+    	@user = User.all
     	# @user = current_user
 	    render :new
 	end
