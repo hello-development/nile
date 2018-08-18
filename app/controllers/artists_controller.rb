@@ -56,10 +56,6 @@ class ArtistsController < ApplicationController
 		redirect_to artists_admin_index_path
 	end
 
-	def search
-		genre_name_ids = Submit.where("genre_name = ?", params[:genre_id]) .pluck(:id)
-	end
-
 	private
 	def artist_params
 		params.require(:artist).permit(:artist_name, :artist_image, :artist_contents,:genre_id, :label_id)
