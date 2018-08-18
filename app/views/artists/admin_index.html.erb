@@ -24,8 +24,8 @@
 				<%= f.text_area :artist_contents, placeholder:"アーティスト説明文", class:"artist_data" %>
 				<h4> アーティスト写真</h4>
 				<%= f.attachment_field :artist_image, placeholder:"アーティスト画像", class:"artist_data" %>
-				<%= f.select :genre_id,Genre.all.map { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %>
-				<%= f.select :label_id,Label.all.map { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %>
+				<%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %>
+				<%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %>
 				<%= f.submit class:"btn btn-primary artist_data" %>
 				<% end %>
 			</div>
