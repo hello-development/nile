@@ -14,7 +14,7 @@
 <div class="users_show_upper clearfix" >
 <div class="users_show_left">
   <div class="users_names"> ユーザー名 </div>
-  <div> <%#= current_user.last_name %> <%#= current_user.first_name %> </div>
+  <div> <%= current_user.last_name %> <%= current_user.first_name %> </div>
   <div> <%= link_to "編集", edit_user_path, class: 'btn btn-default' %> </div>
   <div> <%= link_to "退会", root_path, class: 'btn btn-default', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
 </div>
