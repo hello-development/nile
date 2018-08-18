@@ -30,7 +30,8 @@
               <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "ログアウト", items_path %>
+              <%#= link_to "ログアウト", items_path %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
             <li class="li">
               <%= link_to "カート", user_carts_path(current_user.id) %>
