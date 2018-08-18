@@ -1,5 +1,14 @@
+<% if @address.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @address.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
 新規会員登録(下記を入力して下さい)
-<%= form_for [@user, @address], url: user_addresses_path do |f| %>
+<%= form_for [current_user, @address], url: user_addresses_path do |f| %>
 郵便番号(半角ハイフン無し)<br>
 <%= f.text_field :postal_code %><br>
 住所<br>
