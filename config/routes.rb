@@ -19,6 +19,7 @@ devise_for :users, controllers: {
   get 'carts/confirmation'
   get 'artists/admin_index'
   get 'items/admin_index'
+  patch 'users/:id' => 'users#favorite'
 
   resources :users, only: [:show, :edit, :update, :index]do
     resources :addresses, only: [:new, :create, :edit, :show, :update, :destroy]
