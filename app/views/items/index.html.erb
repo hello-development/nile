@@ -3,90 +3,23 @@
 <body>
   <div class='container'>
     <div class='row'>
-      <h1>商品詳細</h1>
-      <div class="col-lg-8">
+      <div class="col-lg-9">
         <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
-        </div>
-        <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
-        </div>
-        <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
-        </div>
-        <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
-        </div>
-        <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
-        </div>
-        <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
-        </div>
-        <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
-        </div>
-        <div class="col-lg-3">
-          <a><%= image_tag('no_image100x100.jpg') %></a>
-          <ol>
-            <li>シングル/アルバム名</li>
-            <li>アーティスト名</li>
-            <li>ジャンル</li>
-            <li>価格</li>
-            <li>在庫数</li>
-          </ol>
+          <div class="item-box">
+          <% @items.each do |item| %>
+                <dl>
+                  <dt><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %></dt>  
+                  <dd><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></dd>  
+                  <dd>商品名</dd>
+                  <dd><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></dd>
+                  <dd>価格：&yen;200,000</dd>
+                  <dd>在庫</dd>
+                </dl>
+          <% end %>
         </div>
       </div>
-      <div class="col-lg-4">
+    </div>
+      <div class="col-lg-3">
         <h3><br>いいねランキング</h3>
         <table  class="table-hover table">
           <tbody>
@@ -126,31 +59,3 @@
     </div>
   </div>
 </body>
-<!-- <body> -->
-      <h2>商品検索</h2>
-      <div style="width: 250px; padding: 15px; margin-bottom: 10px; border: 1px solid #333333;"></div>
-      <table class="table table-hover table-inverse">
-       <thead>
-        <tr>
-         <th>ID</th>
-         <th>シングル/アルバム名</th>
-         <th></th>
-         <th></th>
-         <th></th>
-         <th colspan="3"></th>
-        </tr>
-       </thead>
-       <tbody>
-       <tr>
-        <th>1</th>
-        <td>商品名</td>
-        <td></td>
-        <th colspan="3"></th>
-        <td><button type="button" class="btn btn-default btn-sm">編集</button><button type="button" class="btn btn-default btn-sm">削除</button></td>
-       </tr>
-       </tbody>
-      </table>
-     </div>
-    </div>
-
-<!-- </body> -->

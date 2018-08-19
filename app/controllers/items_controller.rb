@@ -1,6 +1,11 @@
 class ItemsController < ApplicationController
 
 	def index
+		@items = Item.all
+		@item = Item.new
+		@artists = Artist.all
+		@genres = Genre.all
+		@labels = Label.all
 	end
 
 	def new
@@ -25,12 +30,16 @@ class ItemsController < ApplicationController
 
 	def edit
 		@item = Item.find(params[:id])
+		@artists = Artist.find(params[:id])
+		@genres = Genre.find(params[:id])
+		@labels = Label.find(params[:id])
 	end
 
 
 	def update
 		@item = Item.find(params[:id])
 		@item.update(item_params)
+		redirect_to items_admin_index_path
 	end
 
 	def destroy
@@ -45,6 +54,9 @@ class ItemsController < ApplicationController
 	end
 
 end
+
+
+
 
 
 
