@@ -1,11 +1,16 @@
 class ItemsController < ApplicationController
 
 	def index
-		@items = Item.all
-		@item = Item.new
-		@artists = Artist.all
-		@genres = Genre.all
-		@labels = Label.all
+			@items = Item.all
+			@item = Item.new
+			@artists = Artist.all
+			@genres = Genre.all
+			@labels = Label.all
+		if user_signed_in?
+		unless Address.exists?(user_id: current_user.id)
+			redirect_to new_user_address_path(current_user)
+		end
+		end
 	end
 
 	def new
@@ -54,10 +59,3 @@ class ItemsController < ApplicationController
 	end
 
 end
-
-
-
-
-
-
-
