@@ -20,7 +20,7 @@
             <td><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
             <td><%= item.price %></td>
             <td><%= item.inventory %></td>
-            <td><button class="btn btn-default btn-success">編集</button></td>
+            <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>
             <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn     btn-default btn-danger">削除</button><% end %></td>
           </tr>
           <% end %>

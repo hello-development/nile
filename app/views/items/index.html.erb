@@ -12,8 +12,8 @@
                   <dd><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></dd>  
                   <dd>商品名</dd>
                   <dd><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></dd>
-                  <dd>価格：&yen;200,000</dd>
-                  <dd>在庫</dd>
+                  <dd><%= item.price %></dd>
+                  <dd><%= item.inventory %></dd>
                 </dl>
           <% end %>
         </div>
