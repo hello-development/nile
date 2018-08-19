@@ -39,8 +39,7 @@
 
           <% elsif admin_signed_in? %>
             <li class="li">
-                <%#= link_to "アーティスト", artists_admin_index_path %>
-                <%= link_to "アーティスト" %>
+                <%= link_to "アーティスト", artists_path %>
             </li>
             <li class="li">
                 <%= link_to "CD", items_path %>
@@ -53,17 +52,16 @@
                 <%= link_to "商品登録", new_item_path %>
             </li>
             <li class="li">
-                <%= link_to "ログアウト", destroy_admin_session_path , method: :delete %>
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </li>
             <li class="li">
-              <%#= link_to "アーティスト管理", artists_admin_index_path %>
-              <%= link_to "アーティスト管理" %>
+              <%= link_to "アーティスト管理", artists_admin_index_path %>
             </li>
             <li class="li">
-              <%#= link_to "商品管理", item_disks_path %>
-              <%= link_to "商品管理" %>
+              <%= link_to "商品管理", items_admin_index_path %>
             </li>
             <li class="li">
+              <!-- リンク先が違う・・・ -->
               <%= link_to "ユーザー一覧", users_path %>
             </li>
 
