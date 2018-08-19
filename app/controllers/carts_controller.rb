@@ -22,7 +22,7 @@ class CartsController < ApplicationController
 		redirect_to current_cart
 	end
 
-	# カート詳細画面から、「削除」を押した時のアクション
+	# # カート詳細画面から、「削除」を押した時のアクション
 	def delete_item
 		@cart_item.destroy
 		redirect_to current_cart
@@ -37,3 +37,4 @@ class CartsController < ApplicationController
 		@cart_item = current_cart.cart_items.find_by(item_id: params[:item_id])
 	end
 end
+

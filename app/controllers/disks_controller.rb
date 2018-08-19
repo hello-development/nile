@@ -21,7 +21,6 @@ class DisksController < ApplicationController
       @item = Item.find params[:item_id]
       @disk = Disk.find_by(item_id: params[:item_id], id: params[:id])
       @disk.destroy
-      @disks = @item.disks
       redirect_to item_disks_path, notice: "Disk delete successfully"
     end
 
