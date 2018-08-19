@@ -6,11 +6,11 @@ class AddressesController < ApplicationController
 	def create
 	  @address = Address.new(address_params)
 	  @address.user_id = current_user.id
-	  @address.address_name = current_user.last_name + current_user.first_name if @address.address_name.nil?
+	  @address.address_name = current_user.last_name + current_user.first_name if @address.address_name == ""
 	  if @address.save
 	  	redirect_to user_address_path(current_user, @address)
 	  else
-	  	render :new
+	  	render :edit
 	  end
 	end
 
@@ -24,9 +24,11 @@ class AddressesController < ApplicationController
     end
 
     def update
-      @address = Address.find(params[:id])
+      @address = Address.find_by(user_id: params[:user_id], id: params[:id])
       if @address.update(address_params)
-      	redirect_to user_address_path(current_user, @address)
+         @address.address_name = current_user.last_name + current_user.first_name if @address.address_name == ""
+         @address.save
+      	 redirect_to user_address_path(current_user, @address)
       else
         render :edit
       end
