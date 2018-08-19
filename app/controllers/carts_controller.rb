@@ -2,7 +2,6 @@ class CartsController < ApplicationController
 	before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
 
 	def show
-		# cart_itemsがnilでエラー
 		 @cart_items = current_cart.cart_items
 	end
 
