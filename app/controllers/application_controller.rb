@@ -15,20 +15,21 @@ class ApplicationController < ActionController::Base
 	 	end
 	end
 
-	def after_sign_out_path_for(resource)
-	 items_path
-	end
-
   helper_method :current_cart
 
   def current_cart
+
     if  session[:cart_id]
       @cart = Cart.find(session[:cart_id])
     else
-      @cart = Cart.create
+      @cart = Cart.create(user_id: current_user.id)
       session[:cart_id] = @cart.id
     end
   end
+
+	def after_sign_out_path_for(resource)
+	 items_path
+	end
 
   protected
   def configure_permitted_parameters
