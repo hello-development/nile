@@ -29,5 +29,6 @@
 	曲名=><%= song.song_name %>
 	<%= link_to "編集", edit_item_disk_song_path(@item, @disk, song) %>
 	<%= link_to "削除", item_disk_song_path(@item, @disk, song), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
-
 <% end %>
+
+<button clabtn btn-default btn-danger><%= link_to "商品一覧", items_admin_index_path %></button>

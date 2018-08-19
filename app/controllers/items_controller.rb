@@ -15,14 +15,24 @@ class ItemsController < ApplicationController
 
 	def new
 		@item = Item.new
+		@items = Item.all
+		# @artists = Artist.all
+		# @genres = Genre.all
+		# @labels = Label.all
 	end
 	def create
 		@item = Item.new(item_params)
 		@item.save
-		redirect_to items_admin_index_path
+		redirect_to item_disks_path(@item.id)
 	end
 
 	def show
+		@item = Item.find(params[:id])
+		@artists = Artist.all
+		@genres = Genre.all
+		@labels = Label.all
+		@disks = Disk.all
+		@songs = Song.all
 	end
 
 	def admin_index
@@ -35,9 +45,9 @@ class ItemsController < ApplicationController
 
 	def edit
 		@item = Item.find(params[:id])
-		@artists = Artist.find(params[:id])
-		@genres = Genre.find(params[:id])
-		@labels = Label.find(params[:id])
+		# @artists = Artist.find(params[:id])
+		# @genres = Genre.find(params[:id])
+		# @labels = Label.find(params[:id])
 	end
 
 
