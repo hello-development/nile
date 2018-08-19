@@ -13,7 +13,8 @@ devise_for :users, controllers: {
   root 'items#index'
 
   get 'carts/register'
-  post 'carts/add_item'
+  # post 'carts/add_item'
+  post 'carts/:item_id/add_item' => 'carts#add_item', as: :carts_add_item #item_idをurlに含めて送信
   post 'carts/update_item'
   delete 'carts/delete_item'
   get 'carts/confirmation'

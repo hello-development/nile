@@ -14,6 +14,7 @@
 					<p><%= @item.price %></p>
 					<p><%= @item.inventory %></p>
 					<p>カートに入れる</p>
+					<%= link_to "カートに入れる(仮)", carts_add_item_path(@item.id), method: :post %>
 					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
 				</div>
 				<div class="col-md-1">
