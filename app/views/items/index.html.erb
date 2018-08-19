@@ -1,29 +1,61 @@
-<!-- <body> -->
-  <div class="col-lg-9" style="">
-      <h2>商品検索</h2>
-      <div style="width: 250px; padding: 15px; margin-bottom: 10px; border: 1px solid #333333;"></div>
-      <table class="table table-hover table-inverse">
-       <thead>
-        <tr>
-         <th>ID</th>
-         <th>シングル/アルバム名</th>
-         <th></th>
-         <th></th>
-         <th></th>
-         <th colspan="3"></th>
-        </tr>
-       </thead>
-       <tbody>
-       <tr>
-        <th>1</th>
-        <td>商品名</td>
-        <td></td>
-        <th colspan="3"></th>
-        <td><button type="button" class="btn btn-default btn-sm">編集</button><button type="button" class="btn btn-default btn-sm">削除</button></td>
-       </tr>
-       </tbody>
-      </table>
-     </div>
+<h1>商品一覧</h1>
+ <!-- link_to "商品詳細", items_path(items.id), class: ""  -->
+<body>
+  <div class='container'>
+    <div class='row'>
+      <div class="col-lg-9">
+        <div class="col-lg-3">
+          <div class="item-box">
+          <% @items.each do |item| %>
+                <dl>
+                  <dt><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %></dt>  
+                  <dd><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></dd>  
+                  <dd>商品名</dd>
+                  <dd><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></dd>
+                  <dd><%= item.price %></dd>
+                  <dd><%= item.inventory %></dd>
+                </dl>
+          <% end %>
+        </div>
+      </div>
     </div>
-   </div>
-<!-- </body> -->
+      <div class="col-lg-3">
+        <h3><br>いいねランキング</h3>
+        <table  class="table-hover table">
+          <tbody>
+            <tr>
+              <td>１</td>
+              <td><%= image_tag('no_image100x100.jpg') %></td>
+              <td>アーティスト名</td>
+              <td></span>111</td>
+              <td>ジャンル</td>
+              <td>レーベル</td>
+              <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+              <td>レビュー</td>
+            </tr>
+            <tr>
+              <td>２</td>
+              <td><%= image_tag('no_image100x100.jpg') %></td>
+              <td>アーティスト名</td>
+              <td></td>
+              <td>ジャンル</td>
+              <td>レーベル</td>
+              <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+              <td>レビュー</td>
+            </tr>
+            <tr>
+              <td>３</td>
+              <td><%= image_tag('no_image100x100.jpg') %></td>
+              <td>アーティスト名</td>
+              <td></span>88</td>
+              <td>ジャンル</td>
+              <td>レーベル</td>
+              <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+              <td>レビュー</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>

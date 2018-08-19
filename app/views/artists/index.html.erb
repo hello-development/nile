@@ -4,14 +4,26 @@
 		<div  class="col-md-8 col-sm-8">
 			<h1> アーティスト一覧</h1>
 				<div  class="artist_over_1">
-				<table  class="table-hover table artist_directory">
-					<thead>
+                  <form>
+				    <table  class="table-hover table artist_directory">
+					  <thead>
 						<tr>
-							<th>並び替え▼</th>
-							<th>○○順</th>
+							<th><%= form_tag(artists_path, method: :get) do %>
+								<%= label_tag :"ジャンル" %>
+								<%= select_tag :genre_id, options_for_select(Artist.genres), include_blank: true %>
+							</th>
+							<th>
+								<%= label_tag :"レーベル" %>
+								<%= select_tag :label_id, options_for_select(Artist.labels), include_blank: true %>
+							</th>
+							<th>
+								<%= submit_tag "絞り込み" %>
+								<% end %>
+							</th>
 						</tr>
 					</thead>
 					<tbody>
+						<%= @submits_searched %>
 						<% @artists.each do |artist| %>
 						<tr>
 							<td>
@@ -32,7 +44,8 @@
 						<% end %>
 					</tbody>
 				</table>
-				</div>
+			  </form>
+		    </div>
 		</div>
 		<div class='col-md-4 col-sm-4'>
 			<h3> アーティストCD総合<br>いいねランキング</h3>

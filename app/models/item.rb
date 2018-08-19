@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+	acts_as_paranoid
+
 	belongs_to :artist
 	belongs_to :label
 	belongs_to :genre
@@ -8,9 +10,9 @@ class Item < ApplicationRecord
 	has_many :likes, dependent: :destroy
 	has_many :reviews, dependent: :destroy
 
-	validates :artist, presence: true
-	validates :label, presence: true
-	validates :genre, presence: true
+	validates :artist_id, presence: true
+	validates :label_id, presence: true
+	validates :genre_id, presence: true
 
 	attachment :item_image
 

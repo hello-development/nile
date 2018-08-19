@@ -19,6 +19,7 @@ devise_for :users, controllers: {
   get 'carts/confirmation'
   get 'artists/admin_index'
   get 'items/admin_index'
+  patch 'users/:id' => 'users#favorite'
 
   resources :users, only: [:show, :edit, :update, :index]do
     resources :addresses, only: [:new, :create, :edit, :show, :update, :destroy]
@@ -39,8 +40,4 @@ devise_for :users, controllers: {
     resource :purchase_datails, only: [:new, :create, :index]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-
-
-
-
 end

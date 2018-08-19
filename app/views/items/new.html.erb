@@ -1,30 +1,46 @@
 <body>
   <div class="container">
-　　<div class="row">
-    <div class="col-lg-9" style="">
-      <h2>商品情報変更</h2>
-      <div style="width: 200px; height: 200px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">登録されているジャケット写真</div>
-      <p>シングル/アルバム名</p>
-      <div style="width: 400px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">▼</div>
-      <p>収録曲</p>
-      <div style="width: 400px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">▼</div>
-      <p>商品説明</p>
-      <div style="width: 400px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">▼</div>
-      <p>アーティスト</p>
-      <div style="width: 400px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">▼</div>
-      <p>ジャンル名</p>
-      <div style="width: 400px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">▼</div>
-      <p>レーベル名</p>
-      <div style="width: 400px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">▼</div>
-      <p>ジャケット写真</p>
-      <div style="width: 400px; padding: 1px; margin-bottom: 10px; border: 1px solid #333333;">▼画像を選択する</div>
-      <p>税抜き価格</p>
-      <div style="width: 400px; padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"></div>
-      <p>在庫<p>
-      <div style="width: 400px; padding: 10px; margin-bottom: 10px; border: 1px solid #333333;"></div>
-      <p></p>
-      <button type="button" class="btn btn-success active">上記の内容で変更する</button>
-     </div>
+    <div class="row">
+      <div class="col-lg-5" style="">
+        <h2>商品</h2>
+        <div style="width: 400px; height: 400px; padding: 1px; margin: 0 auto; border: 1px solid #333333;"> 右で選択したジャケ写が表示される</div>
+      </div>
+      <div class="col-lg-7" style="">
+        <h3> 商品登録</h3>
+
+        <%= form_for(@item) do |f| %>
+
+
+        <%= f.label :"アーティスト" %><br>
+        <%= f.select :artist_id,Artist.all.collect { |p| [ p.artist_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+
+        <%= f.label :"シングル/アルバム" %><br>
+        <%= f.text_field :item_name %><br>
+
+        <%= f.label :"ジャケット写真" %><br>
+        <%= f.attachment_field :item_image, placeholder:"ジャケット画像", class:"item_data" %><br>
+       <!-- f.submit class:"btn btn-primary item_data" -->
+
+        <%= f.label :"商品説明" %><br>
+        <%= f.text_area :item_contents %><br>
+
+        <%= f.label :"ジャンル" %><br>
+        <%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+
+        <%= f.label :"レーベル" %><br>
+        <%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+
+        <%= f.label :"価格（税抜き）" %><br>
+        <%= f.text_field :price %><br>
+
+        <%= f.label :"在庫" %><br>
+        <%= f.text_field :inventory %><br>
+
+        <%= f.submit '上記の内容で登録する', class:"btn btn-success active" %>
+
+        <% end %>
+
+      </div>
     </div>
-   </div>
+  </div>
 </body>

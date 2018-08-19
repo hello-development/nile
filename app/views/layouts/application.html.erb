@@ -19,6 +19,7 @@
 
       <nav class="nav">
         <ul>
+
           <% if user_signed_in? %>
             <li class="li">
               <%= link_to "アーティスト", artists_path %>
@@ -27,13 +28,44 @@
               <%= link_to "CD", items_path %>
             </li>
             <li class="li">
-              <%= link_to "マイページ", user_path(current_user) %>
+
+              <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "ログアウト", items_path %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
             <li class="li">
-              <%= link_to "カート", user_carts_path(current_user) %>
+              <%= link_to "カート", user_carts_path(current_user.id) %>
+            </li>
+
+          <% elsif admin_signed_in? %>
+            <li class="li">
+                <%#= link_to "アーティスト", artists_admin_index_path %>
+                <%= link_to "アーティスト" %>
+            </li>
+            <li class="li">
+                <%= link_to "CD", items_path %>
+            </li>
+            <li class="li">
+                <%#= link_to "購入履歴一覧", new_purchase_purchase_datails_path %>
+                <%= link_to "購入履歴一覧" %>
+            </li>
+            <li class="li">
+                <%= link_to "商品登録", new_item_path %>
+            </li>
+            <li class="li">
+                <%= link_to "ログアウト", destroy_admin_session_path , method: :delete %>
+            </li>
+            <li class="li">
+              <%#= link_to "アーティスト管理", artists_admin_index_path %>
+              <%= link_to "アーティスト管理" %>
+            </li>
+            <li class="li">
+              <%#= link_to "商品管理", item_disks_path %>
+              <%= link_to "商品管理" %>
+            </li>
+            <li class="li">
+              <%= link_to "ユーザー一覧", users_path %>
             </li>
 
           <% else %>
