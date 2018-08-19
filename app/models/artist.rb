@@ -1,6 +1,8 @@
 class Artist < ApplicationRecord
 	acts_as_paranoid
 
+	default_scope -> { order(created_at: :desc) }
+
 	has_many :items, dependent: :destroy
 	has_many :users
 

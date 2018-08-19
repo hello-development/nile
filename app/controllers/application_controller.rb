@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
 
   def current_cart
     if  session[:cart_id]
-      @cart = Cart.find(session[:cart_id]
+      @cart = Cart.find(session[:cart_id])
     else
       @cart = Cart.create
       session[:cart_id] = @cart.id
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   protected
-
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :phone_number, :email])
-  end
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:last_name, :first_name, :last_name_kana, :first_name_kana, :phone_number, :email])
+    end
+end
