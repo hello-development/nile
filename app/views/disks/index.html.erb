@@ -20,8 +20,8 @@
 <% end %><br>
 
 <% @disks.each do |disk| %>
-	<%= disk.id %>
-	<%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %>
+	ディスクID=><%= disk.id %>
+	ディスク<%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %>
 	<%= link_to "削除", item_disk_path(@item, disk), method: :delete %><br>
 
 <% end %>
