@@ -2,8 +2,8 @@ class CartsController < ApplicationController
 	before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
 
 	def show
-		# cart_itemsがnilでエラー
-		 @cart_items = current_cart.cart_items
+		 @cart = Cart.find(params[:user_id])
+		 @cart_items = @cart.cart_items
 	end
 
 	# 商品一覧画面から、「商品購入」を押した時のアクション
