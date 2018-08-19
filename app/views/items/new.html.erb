@@ -2,27 +2,12 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-5" style="">
-        <h2>商品</h2>
-        <div style="width: 400px; height: 400px; padding: 1px; margin: 0 auto; border: 1px solid #333333;"> 右で選択したジャケ写が表示される</div>
-      </div>
-      <div class="col-lg-7" style="">
         <h3> 商品登録</h3>
 
         <%= form_for(@item) do |f| %>
 
-
         <%= f.label :"アーティスト" %><br>
         <%= f.select :artist_id,Artist.all.collect { |p| [ p.artist_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
-
-        <%= f.label :"シングル/アルバム" %><br>
-        <%= f.text_field :item_name %><br>
-
-        <%= f.label :"ジャケット写真" %><br>
-        <%= f.attachment_field :item_image, placeholder:"ジャケット画像", class:"item_data" %><br>
-       <!-- f.submit class:"btn btn-primary item_data" -->
-
-        <%= f.label :"商品説明" %><br>
-        <%= f.text_area :item_contents %><br>
 
         <%= f.label :"ジャンル" %><br>
         <%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
@@ -30,16 +15,49 @@
         <%= f.label :"レーベル" %><br>
         <%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
 
+        <%= f.label :"ジャケット写真" %><br>
+        <%= f.attachment_field :item_image, placeholder:"ジャケット画像", class:"item_data" %><br>
+
+        <%= f.label :"シングル/アルバム" %><br>
+        <%= f.text_field :item_name %><br>
+
+        <%= f.label :"商品説明" %><br>
+        <%= f.text_area :item_contents %><br>
+
         <%= f.label :"価格（税抜き）" %><br>
         <%= f.text_field :price %><br>
 
         <%= f.label :"在庫" %><br>
         <%= f.text_field :inventory %><br>
 
-        <%= f.submit '上記の内容で登録する', class:"btn btn-success active" %>
+        <p><%= f.submit '上記の内容で登録する', class:"btn btn-success active" %></p>
 
         <% end %>
 
+      </div>
+      <div class="col-lg-7" style="">
+                <table  class="table-hover table">
+        <thead>
+          <tr>
+            <th>アルバム/シングル</th>
+            <th>価格</th>
+            <th>在庫</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @items.each do |item| %>
+          <tr>
+            <td><%= item.item_name %></td>
+            <td><%= item.price %></td>
+            <td><%= item.inventory %></td>
+            <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>
+            <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn btn-default btn-danger">削除</button><% end %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
       </div>
     </div>
   </div>

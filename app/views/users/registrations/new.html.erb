@@ -42,7 +42,10 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "次へ"%>
+    <%= f.submit '次へ' %>
+    <!-- <form action="users" method="post"> 次へ </form> -->
+    <button class="submit" data-action="users#2#addresses#new"> 次へ </button>
+<!--       form_for(@book, url: 'https://cre8cre8.com') -->
   </div>
 <% end %>
 

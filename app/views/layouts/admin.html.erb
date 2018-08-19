@@ -15,37 +15,40 @@
 
     <div class="header_upper">
 
-      <div class="header_logo"> <%= link_to "", items_path %> </div>
+      <div class="header_logo"> <%#= link_to "", items_path %> </div>
 
       <nav class="nav">
         <ul>
 
           <%# if admin_signed_in? %>
           <li class="li">
-              <%#= link_to "アーティスト", artists_path %>
-          </li>
-          <li class="li">
-              <%#= link_to "CD", items_path %>
-          </li>
-          <li class="li">
-              <%#= link_to "購入履歴一覧", purchase_details_path %>
-          </li>
-          <li class="li">
-              <%#= link_to "商品登録", new_item_path %>
-          </li>
-          <li class="li">
-              <%#= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          </li>
-          <li class="li">
-            <%#= link_to "アーティスト管理", artists_path %>
-          </li>
-          <li class="li">
-            <%#= link_to "商品管理", items_path %>
-          </li>
-          <li class="li">
-            <%#= link_to "ユーザー一覧", users_path %>
-          </li>
-          <%# end %>
+                <%#= link_to "アーティスト", artists_admin_index_path %>
+                <%#= link_to "アーティスト" %>
+            </li>
+            <li class="li">
+                <%#= link_to "CD", items_path %>
+            </li>
+            <li class="li">
+                <%#= link_to "購入履歴一覧", new_purchase_purchase_datails_path %>
+                <%#= link_to "購入履歴一覧" %>
+            </li>
+            <li class="li">
+                <%#= link_to "商品登録", new_item_path %>
+            </li>
+            <li class="li">
+                <%#= link_to "ログアウト", destroy_admin_session_path , method: :delete %>
+            </li>
+            <li class="li">
+              <%#= link_to "アーティスト管理", artists_admin_index_path %>
+              <%#= link_to "アーティスト管理" %>
+            </li>
+            <li class="li">
+              <%#= link_to "商品管理", item_disks_path %>
+              <%#= link_to "商品管理" %>
+            </li>
+            <li class="li">
+              <%#= link_to "ユーザー一覧", users_path %>
+            </li>
 
         </ul>
       </nav>

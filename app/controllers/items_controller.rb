@@ -10,6 +10,10 @@ class ItemsController < ApplicationController
 
 	def new
 		@item = Item.new
+		@items = Item.all
+		@artists = Artist.all
+		@genres = Genre.all
+		@labels = Label.all
 	end
 	def create
 		@item = Item.new(item_params)
@@ -22,6 +26,8 @@ class ItemsController < ApplicationController
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all
+		@disks = Disk.all
+		@songs = Song.all
 	end
 
 	def admin_index
