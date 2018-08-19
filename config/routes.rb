@@ -13,9 +13,9 @@ devise_for :users, controllers: {
   root 'items#index'
 
   get 'carts/register'
-  get 'carts/add_item'
-  get 'carts/update_item'
-  get 'carts/delete_item'
+  post 'carts/add_item'
+  post 'carts/update_item'
+  delete 'carts/delete_item'
   get 'carts/confirmation'
   get 'artists/admin_index'
   get 'items/admin_index'
