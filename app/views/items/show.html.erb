@@ -5,7 +5,7 @@
 			<h1>商品詳細</h1>
 			<div class="col-md-8">
 				<div class="col-md-2">
-					<a><%= image_tag('no_image100x100.jpg') %></a>
+					<a><%= attachment_image_tag @item, :item_image, :fill, 100, 100, format: 'jpeg' %></a>
 				</div>
 				<div class="col-md-5">
 					<p><%= @item.item_name %></p>
