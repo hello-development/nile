@@ -7,23 +7,34 @@ class ItemsController < ApplicationController
 			@genres = Genre.all
 			@labels = Label.all
 		if user_signed_in?
+		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)
+		end
 		end
 		end
 	end
 
 	def new
 		@item = Item.new
+		@items = Item.all
+		# @artists = Artist.all
+		# @genres = Genre.all
+		# @labels = Label.all
 	end
 	def create
 		@item = Item.new(item_params)
 		@item.save
-		redirect_to items_admin_index_path
+		redirect_to item_disks_path(@item.id)
 	end
 
 	def show
 		@item = Item.find(params[:id])
+		@artists = Artist.all
+		@genres = Genre.all
+		@labels = Label.all
+		@disks = Disk.all
+		@songs = Song.all
 	end
 
 	def admin_index
@@ -36,9 +47,9 @@ class ItemsController < ApplicationController
 
 	def edit
 		@item = Item.find(params[:id])
-		@artists = Artist.find(params[:id])
-		@genres = Genre.find(params[:id])
-		@labels = Label.find(params[:id])
+		# @artists = Artist.find(params[:id])
+		# @genres = Genre.find(params[:id])
+		# @labels = Label.find(params[:id])
 	end
 
 
