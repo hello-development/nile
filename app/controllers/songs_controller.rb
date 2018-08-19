@@ -40,7 +40,6 @@ class SongsController < ApplicationController
   	@disk = Disk.find params[:disk_id]
   	@song = Song.find_by(disk_id: params[:disk_id], id: params[:id])
     @song.destroy
-  	@songs = @disk.songs
   	redirect_to item_disk_songs_path, notice: "Song delete successfully"
   end
 

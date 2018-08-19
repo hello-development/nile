@@ -11,10 +11,12 @@ class CartsController < ApplicationController
 	def add_item
 		if @cart_item.blank?
 			@cart_item = current_cart.cart_items.build(item_id: params[:item_id])
+
 		end
 		@cart_item.units += params[:units].to_i
 		@cart_item.save
-		redirect_to current_cart
+		 # redirect_to current_cart 一旦リダイレクト先ルートにします
+		redirect_to root_path
 	end
 
 	# カート詳細画面から、「更新」を押した時のアクション
