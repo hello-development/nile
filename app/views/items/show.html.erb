@@ -1,38 +1,43 @@
-
 <body>
 	<div class='container'>
 		<div class='row'>
 			<h1></h1>
 			<div class="col-md-8">
-				<div class="col-md-2">
-					<a><%= attachment_image_tag @item, :item_image, :fill, 100, 100, format: 'jpeg' %></a>
+				<div class="col-md-4">
+					<div class="item-image-show">
+						<%= attachment_image_tag @item, :item_image, :fill, 200, 200, format: 'jpeg' %>
+					</div>
 				</div>
-				<div class="col-md-5">
-					<p><%= @item.item_name %></p>
-					<p><% @artists.each do |artist| %><% if @item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></p>
-					<p><% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></p>
-					<p><%= @item.price %></p>
-					<p><%= @item.inventory %></p>
-					<p>カートに入れる</p>
-					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
+					<div class="col-md-4">
+						<div class="item-box-show">
+						<h3><%= @item.item_name %></h3>
+						<p><% @artists.each do |artist| %><% if @item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></p>
+						<p><% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></p>
+						<p><%= @item.price %></p>
+						<p><%= @item.inventory %></p>
+						<p>カートに入れる</p>
+						<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
+					</div>
 				</div>
-				<div class="col-md-1">
+				<!-- <div class="col-md-1">
 				<button type="button" class="btn btn-success active">s編集(商品編集へリンク)</button>
-		    	</div>
+		    	</div> -->
 				<div class="col-md-8">
-					<h4>収録曲</h4>
-					<% @disks.each do |disk| %>
-						<% if @item.id == disk.item_id %>
-						<h5>ディスク<%= disk.disk_number %></h5>
-						<ol>
-							<% @songs.each do |song| %>
-								<% if disk.id == song.disk_id %>
-								<li><%= song.song_name %></li>
+					<div class="disk-box-show">
+						<h4>収録曲</h4>
+						<% @disks.each do |disk| %>
+							<% if @item.id == disk.item_id %>
+							<h5>ディスク<%= disk.disk_number %></h5>
+							<ol>
+								<% @songs.each do |song| %>
+									<% if disk.id == song.disk_id %>
+									<li><%= song.song_name %></li>
+									<% end %>
 								<% end %>
+							</ol>
 							<% end %>
-						</ol>
 						<% end %>
-					<% end %>
+					</div>
 				</div>
 				<div class="col-md-8">
 					<p><div style="width: 400px; height: 100px; padding: 1px; margin: 0 auto; border: 1px solid #333333;">レビュー購入者のみ入力可能</div></p>
