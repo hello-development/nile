@@ -37,4 +37,27 @@ class UsersController < ApplicationController
 
 	def destroy
 	end
+
+	def favorite
+		@artist = Artist.find(params[:id])
+		@user = current_user
+		if  @user.artist_id == @artist.id
+			# 現在のアーティストIDと登録したいIDが同じ時にnilにしてupdateする
+			@user.artist_id = nil
+			@user.update(artist_id: nil)
+			# artist_id:にnilを入れてupdate
+			redirect_to artist_path(@artist.id)
+		else
+		@user.update(artist_id: @artist.id)
+		# artist_id:に@artist.id(参照してきたid)を入れてupdate
+		redirect_to artist_path(@artist.id)
+		flash[:notice]="お気に入りに登録しました！"
+	end
+	end
+
+	private
+	def user_params
+		params.require(:user).permit(:artist_id)
+	end
+
 end

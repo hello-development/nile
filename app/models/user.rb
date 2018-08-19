@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_paranoid
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -29,10 +30,10 @@ class User < ApplicationRecord
     validates :email,
     presence: true
 
-    validates :password,
-    # presence: true,
-    # uniqueness: true,
-    # length: { minimum: 6 },
-    format: { with: /\A[a-z0-9]+\z/i }
+    # validates :password,
+    # # presence: true,
+    # # uniqueness: true,
+    # # length: { minimum: 6 },
+    # format: { with: /\A[a-z0-9]+\z/i }
 
 end

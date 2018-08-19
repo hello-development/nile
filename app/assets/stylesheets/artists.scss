@@ -28,13 +28,24 @@
  margin-bottom: 20px;
  }
  .artist_show_image {
- float : left;
+ float: left;
+ }
+ .artist_tag_box {
+ text-align: right;
+ border-bottom: 1px dotted blue;
+ margin-bottom: 10px;
+ }
+ .artist_tag {
+ margin: 0 10px;
  }
  .artist_profile {
  margin: 0 auto;
  }
  .artist_button {
  margin-left: 20px;
+ }
+ .favorite_button {
+ margin-top: 5px;
  }
  .artist_data {
  width: 80%;

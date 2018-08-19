@@ -25,7 +25,7 @@ class ArtistsController < ApplicationController
 		@artist = Artist.new(artist_params)
 		if @artist.save
 			redirect_to artists_admin_index_path
-			flash[:notice]="Artist was successfully created."
+			flash[:notice]="アーティストの登録ができました"
 		else
 			@artists =Artist.all
 			render :admin_index
@@ -34,6 +34,8 @@ class ArtistsController < ApplicationController
 
 	def show
 		@artist = Artist.find(params[:id])
+		@genres = Genre.all
+		@labels = Label.all
 	end
 
 	def edit
@@ -44,7 +46,7 @@ class ArtistsController < ApplicationController
 		@artist = Artist.find(params[:id])
 		if @artist.update(artist_params)
 			redirect_to artist_path(@artist.id)
-			flash[:notice]="Artist was successfully updated."
+			flash[:notice]="アーティストの更新ができました"
 		else
 			render :edit
 		end

@@ -1,4 +1,5 @@
 class Disk < ApplicationRecord
+	acts_as_paranoid
 
 	belongs_to :item
 	has_many :songs, dependent: :destroy
