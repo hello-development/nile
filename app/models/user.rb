@@ -25,10 +25,10 @@ class User < ApplicationRecord
     presence: true
 
     validates :phone_number,
-    presence: true
+    presence: true, numericality: { only_integer: true }
 
     validates :email,
-    presence: true
+    presence: true, uniqueness: true
 
     # validates :password,
     # # presence: true,
