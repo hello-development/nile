@@ -10,12 +10,12 @@
 住所変更およびお届け先追加<br>
 住所を追加する<br>
 <%= form_for [current_user, @address], url: user_addresses_path do |f| %>
-お届け先名<br>
-<%= f.text_field :address_name %><br>
 郵便番号(半角ハイフン無し)<br>
 <%= f.text_field :postal_code %><br>
 住所<br>
 <%= f.text_field :address %><br>
+お届け先名(ご登録されているお名前と異なる場合に入力して下さい)<br>
+<%= f.text_field :address_name %><br>
 <%= f.submit "上記の住所を追加する" %>
 <% end %>
 <% @addresses.each do |ad| %>
