@@ -18,6 +18,11 @@ class ItemsController < ApplicationController
 	end
 
 	def show
+		@items = Item.all
+		@item = Item.new
+		@artists = Artist.all
+		@genres = Genre.all
+		@labels = Label.all
 	end
 
 	def admin_index

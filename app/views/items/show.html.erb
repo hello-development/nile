@@ -8,14 +8,13 @@
 					<a><%= image_tag('no_image100x100.jpg') %></a>
 				</div>
 				<div class="col-md-5">
-					<p>シングル/アルバム名</p>
-					<p>アーティスト名</p>
-					<p>ジャンル</p>
-					<p>価格</p>
-					<p>在庫数</p>
+					<p><%= item.item_name %></p>
+					<p><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></p>
+					<p><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></p>
+					<p><%= item.price %></p>
+					<p><%= item.inventory %></p>
 					<p>カートに入れる</p>
-					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-	</p>	
+					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
 				</div>
 				<div class="col-md-1">
 				<button type="button" class="btn btn-success active">s編集(商品編集へリンク)</button>
