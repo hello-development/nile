@@ -26,6 +26,14 @@ class ItemsController < ApplicationController
 			@items = @items.get_by_item_name params[:item_name]
 		end
 
+		# 検索がヒットしなかった時のメッセージ
+		if params[:item_name].present?
+			@items = @items.get_by_item_name params[:item_name]
+            if @items.count == 0
+              redirect_to items_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			end
+		end
+
 	end
 
 	def new
@@ -81,7 +89,14 @@ class ItemsController < ApplicationController
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
 		end
-		render :admin_index, layout: "admin_item"
+		if params[:item_name].present?
+			@items = @items.get_by_item_name params[:item_name]
+        	if @items.count == 0
+              redirect_to items_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			end
+		end
+
+		# render :admin_index, layout: "admin_item"
 	end
 
 	def edit
