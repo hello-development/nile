@@ -61,6 +61,7 @@
               <%= link_to "商品管理", items_admin_index_path %>
             </li>
             <li class="li">
+              <!-- リンク先が違う・・・ -->
               <%= link_to "ユーザー一覧", users_path %>
             </li>
 
@@ -83,17 +84,14 @@
 
     </div>
 
-    <% if admin_signed_in? %>
     <div class="input-group">
-      <%= form_tag(users_path, method: "get") do %>
-      <%= label_tag :last_name, "姓" %><%= text_field_tag :last_name, params[:last_name] %>
-      <%= label_tag :first_name, "名" %><%= text_field_tag :first_name, params[:first_name] %>
+      <%= form_tag(items_path, method: "get") do %>
+      <%= label_tag :item_name, "シングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %>
       <%= button_tag( class: " btn-primary") do %>
       <%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
       <% end %>
       <% end %>
     </div>
-    <% end %>
 
   </header>
 

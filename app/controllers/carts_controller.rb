@@ -40,4 +40,3 @@ class CartsController < ApplicationController
 		@cart_item = current_cart.cart_items.find_by(item_id: params[:item_id]) #買いたい商品をfind_byで取り出して@cart_itemに代入します
 	end
 end
-

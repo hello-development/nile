@@ -5,6 +5,12 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 		if admin_signed_in?
+		if params[:last_name].present?
+			@users = @users.get_by_last_name params[:last_name]
+		end
+		if params[:first_name].present?
+			@users = @users.get_by_first_name params[:first_name]
+		end
 		elsif user_signed_in?
 			redirect_to root_path
 		else
@@ -15,6 +21,13 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.all
+				if user_signed_in?
+		if current_user.last_sign_in_at == current_user.current_sign_in_at
+		unless Address.exists?(user_id: current_user.id)
+			redirect_to new_user_address_path(current_user)
+		end
+		end
+		end
 	end
 
 	def edit

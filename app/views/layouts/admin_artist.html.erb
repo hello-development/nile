@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>NILE</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+  <header class="header">
+
+    <div class="header_upper">
+
+      <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
+
+      <nav class="nav">
+        <ul>
+            <li class="li">
+                <%= link_to "アーティスト", artists_path %>
+            </li>
+            <li class="li">
+                <%= link_to "CD", items_path %>
+            </li>
+            <li class="li">
+                <%#= link_to "購入履歴一覧", new_purchase_purchase_datails_path %>
+                <%= link_to "購入履歴一覧" %>
+            </li>
+            <li class="li">
+                <%= link_to "商品登録", new_item_path %>
+            </li>
+            <li class="li">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            </li>
+            <li class="li">
+              <%= link_to "アーティスト管理", artists_admin_index_path %>
+            </li>
+            <li class="li">
+              <%= link_to "商品管理", items_admin_index_path %>
+            </li>
+            <li class="li">
+              <!-- リンク先が違う・・・ -->
+              <%= link_to "ユーザー一覧", users_path %>
+            </li>
+        </ul>
+      </nav>
+
+    </div>
+
+    <div class="input-group">
+      <%= form_tag(artists_admin_index_path, method: "get") do %>
+      <%= label_tag :artist_name, "アーティスト名" %><br><%= text_field_tag :artist_name, params[:artist_name] %>
+      <%= button_tag( class: " btn-primary") do %>
+      <%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
+      <% end %>
+      <% end %>
+    </div>
+
+  </header>
+
+  <%= yield %>
+
+      <footer class="footer">
+        Copyright © Infratop Inc. All Rights Reserved.
+      </footer>
+
+  </body>
+
+</html>
