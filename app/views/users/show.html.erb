@@ -9,23 +9,28 @@
   </head>
 
   <body>
-<div class="message"> <%= flash[:notice] %> </div>
+    <div class="message"> <%= flash[:notice] %> </div>
 
-<div class="users_show_upper clearfix" >
-<div class="users_show_left">
-  <div class="users_names"> ユーザー名 </div>
-  <div> <%= current_user.last_name %> <%= current_user.first_name %> </div>
-  <div> <%= link_to "編集", edit_user_path, class: 'btn btn-default' %> </div>
-  <div> <%= link_to "退会", root_path, class: 'btn btn-default', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
-</div>
+    <div class="users_show_upper clearfix" >
 
-<div class="users_show_right">
-<div class="favorite_artists"> お気に入りアーティスト </div>
-<div> アーティスト名 </div>
-<div> 最新のCD </div>
-<div class="favorite_ranking"> いいねランキング </div>
-</div>
-</div>
+    <div class="users_show_left">
+      <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
+      <div> <%= current_user.last_name %> <%= current_user.first_name %> さん </div>
+      <div> <%= link_to "編集", edit_user_path, class: 'btn btn-default' %> </div>
+      <div> <%= link_to "退会", root_path, class: 'btn btn-default', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
+    </div>
+
+    <div class="users_show_right">
+    <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
+    <div> <strong> アーティスト名 </strong> </div>
+    <div> <strong> 最新のCD </strong> </div>
+    </div>
+
+    <div class="mypage_upperright_right">
+    <div class="favorite_ranking"> <strong> いいねランキング </strong> </div>
+    </div>
+
+    </div>
 
 <div class="users_show_bottom">
 <div class="purchase_histories"> 購入履歴 </div>

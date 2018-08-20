@@ -1,9 +1,16 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!
+	before_action :authenticate_user!, except: [:index]
 	# before_action :authenticate_user!, except: [:top, :about, :new_user_session_path, :new_user_registration_path]
 
 	def index
-		@user = User.all
+		@users = User.all
+		if admin_signed_in?
+		elsif user_signed_in?
+			redirect_to root_path
+		else
+			redirect_to root_path
+		end
+		# @user = User.find(params[:id])
 	end
 
 	def show
@@ -18,6 +25,12 @@ class UsersController < ApplicationController
 	end
 
 	def edit
+		if admin_signed_in?
+		elsif user_signed_in?
+			redirect_to root_path
+		else
+			redirect_to root_path
+		end
 	end
 
 	def update
@@ -27,19 +40,20 @@ class UsersController < ApplicationController
 	end
 
 	def create
-		# @user = User.new(user_params)
 		@user = User.all
 		@user.user_id = current_user.id
     if  @user.save
         redirect_to new_user_address_path(@user.id)
     else
     	@user = User.all
-    	# @user = current_user
 	    render :new
 	end
 	end
 
 	def destroy
+		# @user = User.find(params[:id])
+  #   	@user.destroy
+    	redirect_to root_path
 	end
 
 	def favorite
@@ -61,7 +75,7 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:artist_id)
+		params.require(:user).permit(:artist_id, :user_id)
 	end
 
 end
