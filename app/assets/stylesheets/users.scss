@@ -35,11 +35,25 @@
 
 .users_show_right {
 	background-color: orange;
-	width: 80%;
+	width: 50%;
 	float: left;
+}
+
+.mypage_upperright_right {
+	background-color: pink;
+	width: 30%;
+	float: right;
 }
 
 .users_show_bottom {
 	width: 100%;
 	background-color: green;
+}
+
+.mypage_upperright_left {
+	float: left
+}
+
+.mypage_upperright_right {
+	float: left
 }

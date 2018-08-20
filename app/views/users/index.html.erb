@@ -25,9 +25,7 @@
 		<table>
 			<thead>
 				<tr>
-
-					<!-- <th> < users.id %> </th> -->
-
+					<th> ID </th>
 					<th colspan="2"> ユーザー名 </th>
 					<th> メールアドレス </th>
 					<th colspan="2"> </th>
@@ -36,20 +34,18 @@
 			</thread>
 
 			<tbody>
-
+				<% @users.each do |user| %>
 				<tr>
-					<td> ID </td>
-					<td colspan="2"> <%= link_to "ユーザー名" %> </td>
-					<td> メールアドレス </td>
-					<td colspan="2"> <%#= link_to "編集", user_path, class: 'btn btn-default' %> <%= button_to "編集", class: 'btn' %> </td>
-					<td colspan="2"> <%= button_to "退会", class: 'btn' %> </td>
+					<td> <%= user.id %> </td>
+					<td colspan="2"> <%= link_to "#{user.last_name}" + "#{user.first_name}", user_path(user.id) %> </td>
+					<td> <%= user.email %> </td>
+					<td colspan="2"> <%= link_to "編集", edit_user_path(user.id), class: 'btn btn-default' %> </td>
+					<td colspan="2"> <%= link_to "退会", root_path, class: 'btn btn-default', method: :delete, "data-confirm" => "本当に退会させますか？" %> </td>
 				</tr>
-
+				<% end %>
 			</tbody>>
-
 		</table>
-
 	</div>
 
-</body>
+	</body>
 </html>
