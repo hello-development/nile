@@ -36,7 +36,6 @@ class AddressesController < ApplicationController
   end
 
   def destroy
-    @user = current_user
     @address = Address.find_by(user_id: params[:user_id], id: params[:id])
     @address.destroy
     redirect_to user_address_path(current_user, @address)
