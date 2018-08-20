@@ -87,6 +87,10 @@
     <div class="input-group">
       <%= form_tag(artists_path, method: "get") do %>
       <%= label_tag :artist_name, "アーティスト名" %><br><%= text_field_tag :artist_name, params[:artist_name] %>
+      <%= label_tag :ジャンル, "ジャンル" %>
+      <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
+      <%= label_tag :"レーベル" %>
+      <%= select_tag :label_id, options_for_select(Item.labels), include_blank: true %>
       <%= button_tag( class: " btn-primary") do %>
       <%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
       <% end %>

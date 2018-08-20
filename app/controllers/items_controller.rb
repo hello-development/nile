@@ -34,6 +34,12 @@ class ItemsController < ApplicationController
 		# @artists = Artist.all
 		# @genres = Genre.all
 		# @labels = Label.all
+		if params[:genre_id].present?
+			@items = @items.get_by_genre_id params[:genre_id]
+		end
+		if params[:label_id].present?
+			@items = @items.get_by_label_id params[:label_id]
+		end
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
 		end
