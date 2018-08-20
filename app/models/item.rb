@@ -14,6 +14,14 @@ class Item < ApplicationRecord
 	validates :label_id, presence: true
 	validates :genre_id, presence: true
 	validates :item_image, presence: true
+	validates :item_name, presence: true
+	validates :item_contents, presence: true
+	validates :price, numericality: { only_integer: true }
+	validates :inventory, numericality: { only_integer: true }
+
+	# validates :disk_number, numericality: { only_integer: true, greater_than_or_equal_to: 1 }
+	# validates :price, numericality: { only_integer: true }
+
 
 	attachment :item_image
 
