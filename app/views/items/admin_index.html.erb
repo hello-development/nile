@@ -1,32 +1,50 @@
 <body>
-  <div class="row">
-    <div class="col-lg-9" style="">
-      <h2>商品検索</h2>
-      <div style="width: 250px; padding: 15px; margin-bottom: 10px; border: 1px solid #333333;"></div>
-      <table  class="table-hover table">
-        <thead>
-          <tr>
-            <th>並び替え▼</th>
-            <th>○○順</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @items.each do |item| %>
-          <tr>
-            <td><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></td>
-            <td><%= item.item_name %></td>
-            <td><%= item.item_contents %></td>
-            <td><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
-            <td><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
-            <td><%= item.price %></td>
-            <td><%= item.inventory %></td>
-            <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>
-            <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn     btn-default btn-danger">削除</button><% end %></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12" style="">
+        <h2>商品検索</h2>
+          <div>
+            <%= form_tag(items_admin_index_path, method: "get") do %>
+            <%= label_tag :item_name, "シングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %><%= submit_tag "検索" %><br>
+            <%= label_tag :ジャンル, "ジャンル" %>
+            <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
+            <%= submit_tag "絞り込み" %>
+            <%= label_tag :"レーベル" %>
+            <%= select_tag :label_id, options_for_select(Item.labels), include_blank: true %>
+            <%= submit_tag "絞り込み" %>
+            <% end %>
+          </div>
+        <table  class="table-hover table">
+          <thead>
+            <tr>
+              <th></th>
+              <th>商品名</th>
+              <th>アーティスト</th>
+              <th>ジャンル</th>
+              <th>レーベル</th>
+              <th>価格</th>
+              <th>在庫</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            <% @items.each do |item| %>
+              <td></td>
+              <td><%= item.item_name %></td>
+              <td><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></td>
+              <td><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
+              <td><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
+              <td><%= item.price %></td>
+              <td><%= item.inventory %></td>
+              <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>
+              <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn     btn-default   btn-danger">削除</button><% end %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
-   </div>
   </div>
 </body>
