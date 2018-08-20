@@ -1,5 +1,7 @@
 class ItemsController < ApplicationController
 
+	layout 'item'
+
 	def index
 			@items = Item.all
 			@item = Item.new
