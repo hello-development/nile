@@ -51,6 +51,7 @@ class ItemsController < ApplicationController
 		@labels = Label.all
 		@disks = Disk.all
 		@songs = Song.all
+		# @cart_item = current_cart.cart_item.find(params[:item_id])
 	end
 
 	def admin_index
