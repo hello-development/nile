@@ -11,6 +11,7 @@
       </div>
     <% end %>
 
+<<<<<<< HEAD
     <%= @item.item_name %> <br>
     ディスクの追加
     <%= form_for [@item, @disk], url: item_disks_path do |f| %>
@@ -48,3 +49,18 @@
     </div>
   </div>
 </body>
+=======
+<%= @item.item_name %> <br>
+ディスクの追加
+<%= form_for [@item, @disk], url: item_disks_path do |f| %>
+ディスクNo.<br>
+<%= f.number_field :disk_number %><br>
+<%= f.submit 'ディスクを追加する' %>
+<% end %><br>
+
+<% @disks.each do |disk| %>
+ディスクID=><%= disk.id %>
+ディスク<%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %>
+<%= link_to "削除", item_disk_path(@item, disk), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
+<% end %>
+>>>>>>> 1913a5c517399aa6ae7be93fa33a0fd30a259553
