@@ -1,66 +1,47 @@
 <body>
-  <div class="row">
-    <div class="col-sm-12" style="">
-    <% if @disk.errors.any? %>
-      <div id="error_explanation" class="alert alert-danger">
-        <ul>
-          <% @disk.errors.full_messages.each do |message| %>
-            <li><%= message %></li>
-          <% end %>
-        </ul>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5" style="">
+      <% if @disk.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <ul>
+            <% @disk.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      シングル/アルバム<br>
+      <%= @item.item_name %><br>
+      ディスクの追加
+      <%= form_for [@item, @disk], url: item_disks_path do |f| %>
+      ディスクNo.<br>
+      <%= f.number_field :disk_number %><br>
+      <%= f.submit 'ディスクを追加する' %>
+      <% end %><br>
       </div>
-    <% end %>
-
-<<<<<<< HEAD
-    <%= @item.item_name %> <br>
-    ディスクの追加
-    <%= form_for [@item, @disk], url: item_disks_path do |f| %>
-
-    ディスクNo.<br>
-    <%= f.number_field :disk_number %><br>
-
-    <%= f.submit 'ディスクを追加する' %>
-
-    <% end %><br>
-
-    <% @disks.each do |disk| %>
-    	ディスクID=><%= disk.id %>
-    	ディスク<%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %>
-    <% end %>
-
-    <table  class="table-hover table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>ディスク</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @disks.each do |disk| %>
-        <tr>
-          <td><%= disk.id %></td>
-          <td><%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %></td>
-          <td><%= link_to item_disks_path, method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn   btn-default btn-danger">削除</button><% end %></td>
-        </tr>
-        <% end %>
-      </tbody>
-      </table>
+      <div class="col-md-7" style="">
+        <table  class="table-hover table">
+          <thead>
+            <tr>
+              <th>ディスクID</th>
+              <th>ディスク</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @disks.each do |disk| %>
+            <tr>
+              <td><%= disk.id %></td>
+              <td><%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %></td>
+              <td><%= link_to item_disk_path(@item,disk), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn   btn-default    btn-danger">削除</button><% end %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </body>
-=======
-<%= @item.item_name %> <br>
-ディスクの追加
-<%= form_for [@item, @disk], url: item_disks_path do |f| %>
-ディスクNo.<br>
-<%= f.number_field :disk_number %><br>
-<%= f.submit 'ディスクを追加する' %>
-<% end %><br>
 
-<% @disks.each do |disk| %>
-ディスクID=><%= disk.id %>
-ディスク<%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %>
-<%= link_to "削除", item_disk_path(@item, disk), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
-<% end %>
->>>>>>> 1913a5c517399aa6ae7be93fa33a0fd30a259553
+
