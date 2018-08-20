@@ -29,6 +29,9 @@ class ArtistsController < ApplicationController
 		end
 		if params[:artist_name].present?
 			@artists = @artists.get_by_artist_name params[:artist_name]
+            if @artists.count == 0
+              redirect_to artists_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			end
 		end
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
