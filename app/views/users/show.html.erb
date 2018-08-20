@@ -22,12 +22,40 @@
 
     <div class="users_show_right">
     <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
-    <div> <strong> アーティスト名 </strong> </div>
+    <div> <%= @artist.artist_name %> </div>
+    <div> <%= @artist.artist_image %> </div>
     <div> <strong> 最新のCD </strong> </div>
+    <div> <%= @artist.artist_image %> </div>
+
+    <div> <%= @item.item_name %> </div>
+    <div> <%= @genre.genre_name %> </div>
+    <div> ￥ <%= @item.price %> </div>
+
     </div>
 
     <div class="mypage_upperright_right">
-    <div class="favorite_ranking"> <strong> いいねランキング </strong> </div>
+    <h4 class="favorite_ranking"> <strong> いいねランキング </strong> </h4>
+    <table>
+      <%# @artists.each do |artist| %>
+      <tbody>
+        <tr>
+          <div> <%= @artist.artist_image %> </div>
+          <div> <%= @item.item_name %> </div>
+          <div> カートに入れる </div>
+        </tr>
+        <tr>
+          <div> <%= @artist.artist_image %> </div>
+          <div> <%= @item.item_name %> </div>
+          <div> カートに入れる </div>
+        </tr>
+        <tr>
+          <div> <%= @artist.artist_image %> </div>
+          <div> <%= @item.item_name %> </div>
+          <div> カートに入れる </div>
+        </tr>
+      </tbody>
+
+    </table>
     </div>
 
     </div>
