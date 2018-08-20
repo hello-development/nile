@@ -13,6 +13,7 @@ class Item < ApplicationRecord
 	validates :artist_id, presence: true
 	validates :label_id, presence: true
 	validates :genre_id, presence: true
+	validates :item_image, presence: true
 
 	attachment :item_image
 

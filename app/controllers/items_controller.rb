@@ -35,8 +35,13 @@ class ItemsController < ApplicationController
 	end
 	def create
 		@item = Item.new(item_params)
-		@item.save
-		redirect_to item_disks_path(@item.id)
+		if @item.save
+			redirect_to item_disks_path(@item.id)
+			flash[:notice]="商品の登録ができました"
+		else
+			@items = Item.all
+			render :new
+		end
 	end
 
 	def show
