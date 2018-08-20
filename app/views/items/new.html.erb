@@ -2,6 +2,19 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-5" style="">
+        <div class="item-registration-box">
+
+        <% if @item.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <h2  class="alert_h2"><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+          <ul>
+            <% @item.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+
         <h3> 商品登録</h3>
 
         <%= form_for(@item) do |f| %>
@@ -33,6 +46,7 @@
         <p><%= f.submit '上記の内容で登録する', class:"btn btn-success active" %></p>
 
         <% end %>
+      </div>
 
       </div>
       <div class="col-lg-7" style="">
