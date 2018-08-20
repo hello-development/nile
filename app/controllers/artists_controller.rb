@@ -1,5 +1,7 @@
 class ArtistsController < ApplicationController
 
+	layout 'artist'
+
 	def admin_index
 		@artists = Artist.all
 		@artist = Artist.new
@@ -15,7 +17,10 @@ class ArtistsController < ApplicationController
 		if params[:label_id].present?
 			@artists = @artists.get_by_label_id params[:label_id]
 		end
-				if user_signed_in?
+		if params[:artist_name].present?
+			@artists = @artists.get_by_artist_name params[:artist_name]
+		end
+		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)

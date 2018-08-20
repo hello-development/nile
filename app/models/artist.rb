@@ -20,4 +20,6 @@ class Artist < ApplicationRecord
 	scope :get_by_genre_id, ->(genre_id) { where(genre_id: genre_id) }
 	scope :get_by_label_id, ->(label_id) { where(label_id: label_id) }
 
+	scope :get_by_artist_name, ->(artist_name) { where("artist_name like ?", "%#{artist_name}%") }
+
 end
