@@ -24,9 +24,6 @@ class ItemsController < ApplicationController
 		end
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
-		else
-		  redirect_to items_path
-		  flash[:notice]="該当の商品はありませんでした"
 		end
 
 	end
