@@ -18,13 +18,24 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_cart
 
+  #どうしてもセッション使いたいならこっちかな〜
+  # def current_cart
+  #   if current_user.cart.id.present?
+  #     session[:cart_id] = current_user.cart.id
+  #     @cart = Cart.find(id: session[:cart_id])
+  #   else
+  #     # @cart = Cart.create
+  #     @cart = Cart.create(user_id: current_user.id)
+  #     session[:cart_id] = @cart.id
+  #   end
+  # end
+
+  # セッションではない方法
   def current_cart
-    if  session[:cart_id]
-      @cart = Cart.find(session[:cart_id])
+    if Cart.find_by(user_id: current_user).present?   #Cartのデータベースの中にcurrent_userのidを持ったcartが存在していますか？
+      @cart = Cart.find_by(user_id: current_user)     #存在していたらcurrent_userのidで検索して自分のcartを@cartに代入します
     else
-      # @cart = Cart.create
-      @cart = Cart.create(user_id: current_user.id)
-      session[:cart_id] = @cart.id
+      @cart = Cart.create(user_id: current_user.id)   #存在していなければcurrent_userのidを持ったcartを作成して@cartに代入します
     end
   end
 
