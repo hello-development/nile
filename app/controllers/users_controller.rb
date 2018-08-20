@@ -8,6 +8,13 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.all
+				if user_signed_in?
+		if current_user.last_sign_in_at == current_user.current_sign_in_at
+		unless Address.exists?(user_id: current_user.id)
+			redirect_to new_user_address_path(current_user)
+		end
+		end
+		end
 	end
 
 	def edit

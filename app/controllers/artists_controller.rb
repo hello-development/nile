@@ -15,6 +15,13 @@ class ArtistsController < ApplicationController
 		if params[:label_id].present?
 			@artists = @artists.get_by_label_id params[:label_id]
 		end
+				if user_signed_in?
+		if current_user.last_sign_in_at == current_user.current_sign_in_at
+		unless Address.exists?(user_id: current_user.id)
+			redirect_to new_user_address_path(current_user)
+		end
+		end
+		end
 	end
 
 	def new
