@@ -3,17 +3,6 @@
     <div class="row">
       <div class="col-lg-12" style="">
         <h2>商品検索</h2>
-          <div>
-            <%= form_tag(items_admin_index_path, method: "get") do %>
-            <%= label_tag :item_name, "シングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %><%= submit_tag "検索" %><br>
-            <%= label_tag :ジャンル, "ジャンル" %>
-            <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
-            <%= submit_tag "絞り込み" %>
-            <%= label_tag :"レーベル" %>
-            <%= select_tag :label_id, options_for_select(Item.labels), include_blank: true %>
-            <%= submit_tag "絞り込み" %>
-            <% end %>
-          </div>
         <table  class="table-hover table">
           <thead>
             <tr>

@@ -5,6 +5,12 @@ class ArtistsController < ApplicationController
 	def admin_index
 		@artists = Artist.all
 		@artist = Artist.new
+		if params[:genre_id].present?
+			@artists = @artists.get_by_genre_id params[:genre_id]
+		end
+		if params[:label_id].present?
+			@artists = @artists.get_by_label_id params[:label_id]
+		end
 		if params[:artist_name].present?
 			@artists = @artists.get_by_artist_name params[:artist_name]
 		end
