@@ -16,4 +16,17 @@ class Item < ApplicationRecord
 
 	attachment :item_image
 
+	# 絞り込み検索時に使用するデータ（seedに入っているIDと内容を同じにすると使えるっぽい）
+	enum genre: { JｰPOP: 1, 洋楽: 2, レゲエ: 3, ロック: 4, トランス: 5, アニメソング: 6, EDM: 7, 演歌: 8 }
+	enum label: { エイベックス: 1, ソニーミュージック: 2, ポニーキャニオン: 3, テレビ朝日ミュージック: 4, ユニバーサルミュージック: 5, ワーナーミュージックジャパン: 6 }
+
+	# スコープでセレクトタグによって指定したIDをもとにwhereで絞り込みしてるみたいです。。
+	scope :get_by_genre_id, ->(genre_id) { where(genre_id: genre_id) }
+	scope :get_by_label_id, ->(label_id) { where(label_id: label_id) }
+
+	# 名による絞り込み
+	scope :get_by_item_name, ->(item_name) { where("item_name like ?", "%#{item_name}%") }
+	# 性別による絞り込み
+	# scope :get_by_gender, ->(gender) { where(gender: gender) }
+
 end
