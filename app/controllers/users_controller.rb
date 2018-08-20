@@ -5,6 +5,12 @@ class UsersController < ApplicationController
 	def index
 		@users = User.all
 		if admin_signed_in?
+		if params[:last_name].present?
+			@users = @users.get_by_last_name params[:last_name]
+		end
+		if params[:first_name].present?
+			@users = @users.get_by_first_name params[:first_name]
+		end
 		elsif user_signed_in?
 			redirect_to root_path
 		else

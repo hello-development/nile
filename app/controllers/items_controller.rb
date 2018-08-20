@@ -34,6 +34,10 @@ class ItemsController < ApplicationController
 		# @artists = Artist.all
 		# @genres = Genre.all
 		# @labels = Label.all
+		if params[:item_name].present?
+			@items = @items.get_by_item_name params[:item_name]
+		end
+		render :new, layout: "item_new"
 	end
 	def create
 		@item = Item.new(item_params)
@@ -66,6 +70,7 @@ class ItemsController < ApplicationController
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
 		end
+		render :admin_index, layout: "admin_item"
 	end
 
 	def edit

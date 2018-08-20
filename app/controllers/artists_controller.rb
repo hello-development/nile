@@ -5,6 +5,10 @@ class ArtistsController < ApplicationController
 	def admin_index
 		@artists = Artist.all
 		@artist = Artist.new
+		if params[:artist_name].present?
+			@artists = @artists.get_by_artist_name params[:artist_name]
+		end
+		render :admin_index, layout: "admin_artist"
 	end
 
 	def index
