@@ -56,3 +56,25 @@
 .mypage_upperright_right {
 	float: left
 }
+
+
+
+
+.users_index_thread {
+	display: block;
+}
+.users_index_tbody {
+	display: block;
+	overflow-y: scroll;
+	height: 500px;
+}
+
+.users_index_table {
+  width: 40%;
+}
+.users_index_tbody_td {
+	border: 1px solid #bbb;
+}
+.users_index_thread_th {
+	border: 1px solid #bbb;
+}

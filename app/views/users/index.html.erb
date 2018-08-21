@@ -10,7 +10,7 @@
 
 	<body>
 
-	<div class="users_data">
+<!-- 	<div class="users_data">
 		<p>ユーザー検索</p>
 		<div class=search_box>
 	      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -19,28 +19,28 @@
 	        <input type="submit" value="&#xf002">
 	      </form>
 	    </div>
-	</div>
+	</div> -->
 
 	<div>
-		<table>
-			<thead>
+		<table class="users_index_table">
+			<thead class="users_index_thread">
 				<tr>
-					<th> ID </th>
-					<th colspan="2"> ユーザー名 </th>
-					<th> メールアドレス </th>
-					<th colspan="2"> </th>
-					<th colspan="2"> </th>
+					<th class="users_index_thread_th" width="50px"> ID </th>
+					<th colspan="2" class="users_index_thread_th" width="150px"> ユーザー名 </th>
+					<th class="users_index_thread_th" width="200px"> メールアドレス </th>
+					<th colspan="2" class="users_index_thread_th"> </th>
+					<th colspan="2" class="users_index_thread_th"> </th>
 				</tr>
 			</thread>
 
-			<tbody>
+			<tbody class="users_index_tbody">
 				<% @users.each do |user| %>
 				<tr>
-					<td> <%= user.id %> </td>
-					<td colspan="2"> <%= link_to "#{user.last_name}" + "#{user.first_name}", user_path(user.id) %> </td>
-					<td> <%= user.email %> </td>
-					<td colspan="2"> <%= link_to "編集", edit_user_path(user.id), class: 'btn btn-default' %> </td>
-					<td colspan="2"> <%= link_to "退会", root_path, class: 'btn btn-default', method: :delete, "data-confirm" => "本当に退会させますか？" %> </td>
+					<td class="users_index_tbody_td" width="50px"> <%= user.id %> </td>
+					<td colspan="2" class="users_index_tbody_td" width="150px"> <%= link_to "#{user.last_name}" + "#{user.first_name}", user_path(user.id) %> </td>
+					<td class="users_index_tbody_td" width="200px"> <%= user.email %> </td>
+					<td colspan="2"> <%= link_to "編集", edit_user_path(user.id), class: 'btn btn-success' %> </td>
+					<td colspan="2"> <%= link_to "退会", user_path(user.id), class: 'btn btn-danger', method: :delete, "data-confirm" => "本当に退会させますか？" %> </td>
 				</tr>
 				<% end %>
 			</tbody>>
