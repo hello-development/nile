@@ -8,7 +8,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  
+
   <body>
 
   <header class="header">
@@ -20,24 +20,7 @@
       <nav class="nav">
         <ul>
 
-          <% if user_signed_in? %>
-            <li class="li">
-              <%= link_to "アーティスト", artists_path %>
-            </li>
-            <li class="li">
-              <%= link_to "CD", items_path %>
-            </li>
-            <li class="li">
-              <%= link_to "マイページ", user_path(current_user.id) %>
-            </li>
-            <li class="li">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            </li>
-            <li class="li">
-              <%= link_to "カート", user_carts_path(current_user.id) %>
-            </li>
-
-          <% elsif admin_signed_in? %>
+          <% if admin_signed_in? %>
             <li class="li">
                 <%= link_to "アーティスト", artists_path %>
             </li>
@@ -61,8 +44,24 @@
               <%= link_to "商品管理", items_admin_index_path %>
             </li>
             <li class="li">
-              <!-- リンク先が違う・・・ -->
               <%= link_to "ユーザー一覧", users_path %>
+            </li>
+
+          <% elsif user_signed_in? %>
+            <li class="li">
+              <%= link_to "アーティスト", artists_path %>
+            </li>
+            <li class="li">
+              <%= link_to "CD", items_path %>
+            </li>
+            <li class="li">
+              <%= link_to "マイページ", user_path(current_user.id) %>
+            </li>
+            <li class="li">
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            </li>
+            <li class="li">
+              <%= link_to "カート", user_carts_path(current_user.id) %>
             </li>
 
           <% else %>
@@ -101,7 +100,10 @@
 
   <%= yield %>
 
-
+      <footer class="footer">
+        Copyright © Infratop Inc. All Rights Reserved.
+      </footer>
 
   </body>
-  </html>
+
+</html>
