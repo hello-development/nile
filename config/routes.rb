@@ -22,10 +22,12 @@ devise_for :users, controllers: {
   get 'items/admin_index'
   patch 'users/:id' => 'users#favorite'
 
-  resources :users, only: [:show, :edit, :update, :index]do
+  resources :users, only: [:show, :edit, :update, :index, :destroy]do
     resources :addresses, only: [:new, :create, :edit, :show, :update, :destroy]
     resource :carts, only: [:show]
   end
+
+  delete '/users/:id' => 'users#destroy'
 
   resources :artists
 
