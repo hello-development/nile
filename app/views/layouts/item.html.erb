@@ -86,7 +86,7 @@
 
     <div class="input-group">
       <%= form_tag(items_path, method: "get") do %>
-      <%= label_tag :item_name, "ングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %>
+      <%= label_tag :item_name, "シングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %>
       <%= label_tag :ジャンル, "ジャンル" %>
       <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
       <%= label_tag :"レーベル" %>
