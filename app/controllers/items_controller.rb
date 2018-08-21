@@ -84,7 +84,7 @@ class ItemsController < ApplicationController
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
 		end
-		render :admin_index, layout: "admin_item"
+        # render :admin_index, layout: "admin_item"
 	end
 
 	def edit
@@ -113,3 +113,4 @@ class ItemsController < ApplicationController
 	end
 
 end
+
