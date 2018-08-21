@@ -21,6 +21,9 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.all
+		@artist = Artist.find(params[:id])
+		@item = Item.find(params[:id])
+		@genre = Genre.find(params[:id])
 				if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
@@ -37,9 +40,17 @@ class UsersController < ApplicationController
 		else
 			redirect_to root_path
 		end
+		@user = User.find(params[:id])
 	end
 
 	def update
+		@users = User.all
+	if  @user.save
+		redirect_to user_path(@users.id)
+	else
+    	@users = User.all
+	    render :edit
+	end
 	end
 
 	def new

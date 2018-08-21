@@ -8,13 +8,27 @@ class ItemsController < ApplicationController
 			@artists = Artist.all
 			@genres = Genre.all
 			@labels = Label.all
+
+		if params[:genre_id].present?
+			@artists = @artists.get_by_genre_id params[:genre_id]
+		end
+		if params[:label_id].present?
+			@artists = @artists.get_by_label_id params[:label_id]
+		end
+		if params[:item_name].present?
+			@items = @items.get_by_item_name params[:item_name]
+            if @items.count == 0
+              redirect_to root_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			end
+		end
+
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)
 		end
 		end
-		end
+	end
 
 		if params[:genre_id].present?
 			@items = @items.get_by_genre_id params[:genre_id]
@@ -26,13 +40,6 @@ class ItemsController < ApplicationController
 			@items = @items.get_by_item_name params[:item_name]
 		end
 
-		# 検索がヒットしなかった時のメッセージ
-		if params[:item_name].present?
-			@items = @items.get_by_item_name params[:item_name]
-            if @items.count == 0
-              redirect_to items_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			end
-		end
 
 	end
 
@@ -86,17 +93,16 @@ class ItemsController < ApplicationController
 		if params[:label_id].present?
 			@items = @items.get_by_label_id params[:label_id]
 		end
-		if params[:item_name].present?
-			@items = @items.get_by_item_name params[:item_name]
-		end
+		# if params[:item_name].present?
+		# 	@items = @items.get_by_item_name params[:item_name]
+		# end
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
         	if @items.count == 0
-              redirect_to items_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
+              redirect_to items_admin_index_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			else
 			end
 		end
-
-		# render :admin_index, layout: "admin_item"
 	end
 
 	def edit

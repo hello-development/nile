@@ -3,7 +3,10 @@
     <div class='row'>
       <strong><div class="search-results"><%= notice %></div></strong>
       <div class="col-lg-9">
-        <div class="col-lg-3">
+        <!-- <div class="col-lg-3"> -->
+          <div>
+          <div class='row'>
+            <div class="col-lg-3">
           <div class="item-box">
           <% @items.each do |item| %>
                 <dl>
@@ -17,6 +20,9 @@
                 </dl>
           <% end %>
         </div>
+        </div>
+        <!-- </div> -->
+      </div>
       </div>
     </div>
       <div class="col-lg-3">
