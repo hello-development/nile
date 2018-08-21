@@ -3,7 +3,8 @@ class CartsController < ApplicationController
 	before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
 
 	def show
-		 @cart_items = current_cart.cart_items
+		 @cart = current_cart
+		 @cart_items = @cart.cart_items
 	end
 
 	# 商品一覧画面から、「商品購入」を押した時のアクション
@@ -13,6 +14,9 @@ class CartsController < ApplicationController
 	  	@cart_item.units += 1 #存在していれば１個足します
 	  else                    #存在していなければ(新しい商品ということです)１個カゴに入れます
 	    @cart_item = current_cart.cart_items.build(item_id: params[:item_id])
+
+	    @cart_item = CartItem.new()
+	    @cart_item.cart_id = current_user.cart.id
 		@cart_item.units = 1 #params[:units].to_i
       end
 	  @cart_item.save
