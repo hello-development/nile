@@ -17,12 +17,12 @@
 					<p><%= @item.price %></p>
 					<p><%= @item.inventory %></p>
 
-                    <%#= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
+                    <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
                     <br>
-                    <%#= f.label :"数量を選ぶ" %>
-                    <%#= f.number_field :units %><br>
-                    <%#= f.submit 'カートに入れる' %><br>
-                    <%# end %>
+                    <%= f.label :"数量を選ぶ" %>
+                    <%= f.number_field :units %><br>
+                    <%= f.submit 'カートに入れる' %><br>
+                    <% end %>
 					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
 				</div>
 				<div class="disk-box-show">
