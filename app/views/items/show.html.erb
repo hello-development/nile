@@ -16,8 +16,13 @@
 					<p><% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></p>
 					<p><%= @item.price %></p>
 					<p><%= @item.inventory %></p>
-					<p><%= link_to "カートに入れる(仮)", carts_add_item_path(@item.id), method: :post %>
-					<%= select_tag 'cart_items[units]', options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9"]) %></p>
+
+                    <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
+                    <br>
+                    <%= f.label :"数量を選ぶ" %>
+                    <%= f.number_field :units %><br>
+                    <%= f.submit 'カートに入れる' %><br>
+                    <% end %>
 					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
 				</div>
 				<div class="disk-box-show">
@@ -39,7 +44,28 @@
 					</div>
 				</div>
 				<div class="col-md-8">
-					<p><div style="width: 400px; height: 100px; padding: 1px; margin: 0 auto; border: 1px solid #333333;">レビュー購入者のみ入力可能</div></p>
+				<% if @item.favorited_by?(current_user) %>
+					<%= link_to item_likes_path(@item), method: :delete do %><%= @item.likes.count %> いいね<% end %>
+					<% else %>
+    				<%= link_to item_likes_path(@item), method: :post do %><%= @item.likes.count %> いいね<% end %>
+    			<% end %>
+
+       			<p>レビュー<%= @item.reviews.count %>件<br>
+				<% @item.reviews.each do |review| %>						
+    					<!-- 日付 -->
+   						<%= review.created_at.strftime('%Y/%m/%d') %>
+						<!-- 名前 -->
+						<%= review.user.first_name %><br>
+						<!-- コメント -->
+    					<%= review.comment %>
+
+    					<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><% end %><br>		
+    			<% end %></p>
+
+				<%= form_for [@item, @review] do |f| %>
+				    <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
+				    <%= f.submit "送信する", class: "" %>
+				<% end %>
 				</div>
 			</div>
 		</div>

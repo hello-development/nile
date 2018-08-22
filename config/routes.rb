@@ -12,11 +12,11 @@ devise_for :users, controllers: {
 }
   root 'items#index'
 
-  get 'carts/register'
+  get 'carts/:item_id/register' => 'carts#register', as: :carts_register
   # post 'carts/add_item'
   post 'carts/:item_id/add_item' => 'carts#add_item', as: :carts_add_item #item_idをurlに含めて送信
-  post 'carts/update_item'
-  delete 'carts/delete_item'
+  patch 'carts/:item_id/update_item' => 'carts#update_item', as: :carts_update_item
+  delete 'carts/:item_id/delete_item' => 'carts#delete_item', as: :carts_delete_item
   get 'carts/confirmation'
   get 'artists/admin_index'
   get 'items/admin_index'
@@ -33,7 +33,7 @@ devise_for :users, controllers: {
 
   resources :items do
     resource :likes, only: [:create, :destroy]
-    resource :reviews, only: [:create, :destroy]
+    resources :reviews, only: [:create, :destroy]
     resources :disks, only: [:new, :create, :index, :destroy]do
       resources :songs, only: [:new, :create, :edit, :update, :index, :destroy]
     end

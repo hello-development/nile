@@ -1,7 +1,7 @@
 class DisksController < ApplicationController
 	def index
     @item = Item.find(params[:item_id])
-	  @disk = Disk.new
+	@disk = Disk.new
     @disks = @item.disks
   end
 

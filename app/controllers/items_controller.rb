@@ -1,7 +1,5 @@
 class ItemsController < ApplicationController
 
-	layout 'item'
-
 	def index
 			@items = Item.all
 			@item = Item.new
@@ -10,16 +8,30 @@ class ItemsController < ApplicationController
 			@labels = Label.all
 			# render layout: "item"
 		if params[:genre_id].present?
-			@artists = @artists.get_by_genre_id params[:genre_id]
+			@items = @items.get_by_genre_id params[:genre_id]
 		end
 		if params[:label_id].present?
-			@artists = @artists.get_by_label_id params[:label_id]
+			@items = @items.get_by_label_id params[:label_id]
 		end
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
-            if @items.count == 0
-              redirect_to root_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			end
+		end
+
+		unless @items.count == Item.all.count
+			# itemsの数がitems.allから変わっているか確認する
+		if @items.count == 0
+			# itemsの数が０の時
+			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			render :action => :index, layout: "item" and return
+			# indexに戻りitemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
+		elsif @items.count > 0
+
+          	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
+          	#{@items.count}で絞り込まれた数を表示させる
+
+          	render :action => :index, layout: "item" and return
+          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+		end
 		end
 
 		if user_signed_in?
@@ -28,7 +40,10 @@ class ItemsController < ApplicationController
 			redirect_to new_user_address_path(current_user)
 		end
 		end
-	end
+		end
+
+		render :index, layout: "item"
+		# itemのレイアウトを適用させる。
 	end
 
 	def new
@@ -46,8 +61,27 @@ class ItemsController < ApplicationController
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
 		end
+
+		unless @items.count == Item.all.count
+			# itemsの数がitems.allから変わっているか確認する
+		if @items.count == 0
+			# itemsの数が０の時
+			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			render :action => :new, layout: "item_new" and return
+			# newに戻りitem_newのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
+		elsif @items.count > 0
+
+          	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
+          	#{@items.count}で絞り込まれた数を表示させる
+
+          	render :action => :new, layout: "item_new" and return
+          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+		end
+		end
+
 		render :new, layout: "item_new"
 	end
+
 	def create
 		@item = Item.new(item_params)
 		if @item.save
@@ -61,23 +95,22 @@ class ItemsController < ApplicationController
 
 	def show
 		@item = Item.find(params[:id])
+		@review = Review.new
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all
 		@disks = Disk.all
 		@songs = Song.all
-		# @cart_item = current_cart.cart_item.find(params[:item_id])
+		@cart_item = CartItem.new
 	end
 
 	def admin_index
+
 		@items = Item.all
 		@item = Item.new
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all
-
-		# render :admin_index, layout: 'admin_item'
-
 		if params[:genre_id].present?
 			@items = @items.get_by_genre_id params[:genre_id]
 		end
@@ -86,12 +119,26 @@ class ItemsController < ApplicationController
 		end
 		if params[:item_name].present?
 			@items = @items.get_by_item_name params[:item_name]
-            if @items.count == 0
-              redirect_to items_admin_index_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			end
-			return
 		end
-        render :admin_index, layout: 'admin_item'
+
+		unless @items.count == Item.all.count
+			# itemsの数がitems.allから変わっているか確認する
+		if @items.count == 0
+			# itemsの数が０の時
+			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			render :action => :admin_index, layout: "admin_item" and return
+			# admin_indexに戻りadmin_itemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
+		elsif @items.count > 0
+
+          	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
+          	#{@items.count}で絞り込まれた数を表示させる
+
+          	render :action => :admin_index, layout: "admin_item" and return
+          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+		end
+		end
+		render :admin_index, layout: "admin_item"
+		# admin_itemのレイアウトを適用させる。
 	end
 
 	def edit
@@ -120,4 +167,3 @@ class ItemsController < ApplicationController
 	end
 
 end
-
