@@ -11,6 +11,22 @@ class UsersController < ApplicationController
 		if params[:first_name].present?
 			@users = @users.get_by_first_name params[:first_name]
 		end
+
+		unless @users.count == User.all.count
+			# @usersの数がUser.allから変わっているか確認する
+		if @users.count == 0
+			# usersの数が０の時
+			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+			render :action => :index
+			# renderにする事で変更された情報を維持しつつnoticeを表示させる
+		elsif @users.count > 0
+          	flash.now[:notice] = "#{@users.count}件のユーザーがヒットしました。"
+          	#{@users.count}で絞り込まれた数を表示させる
+          	render :action => :index
+          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+		end
+		end
+
 		elsif user_signed_in?
 			redirect_to root_path
 		else
@@ -24,7 +40,7 @@ class UsersController < ApplicationController
 		@artist = Artist.find(params[:id])
 		@item = Item.find(params[:id])
 		@genre = Genre.find(params[:id])
-				if user_signed_in?
+		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)
