@@ -11,12 +11,9 @@
           </ul>
         </div>
       <% end %>
-      シングル/アルバム<br>
       <%= @item.item_name %><br>
-      ディスクの追加
       <%= form_for [@item, @disk], url: item_disks_path do |f| %>
-      ディスクNo.<br>
-      <%= f.number_field :disk_number %><br>
+      No.<%= f.number_field :disk_number %><br>
       <%= f.submit 'ディスクを追加する' %>
       <% end %><br>
       </div>
@@ -24,7 +21,7 @@
         <table  class="table-hover table">
           <thead>
             <tr>
-              <th>ディスクID</th>
+              <!-- <th>ディスクID</th> -->
               <th>ディスク</th>
               <th></th>
             </tr>
@@ -32,8 +29,7 @@
           <tbody>
             <% @disks.each do |disk| %>
             <tr>
-              <td><%= disk.id %></td>
-              <td><%= link_to "#{disk.disk_number}", item_disk_songs_path(@item, disk) %></td>
+              <td><%= link_to "ディスク［#{disk.disk_number}］", item_disk_songs_path(@item, disk) %></td>
               <td><%= link_to item_disk_path(@item,disk), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn   btn-default    btn-danger">削除</button><% end %></td>
             </tr>
             <% end %>
