@@ -3,40 +3,62 @@ class CartsController < ApplicationController
 	before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
 
 	def show
-		 @cart_items = current_cart.cart_items
+      @items = Item.all
+	  @cart_items = current_cart.cart_items
 	end
 
-	# 商品一覧画面から、「商品購入」を押した時のアクション
+
+	# 「カートに入れる」を押した時のアクション
 	#先にsetup_cart_item!を実行するよ！
 	def add_item
-	  if @cart_item.present?  #@cart_itemが存在していますか？(同じ商品がカゴに入っているかどうか聞いています)
-	  	@cart_item.units += 1 #存在していれば１個足します
-	  else                    #存在していなければ(新しい商品ということです)１個カゴに入れます
-	    @cart_item = current_cart.cart_items.build(item_id: params[:item_id])
-		@cart_item.units = 1 #params[:units].to_i
-      end
-	  @cart_item.save
+	  item = Item.find(params[:item_id])
+	  if @cart_item.nil? #setup_cart_item!の結果がnilかどうか聞いています。nilなら新しいcart_itemを作ります。
+	    cart_item = CartItem.new(cart_item_params)
+	  	cart_item.item_id = item.id
+	  	cart_item.cart_id = current_cart.id
+	  else               #nilでなければ同じ商品がカートに入っているということなので数量を足します
+	   	additem = CartItem.new(cart_item_params)
+        @cart_item.units += additem.units
+	  end
+	  cart_item.save
 	  redirect_to user_carts_path(current_user)
 	end
 
-	# カート詳細画面から、「更新」を押した時のアクション
+	# カート画面で「この数量で更新」を押した時のアクション
+	#先にsetup_cart_item!を実行するよ！
 	def update_item
-		@cart_item.update(units: params[:units].to_i)
-		redirect_to user_carts_path(current_user)
+	  if @cart_item.update(cart_item_params)
+	    redirect_to user_carts_path(current_user), notice: "更新しました！"
+	  else
+	  	@items = Item.all
+	    @cart_items = current_cart.cart_items
+	  	flash.now[:alert] = "数量が正しくなかったため更新できませんでした"
+	  	render :show
+	  end
 	end
 
-	# # カート詳細画面から、「削除」を押した時のアクション
+	 # カート画面で「削除」を押した時のアクション
+	 #先にsetup_cart_item!を実行するよ！
 	def delete_item
-		@cart_item.destroy
-		redirect_to user_carts_path(current_user)
+	  @cart_item.destroy
+	  redirect_to user_carts_path(current_user)
 	end
 
 	def register
+	  @items = Item.all
+	  @genres = Genre.all
+	  @artists = Artist.all
+	  @cart_items = current_cart.cart_items
 	end
 
 	private
 
 	def setup_cart_item!
-		@cart_item = current_cart.cart_items.find_by(item_id: params[:item_id]) #買いたい商品をfind_byで取り出して@cart_itemに代入します
+      # カートの中に入っている商品をitem_idで検索して代入しています。item_idと一致する商品が見つからない場合はnilが代入されます。
+	  @cart_item = current_cart.cart_items.find_by(item_id: params[:item_id])
 	end
+
+	def cart_item_params
+	  params.require(:cart_item).permit(:cart_id, :item_id, :units)
+    end
 end

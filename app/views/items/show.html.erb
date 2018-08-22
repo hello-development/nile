@@ -16,8 +16,13 @@
 					<p><% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></p>
 					<p><%= @item.price %></p>
 					<p><%= @item.inventory %></p>
-					<p><%= link_to "カートに入れる(仮)", carts_add_item_path(@item.id), method: :post %>
-					<%= select_tag 'cart_items[units]', options_for_select(["1", "2", "3", "4", "5", "6", "7", "8", "9"]) %></p>
+
+                    <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
+                    <br>
+                    <%= f.label :"数量を選ぶ" %>
+                    <%= f.number_field :units %><br>
+                    <%= f.submit 'カートに入れる' %><br>
+                    <% end %>
 					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
 				</div>
 				<div class="disk-box-show">
