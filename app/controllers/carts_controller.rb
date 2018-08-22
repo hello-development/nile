@@ -45,10 +45,13 @@ class CartsController < ApplicationController
 	end
 
 	def register
-	  @items = Item.all
-	  @genres = Genre.all
-	  @artists = Artist.all
-	  @cart_items = current_cart.cart_items
+	  @purchase = Purchase.new
+	  sum = 0
+	  cart_items = current_cart.cart_items
+	  cart_items.each do |cart_item|
+	  	sum = cart_item.units * cart_item.item.price + sum
+	  end
+	  @sum = sum
 	end
 
 	private
