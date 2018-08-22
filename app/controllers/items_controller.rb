@@ -81,6 +81,7 @@ class ItemsController < ApplicationController
 
 		render :new, layout: "item_new"
 	end
+
 	def create
 		@item = Item.new(item_params)
 		if @item.save
@@ -94,6 +95,7 @@ class ItemsController < ApplicationController
 
 	def show
 		@item = Item.find(params[:id])
+		@review = Review.new
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all

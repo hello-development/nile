@@ -33,7 +33,7 @@ devise_for :users, controllers: {
 
   resources :items do
     resource :likes, only: [:create, :destroy]
-    resource :reviews, only: [:create, :destroy]
+    resources :reviews, only: [:create, :destroy]
     resources :disks, only: [:new, :create, :index, :destroy]do
       resources :songs, only: [:new, :create, :edit, :update, :index, :destroy]
     end

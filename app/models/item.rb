@@ -38,4 +38,8 @@ class Item < ApplicationRecord
 	# 性別による絞り込み
 	# scope :get_by_gender, ->(gender) { where(gender: gender) }
 
+	def favorited_by?(user)
+          likes.where(user_id: user.id).exists?
+    end
+
 end
