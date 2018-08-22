@@ -1,7 +1,5 @@
 class ArtistsController < ApplicationController
 
-	layout 'artist'
-
 	def admin_index
 		@artists = Artist.all
 		@artist = Artist.new
@@ -14,6 +12,23 @@ class ArtistsController < ApplicationController
 		if params[:artist_name].present?
 			@artists = @artists.get_by_artist_name params[:artist_name]
 		end
+
+		unless @artists.count == Artist.all.count
+			# artistsの数がArtist.allから変わっているか確認する
+		if @artists.count == 0
+			# artistsの数が０の時
+			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+            render :action => :admin_index, layout: "admin_artist" and return
+		elsif @artists.count > 0
+
+          	flash.now[:notice] = "#{@artists.count}件のアーティストがヒットしました。"
+          	#{@artists.count}で絞り込まれた数を表示させる
+
+          	render :action => :admin_index, layout: "admin_artist" and return
+          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+		end
+		end
+
 		render :admin_index, layout: "admin_artist"
 	end
 
@@ -29,10 +44,24 @@ class ArtistsController < ApplicationController
 		end
 		if params[:artist_name].present?
 			@artists = @artists.get_by_artist_name params[:artist_name]
-            if @artists.count == 0
-              redirect_to artists_path, notice: "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			end
 		end
+
+		unless @artists.count == Artist.all.count
+			# artistsの数がArtist.allから変わっているか確認する
+		if @artists.count == 0
+			# artistsの数が０の時
+			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+            render :action => :index, layout: "artist" and return
+		elsif @artists.count > 0
+
+          	flash.now[:notice] = "#{@artists.count}件のアーティストがヒットしました。"
+          	#{@artists.count}で絞り込まれた数を表示させる
+
+          	render :action => :index, layout: "artist" and return
+          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+		end
+		end
+
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
@@ -40,6 +69,9 @@ class ArtistsController < ApplicationController
 		end
 		end
 		end
+
+		render :index, layout: "artist"
+		# artistのレイアウトを適用させる。
 	end
 
 	def new
