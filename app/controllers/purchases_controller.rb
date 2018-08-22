@@ -11,7 +11,7 @@ class PurchasesController < ApplicationController
     purchase.total_price = taxincl.round
     purchase.purchased_date = Time.now
     purchase.save
-    redirect_to purchase_purchase_datails_path(purchase.id)
+    redirect_to confirmation_path(purchase)
   end
 
 
