@@ -36,6 +36,7 @@ class ArtistsController < ApplicationController
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all
+		@rank_artist = Artist.find(Like.group(:item_id.artist_id).order('count(item_id.artist_id) desc').limit(5).pluck(:artist_id))
 		if params[:genre_id].present?
 			@artists = @artists.get_by_genre_id params[:genre_id]
 		end

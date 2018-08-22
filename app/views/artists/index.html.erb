@@ -37,30 +37,16 @@
 			<h3> アーティストCD総合<br>いいねランキング</h3>
 			<table  class="table-hover table">
 				<tbody>
+					<% @rank_artist.each do |rank_artist| %>
 					<tr>
 						<td>１</td>
 						<td><%= image_tag('no_image50x50.jpg') %></td>
-						<td>アーティスト名</td>
+						<td><%= rank.artist_name %></td>
 						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>111</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
+						<td><% @genres.each do |genre| %><% if rank_artist.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
+						<td><% @labels.each do |label| %><% if rank_artist.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
 					</tr>
-					<tr>
-						<td>２</td>
-						<td><%= image_tag('no_image50x50.jpg') %></td>
-						<td>アーティスト名</td>
-						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>99</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-					</tr>
-					<tr>
-						<td>３</td>
-						<td><%= image_tag('no_image50x50.jpg') %></td>
-						<td>アーティスト名</td>
-						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>88</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-					</tr>
+					<% end %>
 				</tbody>
 			</table>
 		</div>
