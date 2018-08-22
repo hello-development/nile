@@ -1,4 +1,4 @@
-<%= @item.item_name %> > <%= @disk.disk_number %> <br>
+<%= @disk.item.item_name %> > <%= @disk.disk_number %> <br>
 
 
 <% if @song.errors.any? %>
@@ -27,8 +27,8 @@
 	曲ID=><%= song.id %>
 	曲順=><%= song.song_order %>
 	曲名=><%= song.song_name %>
-	<%= link_to "編集", edit_item_disk_song_path(@item, @disk, song) %>
-	<%= link_to "削除", item_disk_song_path(@item, @disk, song), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
+	<%= link_to "編集", edit_item_disk_song_path(@disk.item, @disk, song) %>
+	<%= link_to "削除", item_disk_song_path(@disk.item, @disk, song), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
 <% end %>
 
 <button clabtn btn-default btn-danger><%= link_to "商品一覧", items_admin_index_path %></button>

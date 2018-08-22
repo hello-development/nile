@@ -1,6 +1,5 @@
 class SongsController < ApplicationController
   def index
-  	@item = Item.find(params[:item_id])
   	@disk = Disk.find(params[:disk_id])
   	@song = Song.new
   	@songs = @disk.songs
@@ -20,7 +19,6 @@ class SongsController < ApplicationController
   end
 
   def edit
-  	@item = Item.find(params[:item_id])
   	@disk = Disk.find(params[:disk_id])
   	@song = Song.find(params[:id])
   end
@@ -38,8 +36,8 @@ class SongsController < ApplicationController
   end
 
   def destroy
-  	@song = Song.find_by(disk_id: params[:disk_id], id: params[:id])
-    @song.destroy
+  	song = Song.find_by(disk_id: params[:disk_id], id: params[:id])
+    song.destroy
   	redirect_to item_disk_songs_path, notice: "Song delete successfully"
   end
 
