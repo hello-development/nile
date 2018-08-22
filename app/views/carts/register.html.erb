@@ -1,27 +1,20 @@
-<% sum = 0 %>
-<h1>カートの中身</h1>
-<div class="update"><%= notice %></div>
-<% @cart_items.each do |ci| %>
-  <% @items.each do |item| %>
-    <% if item.id == ci.item_id %>
-      ジャケ写<br><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpg' %><br>
-      商品名<br><%= item.item_name %><br>
-      価格<br><%= item.price %>円<br>
-      <%= form_for (ci), url: carts_update_item_path(item.id) do |f| %>
-      <%= f.label :"数量を変える(現在の数量が表示されています)" %><br>
-      <%= f.number_field :units %><br>
-      <%= f.submit 'この数量で更新' %><br>
-      <% end %>
-      <%= link_to "削除", carts_delete_item_path(item.id), method: :delete, "data-confirm" => "全ての#{item.item_name}をカートから外しますか？" %>
-      小計(<%= ci.units %>点) ¥ <%= ci.units * item.price %>円<br>
-
-      <!-- 合計を出す準備の計算です -->
-      <% sum = ci.units * item.price + sum %>
-
-    <% end %>
+<% n = 1 %>
+<%= form_for (@purchase), url: purchases_path do |f| %>
+  <% current_user.addresses.each do |address| %>
+    <h3>宛先<%= n %><br></h3>
+    <label><%= f.radio_button :delivery_address, address.address_name %><%= address.address_name %></label><br>
+    <%= f.label :"address.postal_code" %><br>
+    <%= f.label :"address.address" %><br>
+    <% n += 1 %>
   <% end %>
-  <br>
+<%= link_to "お届け先を追加される方はこちらから", user_address_path(current_user, current_user.addresses.first) %><br>
+
+合計<%= @sum %>円<br>
+<% taxincl = @sum * 1.08 %>
+(税込<%= taxincl.round %>円)<br>
+<%= f.submit '購入確定' %>
+<%= link_to "カートに戻る", user_carts_path(current_user) %>
+
+
+
 <% end %>
-合計<%= sum %>円<br>
-<% taxincl = sum * 1.08 %>
-(税込 <%= taxincl.round %>円)

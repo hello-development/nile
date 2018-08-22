@@ -2,6 +2,6 @@ class PurchaseDatail < ApplicationRecord
 	belongs_to :item
 	belongs_to :purchase
 
-	validates :purchase,  presence: true
+	validates :purchase_id,  presence: true
 
 end
