@@ -30,15 +30,15 @@
     <% end %>
 
     <div> <strong> 最新のCD </strong> </div>
-    <% @users.each do |user| %>
-    <% @items.each do |item| %>
+    <%# @users.each do |user| %>
+    <%# @items.each do |item| %>
     <%# @genres.each do |genre| %>
-      <div> <%# if user.item_id == item.id %> <%#= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %> <%# end %> </div>
+      <div> <% @item.each do |item| %> <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %> <% end %> </div>
       <div> <%# if user.item_id == item.id %> <%#= item.item_name %> <%# end %> </div>
       <div> <%# if user.item_id == genre.id %> <%#= genre.genre_name %> <%# end %> </div>
       <div> <%# if user.item_id == item.id %> <%#= item.price %> <%# end %> </div>
-    <% end %>
-    <% end %>
+    <%# end %>
+    <%# end %>
     <%# end %>
 
     </div>
