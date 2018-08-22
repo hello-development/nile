@@ -6,6 +6,8 @@ class ItemsController < ApplicationController
 			@artists = Artist.all
 			@genres = Genre.all
 			@labels = Label.all
+			@review = Review.all
+			@likes = Like.all
 			# render layout: "item"
 		if params[:genre_id].present?
 			@items = @items.get_by_genre_id params[:genre_id]
@@ -40,6 +42,7 @@ class ItemsController < ApplicationController
 			redirect_to new_user_address_path(current_user)
 		end
 		end
+		return
 		end
 
 		render :index, layout: "item"
