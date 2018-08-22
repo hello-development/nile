@@ -36,7 +36,16 @@ class ArtistsController < ApplicationController
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all
-		@rank_artist = Artist.find(Like.group(:item_id.artist_id).order('count(item_id.artist_id) desc').limit(5).pluck(:artist_id))
+		@items = Item.all
+		# @likes_count = Like.where(item_id: @item.id).count
+		# item_like_count = Item.joins(:likes).group(:item_id).count
+		# item_liked_ids = Hash[item_like_count.sort_by{ |_, v| -v }].keys
+		# @rank= Item.where(id: item_liked_ids)
+		@like = Like.all
+
+  		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
+
+
 		if params[:genre_id].present?
 			@artists = @artists.get_by_genre_id params[:genre_id]
 		end

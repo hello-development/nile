@@ -34,17 +34,17 @@
 		    </div>
 		</div>
 		<div class='col-md-4 col-sm-4'>
-			<h3> アーティストCD総合<br>いいねランキング</h3>
+			<h3> CDいいねランキング</h3>
 			<table  class="table-hover table">
 				<tbody>
-					<% @rank_artist.each do |rank_artist| %>
+					<% @rank.each.with_index(1) do |rank, i| %>
 					<tr>
-						<td>１</td>
-						<td><%= image_tag('no_image50x50.jpg') %></td>
-						<td><%= rank.artist_name %></td>
-						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>111</td>
-						<td><% @genres.each do |genre| %><% if rank_artist.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
-						<td><% @labels.each do |label| %><% if rank_artist.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
+						<td><%= "#{i}位" %></td>
+						<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
+						<td><%= rank.item_name %></td>
+						<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
+						<td><% @genres.each do |genre| %><% if rank.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
+						<td><% @labels.each do |label| %><% if rank.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
 					</tr>
 					<% end %>
 				</tbody>
