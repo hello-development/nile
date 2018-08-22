@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!, except: [:index, :edit, :destroy, :show, :update]
+	before_action :cart_destroy!, only: [:destroy]
 	# before_action :authenticate_user!, except: [:top, :about, :new_user_session_path, :new_user_registration_path]
 
 	def index
@@ -111,6 +112,12 @@ class UsersController < ApplicationController
 	private
 	def user_params
 		params.require(:user).permit(:artist_id, :user_id)
+	end
+
+	def cart_destroy!
+      # 退会時にカートを削除する意図で記述しています。上手く動くかは確認しておりません
+      cart = Cart.find_by(user_id: current_user)
+      cart.destroy
 	end
 
 end

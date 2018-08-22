@@ -25,3 +25,14 @@
 	overflow-y: scroll;
 	height: 500px;
 }
+a {
+	text-decoration: none;
+	.black {
+		color: black;
+	}
+	.yellow {
+		color: red;
+		background-color: yellow;
+	}
+}
+

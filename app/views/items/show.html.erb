@@ -23,7 +23,6 @@
                     <%= f.number_field :units %><br>
                     <%= f.submit 'カートに入れる' %><br>
                     <% end %>
-					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
 				</div>
 				<div class="disk-box-show">
 					<div class="col-md-8">
@@ -45,10 +44,10 @@
 				</div>
 				<div class="col-md-8">
 				<% if @item.favorited_by?(current_user) %>
-					<%= link_to item_likes_path(@item), method: :delete do %><%= @item.likes.count %> いいね<% end %>
+				  <%= render 'likes/like_destroy' %>
 					<% else %>
-    				<%= link_to item_likes_path(@item), method: :post do %><%= @item.likes.count %> いいね<% end %>
-    			<% end %>
+				  <%= render 'likes/like_create' %>
+    			    <% end %>
 
        			<p>レビュー<%= @item.reviews.count %>件<br>
 				<% @item.reviews.each do |review| %>
@@ -59,7 +58,7 @@
 						<!-- コメント -->
     					<%= review.comment %>
 
-    					<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><% end %><br>		
+    					<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><% end %><br>
     			<% end %></p>
 
 				<%= form_for [@item, @review] do |f| %>
