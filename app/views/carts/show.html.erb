@@ -6,32 +6,47 @@
 
 <% else %>
 <p class="update"><%= notice %></p><p class="alert"><%= alert %></p>
+<table  class="table-hover table">
+  <tbody>
+        <thead>
+          <tr>
+            <th></th>
+            <th><h4>商品名</h4></th>
+            <th><h4>価格</h4></th>
+            <th><h4>数量</h4></th>
+            <th></th>
+            <th><h4>小計</h4></th>
+          </tr>
+        </thead>
 <% @cart_items.each do |ci| %>
   <% @items.each do |item| %>
     <% if item.id == ci.item_id %>
-      ジャケ写<br><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpg' %><br>
-      商品名<br><%= item.item_name %><br>
-      価格<br><%= item.price %>円<br>
-      <%= form_for (ci), url: carts_update_item_path(item.id) do |f| %>
-      <%= f.label :"数量を変える(現在の数量が表示されています)" %><br>
-      <%= f.number_field :units %><br>
-      <%= f.submit 'この数量で更新' %><br>
+        <tr  class="cart_item_box">
+          <td><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpg' %><% end %><br></td>
+          <td><%= item.item_name %></td>
+          <td><span class="price">¥  <%= item.price %></span></td>
+          <td><%= form_for (ci), url: carts_update_item_path(item.id) do |f| %>
+          <%= f.label :"数量を変える(現在の数量が表示されています)" %><br>
+          <%= f.number_field :units %>
+          <%= f.submit 'この数量で更新' %><br></td>
+          <% end %>
+          <td><%= link_to carts_delete_item_path(item.id), method: :delete, "data-confirm" => "全ての#{item.item_name}をカートから外しますか？" do %>
+          <button class="btn-sm btn-default btn-danger">削除</button><% end %></td>
+          <td>(<%= ci.units %>点)<span  class="price"> ¥ <%= ci.units * item.price %>円</span></td>
+          <!-- 合計を出す準備の計算です -->
+          <% sum = ci.units * item.price + sum %>
+          <% end %>
       <% end %>
-      <%= link_to "削除", carts_delete_item_path(item.id), method: :delete, "data-confirm" => "全ての#{item.item_name}をカートから外しますか？" %>
-      小計(<%= ci.units %>点) ¥ <%= ci.units * item.price %>円<br>
-
-      <!-- 合計を出す準備の計算です -->
-      <% sum = ci.units * item.price + sum %>
-
+      <br>
     <% end %>
-  <% end %>
-  <br>
-<% end %>
-合計<%= sum %>円<br>
+  </tbody>
+</table>
+
+合計<span  class="price"><%= sum %>円</span><br>
 <% taxincl = sum * 1.08 %>
 (税込 <%= taxincl.round %>円)
 
-<%= link_to "レジに進む", carts_register_path(@items) %>
+<%= link_to carts_register_path(@items) do %><button class="btn-sm">レジに進む</button><% end %>
 
 <% end %>
 
