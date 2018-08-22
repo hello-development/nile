@@ -1,14 +1,14 @@
 <body>
-  <div class='container'>
+  <div class='container-fluid'>
     <div class='row'>
       <strong><div class="search-results"><%= notice %></div></strong>
       <div class="col-lg-9">
         <!-- <div class="col-lg-3"> -->
         <div class= "item-list">
           <div class='row'>
-            <div class="col-lg-3">
-          <div class="item-box">
-          <% @items.each do |item| %>
+            <!-- <div class="col-lg-3"> -->
+              <% @items.each do |item| %>
+              <div class="item-box">
                 <dl>
                   <dt><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></dt>
                   <dd><h4><%= item.item_name %></h4></dd>
@@ -18,49 +18,51 @@
                   <dd>￥<%= item.price %></dd>
                   <dd><%#= item.inventory %></dd>
                 </dl>
-          <% end %>
-        </div>
-        </div>
+              </div>
+              <% end %>
+            <!-- </div> -->
         <!-- </div> -->
-      </div>
-      </div>
+          </div>
+        </div>
     </div>
       <div class="col-lg-3">
-        <h3><br>いいねランキング</h3>
-        <table  class="table-hover table">
-          <tbody>
-            <tr>
-              <td>１</td>
-              <td><%= image_tag('no_image100x100.jpg') %></td>
-              <td>アーティスト名</td>
-              <td></span>111</td>
-              <td>ジャンル</td>
-              <td>レーベル</td>
-              <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
-              <td>レビュー</td>
-            </tr>
-            <tr>
-              <td>２</td>
-              <td><%= image_tag('no_image100x100.jpg') %></td>
-              <td>アーティスト名</td>
-              <td></td>
-              <td>ジャンル</td>
-              <td>レーベル</td>
-              <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
-              <td>レビュー</td>
-            </tr>
-            <tr>
-              <td>３</td>
-              <td><%= image_tag('no_image100x100.jpg') %></td>
-              <td>アーティスト名</td>
-              <td></span>88</td>
-              <td>ジャンル</td>
-              <td>レーベル</td>
-              <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
-              <td>レビュー</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class= "item-rank-list">
+          <h3><br>いいねランキング</h3>
+          <table  class="table-hover table">
+            <tbody>
+              <tr>
+                <td>１</td>
+                <td><%= image_tag('no_image100x100.jpg') %></td>
+                <td>アーティスト名</td>
+                <td></span>111</td>
+                <td>ジャンル</td>
+                <td>レーベル</td>
+                <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+                <td>レビュー</td>
+              </tr>
+              <tr>
+                <td>２</td>
+                <td><%= image_tag('no_image100x100.jpg') %></td>
+                <td>アーティスト名</td>
+                <td></td>
+                <td>ジャンル</td>
+                <td>レーベル</td>
+                <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+                <td>レビュー</td>
+              </tr>
+              <tr>
+                <td>３</td>
+                <td><%= image_tag('no_image100x100.jpg') %></td>
+                <td>アーティスト名</td>
+                <td></span>88</td>
+                <td>ジャンル</td>
+                <td>レーベル</td>
+                <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
+                <td>レビュー</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

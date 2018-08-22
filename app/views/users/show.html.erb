@@ -15,20 +15,20 @@
 
     <div class="users_show_left">
       <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
-      <div> <%= current_user.last_name %> <%= current_user.first_name %> さん </div>
-      <div> <%= link_to "編集", edit_user_path, class: 'btn btn-default' %> </div>
-      <div> <%= link_to "退会", root_path, class: 'btn btn-default', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
+      <div> <%= @user.last_name %> <%= @user.first_name %> さん </div>
+      <div> <%= link_to "編集", edit_user_path, class: 'btn btn-success' %> </div>
+      <div> <%= link_to "退会", user_path, class: 'btn btn-danger', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
     </div>
 
     <div class="users_show_right">
     <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
-    <div> <%= @artist.artist_name %> </div>
-    <div> <%= @artist.artist_image %> </div>
+    <div> <%#= @user.artist.artist_name %> </div>
+    <div> <%#= @user.artist.artist_image %> </div>
     <div> <strong> 最新のCD </strong> </div>
-    <div> <%= @artist.artist_image %> </div>
-    <div> <%= @item.item_name %> </div>
-    <div> <%= @genre.genre_name %> </div>
-    <div> ￥ <%= @item.price %> </div>
+    <div> <%#= @user.artist.artist_image %> </div>
+    <div> <%#= @user.item.item_name %> </div>
+    <div> <%#= @user.genre.genre_name %> </div>
+    <div> ￥ <%#= @user.item.price %> </div>
 
     </div>
 
@@ -38,18 +38,18 @@
       <%# @artists.each do |artist| %>
       <tbody>
         <tr>
-          <div> <%= @artist.artist_image %> </div>
-          <div> <%= @item.item_name %> </div>
+          <div> <%#= @artist.artist_image %> </div>
+          <div> <%#= @item.item_name %> </div>
           <div> カートに入れる </div>
         </tr>
         <tr>
-          <div> <%= @artist.artist_image %> </div>
-          <div> <%= @item.item_name %> </div>
+          <div> <%#= @artist.artist_image %> </div>
+          <div> <%#= @item.item_name %> </div>
           <div> カートに入れる </div>
         </tr>
         <tr>
-          <div> <%= @artist.artist_image %> </div>
-          <div> <%= @item.item_name %> </div>
+          <div> <%#= @artist.artist_image %> </div>
+          <div> <%#= @item.item_name %> </div>
           <div> カートに入れる </div>
         </tr>
       </tbody>
