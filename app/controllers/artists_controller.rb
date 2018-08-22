@@ -37,7 +37,7 @@ class ArtistsController < ApplicationController
 		@genres = Genre.all
 		@labels = Label.all
 
-  		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
+  		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
   		# group(:item_id)で、アイテムの番号が同じものにグループを分ける
   		# order('count(item_id) desc')で、番号の多い順に並び替える
   		# limit()で、表示する最大数を指定して
