@@ -6,7 +6,12 @@ class ItemsController < ApplicationController
 			@artists = Artist.all
 			@genres = Genre.all
 			@labels = Label.all
+			@review = Review.all
+			@likes = Like.all
 			# render layout: "item"
+			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
+
+
 		if params[:genre_id].present?
 			@items = @items.get_by_genre_id params[:genre_id]
 		end
@@ -40,6 +45,7 @@ class ItemsController < ApplicationController
 			redirect_to new_user_address_path(current_user)
 		end
 		end
+		return
 		end
 
 		render :index, layout: "item"
@@ -101,7 +107,9 @@ class ItemsController < ApplicationController
 		@labels = Label.all
 		@disks = Disk.all
 		@songs = Song.all
-		@cart_item = CartItem.new
+		@cart_item =CartItem.new
+		@likes = Like.all
+    
 		# @cart_item = current_cart.cart_item.find(params[:item_id])
 	end
 
