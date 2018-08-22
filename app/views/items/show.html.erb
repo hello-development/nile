@@ -11,7 +11,6 @@
 				</div>
 				<div class="item-box-show">
 					<div class="col-md-4">
-					<!-- <div class="item-box-show"> -->
 					<h3><%= @item.item_name %></h3>
 					<p><% @artists.each do |artist| %><% if @item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %><br>
 					<% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %><br>

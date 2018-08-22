@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!, except: [:index]
+	before_action :authenticate_user!, except: [:index, :edit, :destroy, :show]
 	# before_action :authenticate_user!, except: [:top, :about, :new_user_session_path, :new_user_registration_path]
 
 	def index
@@ -36,10 +36,11 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.all
-		@artist = Artist.find(params[:id])
-		@item = Item.find(params[:id])
-		@genre = Genre.find(params[:id])
+		@users = User.all
+		@user = User.find(params[:id])
+		@artists = Artist.all
+		@items = Item.all
+		@genres = Genre.all
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)

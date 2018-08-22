@@ -9,6 +9,9 @@ class ItemsController < ApplicationController
 			@review = Review.all
 			@likes = Like.all
 			# render layout: "item"
+			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
+
+
 		if params[:genre_id].present?
 			@items = @items.get_by_genre_id params[:genre_id]
 		end
@@ -104,7 +107,9 @@ class ItemsController < ApplicationController
 		@labels = Label.all
 		@disks = Disk.all
 		@songs = Song.all
-		@cart_item = CartItem.new
+		@cart_item =CartItem.new
+		@likes = Like.all
+		# @cart_item = current_cart.cart_item.find(params[:item_id])
 	end
 
 	def admin_index

@@ -1,59 +1,60 @@
 <body>
-  <div class='container-fluid'>
+  <!-- <div class='container-fluid'> -->
+  <div class="box">
     <div class='row'>
       <strong><div class="search-results"><%= notice %></div></strong>
       <div class="col-lg-8">
-        <!-- <div class="col-lg-3"> -->
         <div class= "item-list">
           <div class='row'>
-            <!-- <div class="col-lg-3"> -->
-              <% @items.each do |item| %>
-              <div class="item-box">
-                <dl>
-                  <dt><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></dt>
-                  <dd><h4><%= item.item_name %></h4></dd>
-                  <dd><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></dd>  
-                  <dd><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></dd>
-                  <dd><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></dd>
-                  <dd>￥<%= item.price %></dd>
-                  <dd><%#= item.inventory %></dd>
-                </dl>
-              </div>
-              <% end %>
-            <!-- </div> -->
-        <!-- </div> -->
-          </div>
-        </div>
-    </div>
-      <div class="col-lg-3">
-        <div class= "item-rank-list">
-          <h3><br>いいねランキング</h3>
-          <% @items.each do |item| %>
-          <div class="item-rank-box">
-            <table  class="table-hover table">
-              <thead>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-                <tr></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>１</td>
-                  <td><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></td>
-                  <td><%= item.item_name %><br><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></dd><br><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %><br><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></dd><br></td>
-                  <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><br>
-                  <%= item.likes.count %>件<br><span class="glyphicon glyphicon-edit" aria-hidden="true"></span><br>
-                  <%= item.reviews.count %>件<br></td>
-                </tr>
-               </tbody>
-              </table>
+            <% @items.each do |item| %>
+            <div class="item-box">
+              <dl>
+                <dt><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></dt>
+                <dd><h4><%= item.item_name %></h4></dd>
+                <dd><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></dd>  
+                <dd><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></dd>
+                <dd><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></dd>
+                <dd>￥<%= item.price %></dd>
+                <dd><%#= item.inventory %></dd>
+              </dl>
             </div>
             <% end %>
           </div>
         </div>
       </div>
+      <div class="col-lg-4">
+        <div class="item-rank-box">
+          <h3> CDいいねランキング</h3>
+          <table  class="table-hover table">
+            <tbody>
+            <% @rank.each.with_index(1) do |rank, i| %>
+              <tr>
+                <td><%= "#{i}位" %></td>
+                <td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
+                <td><%= rank.item_name %></td>
+                <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
+                <td><% @genres.each do |genre| %><% if rank.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
+                <td><% @labels.each do |label| %><% if rank.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
+  <!-- </div> -->
 </body>
+
+
+
+
+
+
+
+
+
+
+
+
 
