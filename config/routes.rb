@@ -21,6 +21,7 @@ devise_for :users, controllers: {
   get 'artists/admin_index'
   get 'items/admin_index'
   patch 'users/:id' => 'users#favorite'
+  get 'purchase/:purchase_id/confirmation' => 'purchase_datails#confirmation', as: :confirmation
 
   resources :users, only: [:show, :edit, :update, :index, :destroy]do
     resources :addresses, only: [:new, :create, :edit, :show, :update, :destroy]

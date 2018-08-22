@@ -52,7 +52,7 @@
     			<% end %>
 
        			<p>レビュー<%= @item.reviews.count %>件<br>
-				<% @item.reviews.each do |review| %>						
+				<% @item.reviews.each do |review| %>
     					<!-- 日付 -->
    						<%= review.created_at.strftime('%Y/%m/%d') %>
 						<!-- 名前 -->

@@ -32,7 +32,7 @@
  }
  .artist_tag_box {
  text-align: right;
- border-bottom: 1px dotted blue;
+ border-bottom: 6px dotted #add8e6;
  margin-bottom: 10px;
  }
  .artist_tag {
@@ -63,6 +63,11 @@
 }
  .artist_over_2 {
  width: 900px;
+ height: 600px;
+ overflow: scroll;
+}
+.artist_over_3 {
+ width: 420px;
  height: 600px;
  overflow: scroll;
 }
