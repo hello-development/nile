@@ -43,6 +43,7 @@ class UsersController < ApplicationController
 		@items = Item.all
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
+		@genre = Genre.limit(1).order('created_at desc')
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
@@ -51,6 +52,7 @@ class UsersController < ApplicationController
 		end
 		end
 	end
+
 
 	def edit
 		if admin_signed_in?
