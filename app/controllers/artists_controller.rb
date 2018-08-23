@@ -1,4 +1,5 @@
 class ArtistsController < ApplicationController
+	before_action :authenticate_admin!, except: [:index, :show,]
 
 	def admin_index
 		@artists = Artist.all

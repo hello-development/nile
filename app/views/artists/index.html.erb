@@ -6,9 +6,16 @@
 			<h1> アーティスト一覧</h1>
 
 				<div  class="artist_over_1">
-                  <form>
 				    <table  class="table-hover table artist_directory">
 					<tbody>
+						<thead>
+							<tr>
+							<th></th>
+							<th>アーティスト名</th>
+							<th>ジャンル</th>
+							<th>レーベル</th>
+							</tr>
+						</thead>
 						<%= @submits_searched %>
 						<% @artists.each do |artist| %>
 						<tr>
@@ -30,7 +37,6 @@
 						<% end %>
 					</tbody>
 				</table>
-			  </form>
 		    </div>
 		</div>
 		<div class='col-md-4 col-sm-4'>
