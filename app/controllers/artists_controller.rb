@@ -101,6 +101,7 @@ class ArtistsController < ApplicationController
 		@artist = Artist.find(params[:id])
 		@genres = Genre.all
 		@labels = Label.all
+		@items = Item.where(artist_id: @artist.id)
 	end
 
 	def edit

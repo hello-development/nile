@@ -30,13 +30,15 @@
  .artist_show_image {
  float: left;
  }
- .artist_tag_box {
- text-align: right;
+ .artist_profile_box {
  border-bottom: 6px dotted #add8e6;
+ border-top: 6px dotted #add8e6;
  margin-bottom: 10px;
+ padding: 15px 0
  }
  .artist_tag {
  margin: 0 10px;
+  float: right;
  }
  .artist_profile {
  margin: 0 auto;
