@@ -4,6 +4,10 @@ class CartsController < ApplicationController
 
 	def show
 	  @cart_items = current_cart.cart_items
+	  unless Address.exists?(user_id: current_user.id)
+	    redirect_to new_user_address_path(current_user)
+	    flash[:notice]="住所を登録して下さい" and return
+	  end
 	end
 
 
