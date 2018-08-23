@@ -36,6 +36,14 @@ class ArtistsController < ApplicationController
 		@artists = Artist.all
 		@genres = Genre.all
 		@labels = Label.all
+
+  		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
+  		# group(:item_id)で、アイテムの番号が同じものにグループを分ける
+  		# order('count(item_id) desc')で、番号の多い順に並び替える
+  		# limit()で、表示する最大数を指定して
+  		# pluck(:item_id)で:item_idカラムのみを取り出すように指定。
+  		# Item.find(integer)最終的に、取り出される数値オブジェクトをアイテムのIDとすることで表示される
+
 		if params[:genre_id].present?
 			@artists = @artists.get_by_genre_id params[:genre_id]
 		end

@@ -19,11 +19,13 @@
 					<div  class="artist_contents_box">
 						<p  class="artist_contents"><%= @artist.artist_contents %></p>
 					</div>
+					<% if admin_signed_in? %>
 					<%= link_to edit_artist_path(@artist.id) do %>
 					<button class="btn btn-default btn-success artist_button">このアーティストを編集する</button>
 					<% end %>
 					<%= link_to artist_path(@artist.id), method: :delete,"data-confirm" => "本当に削除しますか？" do %>
 					<button class="btn btn-default btn-danger artist_button">このアーティストを削除する</button>
+					<% end %>
 					<% end %>
 				</div>
 			<!-- ユーザーがログインしているか -->

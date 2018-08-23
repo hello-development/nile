@@ -1,7 +1,7 @@
 class DisksController < ApplicationController
 	def index
     @item = Item.find(params[:item_id])
-	@disk = Disk.new
+	  @disk = Disk.new
     @disks = @item.disks
   end
 
@@ -18,8 +18,8 @@ class DisksController < ApplicationController
   end
 
   def destroy
-    @disk = Disk.find_by(item_id: params[:item_id], id: params[:id])
-    @disk.destroy
+    disk = Disk.find_by(item_id: params[:item_id], id: params[:id])
+    disk.destroy
     redirect_to item_disks_path, notice: "Disk delete successfully"
   end
 

@@ -8,7 +8,7 @@
   </div>
 <% end %>
 
-<%= @item.item_name %> > <%= @disk.disk_number %> <br>
+<%= @disk.item.item_name %> > <%= @disk.disk_number %> <br>
 曲情報変更<br>
 <%= form_for [@disk, @song], url: item_disk_song_path do |f| %>
 

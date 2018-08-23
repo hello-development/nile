@@ -16,9 +16,9 @@
 
   <div class="field">
     <p> 名前フリガナ（全角カナ） </p>
-    セイ
+    <span> セイ </span>
     <%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana", placeholder: "セイ" %>
-    メイ
+    <span> メイ </span>
     <%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana", placeholder: "メイ" %>
   </div>
 
@@ -46,7 +46,6 @@
   </div>
 
   <div class="actions">
-    <%#= f.submit "上記の内容で変更する"%>
     <input type="submit" class="bg-danger" value="上記の内容で変更する" data-disable-with="上記の内容で変更する">
   </div>
 

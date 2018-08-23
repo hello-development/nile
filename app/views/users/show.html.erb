@@ -22,13 +22,24 @@
 
     <div class="users_show_right">
     <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
-    <div> <%#= @user.artist.artist_name %> </div>
-    <div> <%#= @user.artist.artist_image %> </div>
+    <% @users.each do |user| %>
+    <% @artists.each do |artist| %>
+      <div> <% if user.artist_id == artist.id %> <%= artist.artist_name %> <% end %> </div>
+      <div> <% if user.artist_id == artist.id %> <%= attachment_image_tag artist, :artist_image, :fill, 100, 100, format: "jpg" %> <% end %> </div>
+    <% end %>
+    <% end %>
+
     <div> <strong> 最新のCD </strong> </div>
-    <div> <%#= @user.artist.artist_image %> </div>
-    <div> <%#= @user.item.item_name %> </div>
-    <div> <%#= @user.genre.genre_name %> </div>
-    <div> ￥ <%#= @user.item.price %> </div>
+    <%# @users.each do |user| %>
+    <%# @items.each do |item| %>
+    <%# @genres.each do |genre| %>
+      <div> <% @item.each do |item| %> <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %> <% end %> </div>
+      <div> <%# if user.item_id == item.id %> <%#= item.item_name %> <%# end %> </div>
+      <div> <%# if user.item_id == genre.id %> <%#= genre.genre_name %> <%# end %> </div>
+      <div> <%# if user.item_id == item.id %> <%#= item.price %> <%# end %> </div>
+    <%# end %>
+    <%# end %>
+    <%# end %>
 
     </div>
 
@@ -61,7 +72,35 @@
 
 <div class="users_show_bottom">
 <div class="purchase_histories"> 購入履歴 </div>
-<div>　月　日購入▼</div>
+
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">　月　日購入▼</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">　月　日購入</div>
+
+    </div>
+  </div>
+</div>
+
+<div class="panel-group">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" href="#collapse1">　月　日購入▼</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">　月　日購入</div>
+    </div>
+  </div>
+</div>
+
 </div>
 
   </body>

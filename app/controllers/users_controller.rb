@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-	before_action :authenticate_user!, except: [:index]
+	before_action :authenticate_user!, except: [:index, :edit, :destroy, :show, :update]
+	before_action :cart_destroy!, only: [:destroy]
 	# before_action :authenticate_user!, except: [:top, :about, :new_user_session_path, :new_user_registration_path]
 
 	def index
@@ -36,10 +37,12 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@user = User.all
-		@artist = Artist.find(params[:id])
-		@item = Item.find(params[:id])
-		@genre = Genre.find(params[:id])
+		@users = User.all
+		@user = User.find(params[:id])
+		@artists = Artist.all
+		@items = Item.all
+		@genres = Genre.all
+		@item = Item.limit(1).order('created_at desc')
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
@@ -60,13 +63,13 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		@users = User.all
-	if  @user.save
-		redirect_to user_path(@users.id)
-	else
-    	@users = User.all
-	    render :edit
-	end
+		user = User.find(params[:id])
+	    if user.update(user_params)
+	        redirect_to user_path(@user.id)
+	    else
+	    	@users =User.all
+			render :edit
+	    end
 	end
 
 	def new
@@ -109,6 +112,12 @@ class UsersController < ApplicationController
 	private
 	def user_params
 		params.require(:user).permit(:artist_id, :user_id)
+	end
+
+	def cart_destroy!
+      # 退会時にカートを削除する意図で記述しています。上手く動くかは確認しておりません
+      cart = Cart.find_by(user_id: current_user)
+      cart.destroy
 	end
 
 end

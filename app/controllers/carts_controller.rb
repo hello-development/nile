@@ -3,7 +3,6 @@ class CartsController < ApplicationController
 	before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
 
 	def show
-      @items = Item.all
 	  @cart_items = current_cart.cart_items
 	end
 
@@ -16,11 +15,12 @@ class CartsController < ApplicationController
 	    cart_item = CartItem.new(cart_item_params)
 	  	cart_item.item_id = item.id
 	  	cart_item.cart_id = current_cart.id
+	  	cart_item.save
 	  else               #nilでなければ同じ商品がカートに入っているということなので数量を足します
 	   	additem = CartItem.new(cart_item_params)
         @cart_item.units += additem.units
+        @cart_item.save
 	  end
-	  cart_item.save
 	  redirect_to user_carts_path(current_user)
 	end
 
@@ -45,10 +45,13 @@ class CartsController < ApplicationController
 	end
 
 	def register
-	  @items = Item.all
-	  @genres = Genre.all
-	  @artists = Artist.all
-	  @cart_items = current_cart.cart_items
+	  @purchase = Purchase.new
+	  sum = 0 #計算用のsumという変数(sumという名前じゃなくても良いです)の値を0に設定(初期化)しておきます
+	  cart_items = current_cart.cart_items
+	  cart_items.each do |cart_item|
+	  	sum = cart_item.units * cart_item.item.price + sum #cart_itemを１つずつ取り出して小計を計算しsum(合計)に足しています
+	  end
+	  @sum = sum #sumに小計が全て足された値(つまり合計ですね!)が入っています。viewに値を渡せるようにインスタンス変数に代入しておきます。
 	end
 
 	private

@@ -5,17 +5,18 @@
 			<div class="col-md-8">
 				<div class="col-md-4">
 					<div class="item-image-show">
-						<%= attachment_image_tag @item, :item_image, :fill, 200, 200, format: 'jpeg' %>
+						<%= attachment_image_tag @item, :item_image, :fill, 200, 200, format: 'jpeg' %><br>
+						<p>Description<br><%= @item.item_contents %></p>
 					</div>
 				</div>
 				<div class="item-box-show">
 					<div class="col-md-4">
-					<!-- <div class="item-box-show"> -->
 					<h3><%= @item.item_name %></h3>
-					<p><% @artists.each do |artist| %><% if @item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></p>
-					<p><% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></p>
-					<p><%= @item.price %></p>
-					<p><%= @item.inventory %></p>
+					<p><% @artists.each do |artist| %><% if @item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %><br>
+					<% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %><br>
+					<% @labels.each do |label| %><% if @item.label_id == label.id %><%= label.label_name %><% end %><% end %></p>
+					<p>¥<%= @item.price %></p>
+					<p>在庫<%= @item.inventory %></p>
 
                     <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
                     <br>
@@ -23,7 +24,6 @@
                     <%= f.number_field :units %><br>
                     <%= f.submit 'カートに入れる' %><br>
                     <% end %>
-					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></p>
 				</div>
 				<div class="disk-box-show">
 					<div class="col-md-8">
@@ -52,29 +52,28 @@
     					<% end %>
        					<p>レビュー<%= @item.reviews.count %>件<br>
 						<% @item.reviews.each do |review| %>
-    					<!-- 日付 -->
+    					  <!-- 日付 -->
    							<%= review.created_at.strftime('%Y/%m/%d') %>
-						<!-- 名前 -->
-							<%= review.user.first_name %><br>
-						<!-- コメント -->
+						    <!-- 名前 -->
+							  <%= review.user.first_name %><br>
+						    <!-- コメント -->
     						<%= review.comment %><br>
-    					<% end %></p>
-
+    				<% end %></p>
 						<%= form_for [@item, @review] do |f| %>
 				   		<%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
 				    	<%= f.submit "送信する", class: "" %>
 						<% end %>
 					
 					<% elsif admin_signed_in? %>
-       					<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= @item.likes.count %><br>レビュー<%= @item.reviews.count %>件<br>
+       			<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= @item.likes.count %><br>レビュー<%= @item.reviews.count %>件<br>
 						<% @item.reviews.each do |review| %>
     						<!-- 日付 -->
    							<%= review.created_at.strftime('%Y/%m/%d') %>
-							<!-- 名前 -->
-							<%= review.user.first_name %><br>
-							<!-- コメント -->
+							  <!-- 名前 -->
+							  <%= review.user.first_name %><br>
+							  <!-- コメント -->
     						<%= review.comment %>
-
+          
     						<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><% end %><br>
     					<% end %></p>
     				<!-- No login -->
@@ -90,36 +89,32 @@
 		<div class="col-md-4">
 		<h3><br>いいねランキング</h3>
 			<table  class="table-hover table">
+				<thead>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+				</thead>
 				<tbody>
 					<tr>
 						<td>１</td>
 						<td><%= image_tag('no_image100x100.jpg') %></td>
-						<td>アーティスト名</td>
-						<td></span>111</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-						<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
-						<td>レビュー</td>
+						<td>アーティスト名<br>ジャンル<br>レーベル<br></td>
+						<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><br>3件<br>レビュー<br>3件</td>
 					</tr>
 					<tr>
 						<td>２</td>
 						<td><%= image_tag('no_image100x100.jpg') %></td>
-						<td>アーティスト名</td>
-						<td></td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-						<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
-						<td>レビュー</td>
+						<td>アーティスト名<br>ジャンル<br>レーベル<br></td>
+						<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><br>3件<br>レビュー<br>3件</td>
+					</tr>
 					</tr>
 					<tr>
 						<td>３</td>
 						<td><%= image_tag('no_image100x100.jpg') %></td>
-						<td>アーティスト名</td>
-						<td></span>88</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-						<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span></td>
-						<td>レビュー</td>
+						<td>アーティスト名<br>ジャンル<br>レーベル<br></td>
+						<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><br>3件<br>レビュー<br>3件</td>
+					</tr>
 					</tr>
 				</tbody>
 			</table>

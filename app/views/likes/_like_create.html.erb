@@ -1,0 +1,3 @@
+<%= link_to item_likes_path(@item), method: :post, id: "likes", remote: true do %>
+<span class="glyphicon glyphicon-thumbs-up black" aria-hidden="true"><%= @item.likes.count %></span>いいね
+<% end %>

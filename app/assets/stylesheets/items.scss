@@ -17,7 +17,7 @@
  	width: 200px;
  	// border: 1px solid #333333;
  	padding: 5px;
- 	margin: 10px 10px 10px 30px;
+ 	margin: 5px 5px 5px 10px;
 }
 
 .item-rank-list{
@@ -25,3 +25,14 @@
 	overflow-y: scroll;
 	height: 500px;
 }
+a {
+	text-decoration: none;
+	.black {
+		color: black;
+	}
+	.yellow {
+		color: red;
+		background-color: yellow;
+	}
+}
+
