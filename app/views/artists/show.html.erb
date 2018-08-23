@@ -5,80 +5,81 @@
 			<p class="notice"><%= flash[:notice] %></p>
 			<% end %>
 				<h1> <%= @artist.artist_name %></h1>
-				<div  class="artist_tag_box">
-					<span  class="artist_tag">
-						<% @genres.each do |genre| %><% if @artist.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %>
-					</span>
-					<span  class="artist_tag">
-						<% @labels.each do |label| %><% if @artist.label_id == label.id %><%= label.label_name %><% end %><% end %>
-					</span>
-				</div>
 				<div  class="clearfix">
-					<%= attachment_image_tag @artist, :artist_image, :fill, 250, 250, format: 'jpeg', class: "artist_show_image" %>
-					<h3  class="artist_profile">・プロフィール</h3>
-					<div  class="artist_contents_box">
-						<p  class="artist_contents"><%= @artist.artist_contents %></p>
+					<div class="artist_profile_box  clearfix">
+						<span  class="artist_tag">
+							<% @genres.each do |genre| %><% if @artist.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %>
+						</span>
+						<span  class="artist_tag">
+							<% @labels.each do |label| %><% if @artist.label_id == label.id %><%= label.label_name %><% end %><% end %>
+						</span>
+						<%= attachment_image_tag @artist, :artist_image, :fill, 250, 250, format: 'jpeg', class: "artist_show_image" %>
+						<h3  class="artist_profile">・プロフィール</h3>
+						<div  class="artist_contents_box">
+							<p  class="artist_contents"><%= @artist.artist_contents %></p>
+						</div>
+						<% if admin_signed_in? %>
+						<%= link_to edit_artist_path(@artist.id) do %>
+						<button class="btn btn-default btn-success artist_button">このアーティストを編集する</button>
+						<% end %>
+						<%= link_to artist_path(@artist.id), method: :delete,"data-confirm" => "本当に削除しますか？" do %>
+						<button class="btn btn-default btn-danger artist_button">このアーティストを削除する</button>
+						<% end %>
+						<% end %>
+						<!-- ユーザーがログインしているか -->
+						<% if user_signed_in? %>
+						<!-- ユーザーの持っているアーティストIDとアーティストIDと同じ時 -->
+						<% if current_user.artist_id == @artist.id %>
+						<%= link_to user_path(@artist.id), method: :patch, "data-confirm" => "本当に解除しますか？" do %>
+						<button type="button" class="btn btn-danger btn-sm favorite_button">このアーティストのお気に入りを解除する</button>
+						<% end %>
+						<!-- ユーザーがアーティストIDを持っていない時 -->
+						<% elsif current_user.artist_id == nil %>
+						<%= link_to user_path(@artist.id), method: :patch do %>
+						<button type="button" class="btn btn-primary btn-sm favorite_button">このアーティストをお気に入り登録する</button>
+						<% end %>
+						<!-- ユーザーがアーティストIDを持っているが登録したいアーティストIDと違う時 -->
+						<% else %>
+						<%= link_to user_path(@artist.id), method: :patch, "data-confirm" => "お気に入りは１つのみ登録できます。このアーティストに変更しますか？" do %>
+						<button type="button" class="btn btn-primary btn-sm favorite_button">このアーティストをお気に入り登録する</button>
+						<% end %>
+						<% end %>
+						<% end %>
 					</div>
-					<% if admin_signed_in? %>
-					<%= link_to edit_artist_path(@artist.id) do %>
-					<button class="btn btn-default btn-success artist_button">このアーティストを編集する</button>
-					<% end %>
-					<%= link_to artist_path(@artist.id), method: :delete,"data-confirm" => "本当に削除しますか？" do %>
-					<button class="btn btn-default btn-danger artist_button">このアーティストを削除する</button>
-					<% end %>
-					<% end %>
 				</div>
-			<!-- ユーザーがログインしているか -->
-			<% if user_signed_in? %>
-			<!-- ユーザーの持っているアーティストIDとアーティストIDと同じ時 -->
-				<% if current_user.artist_id == @artist.id %>
-					<%= link_to user_path(@artist.id), method: :patch, "data-confirm" => "本当に解除しますか？" do %>
-					<button type="button" class="btn btn-danger btn-sm favorite_button">このアーティストのお気に入りを解除する</button>
-					<% end %>
-			<!-- ユーザーがアーティストIDを持っていない時 -->
-				<% elsif current_user.artist_id == nil %>
-					<%= link_to user_path(@artist.id), method: :patch do %>
-					<button type="button" class="btn btn-primary btn-sm favorite_button">このアーティストをお気に入り登録する</button>
-					<% end %>
-			<!-- ユーザーがアーティストIDを持っているが登録したいアーティストIDと違う時 -->
-				<% else %>
-					<%= link_to user_path(@artist.id), method: :patch, "data-confirm" => "お気に入りは１つのみ登録できます。このアーティストに変更しますか？" do %>
-					<button type="button" class="btn btn-primary btn-sm favorite_button">このアーティストをお気に入り登録する</button>
-					<% end %>
+			<div  class="artist_item_box clearfix">
+				<% @items.each do |item| %>
+				<div class="item-box artist_directory">
+					<dl>
+						<dt><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></dt>
+						<dd><h4><%= item.item_name %></h4></dd>
+						<dd><%= @artist.artist_name %></dd>
+						<dd><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></dd>
+						<dd><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></dd>
+						<dd>￥<%= item.price %></dd>
+					</dl>
+				</div>
 				<% end %>
-			<% end %>
+			</div>
 		</div>
 		<div class='col-md-4 col-sm-4'>
-			<h3><%= @artist.artist_name %></h3>
-			<h3>CDいいねランキング</h3>
-			<table  class="table-hover table">
-				<tbody>
-					<tr>
-						<td>１</td>
-						<td><%= image_tag('no_image50x50.jpg') %></td>
-						<td>アーティスト名</td>
-						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>111</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-					</tr>
-					<tr>
-						<td>２</td>
-						<td><%= image_tag('no_image50x50.jpg') %></td>
-						<td>アーティスト名</td>
-						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>99</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-					</tr>
-					<tr>
-						<td>３</td>
-						<td><%= image_tag('no_image50x50.jpg') %></td>
-						<td>アーティスト名</td>
-						<td><span class="glyphicon glyphicon-heart" aria-hidden="true"></span>88</td>
-						<td>ジャンル</td>
-						<td>レーベル</td>
-					</tr>
-				</tbody>
-			</table>
+			<h3>CD総合いいねランキング</h3>
+			<div  class="artist_over_3">
+				<table  class="table-hover table">
+					<tbody>
+						<% @rank.each.with_index(1) do |rank, i| %>
+						<tr>
+							<td><%= "#{i}位" %></td>
+							<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
+							<td><%= rank.item_name %></td>
+							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
+							<td><% @genres.each do |genre| %><% if rank.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
+							<td><% @labels.each do |label| %><% if rank.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
