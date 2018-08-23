@@ -48,7 +48,6 @@ class ItemsController < ApplicationController
 		    end
 		  end
 		return
-		render :index, layout: "item"# itemのレイアウトを適用させる。
 		end
 		render :index, layout: "item"
 		# itemのレイアウトを適用させる。
