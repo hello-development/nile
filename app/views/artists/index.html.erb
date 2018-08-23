@@ -38,6 +38,29 @@
 					</tbody>
 				</table>
 		    </div>
+
+
+		    <% @artists.each.with_index(1) do |artist,i| %>
+		    <button type="button" class="btn btn-default btn-block">
+		    	<div class="accordion-group">
+		    		<div class="accordion-heading">
+		    			<a class="accordion-toggle" data-toggle="collapse" data-parent="#faq" href="#faqpost_<%= "#{i}" %>">アーティスト</a>
+		    		</div>
+		    		<div id="faqpost_<%= "#{i}" %>" class="accordion-body collapse">
+		    			<div class="accordion-inner">
+		    				<%= link_to artist_path(artist.id) do %><%= attachment_image_tag artist, :artist_image, :fill, 100, 100, format: "jpg" %><% end %>
+		    				<%= link_to artist_path(artist.id) do %><%= artist.artist_name %><% end %>
+		    				<% @genres.each do |genre| %>
+		    				<% if artist.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %>
+		    				<% @labels.each do |label| %>
+		    				<% if artist.label_id == label.id %><%= label.label_name %><% end %><% end %>
+		    			</div>
+		    		</div>
+		    	</div>
+		    </button>
+		    <% end %>
+
+
 		</div>
 		<div class='col-md-4 col-sm-4'>
 			<h3> CDいいねランキング</h3>
