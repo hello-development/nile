@@ -22,20 +22,23 @@
 
     <div class="users_show_right">
     <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
+    <% if @user.artist_id.nil? %>
+      <p> お気に入りアーティストは未登録です </p>
+    <% end %>
     <% unless @user.artist_id.nil? %>
       <div> <% if user.artist_id == artist.id %> <%= artist.artist_name %> <% end %> </div>
       <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 100, 100, format: "jpg" %> </div>
-    <% end %>
 
     <div> <strong> 最新のCD </strong> </div>
       <div> <% @item.each do |item| %> <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %> <% end %> </div>
       <div> <%# if user.item_id == item.id %> <%#= item.item_name %> <%# end %> </div>
       <div> <%# if user.item_id == genre.id %> <%#= genre.genre_name %> <%# end %> </div>
       <div> <%# if user.item_id == item.id %> <%#= item.price %> <%# end %> </div>
-
+      <%# end %>
+      <% end %>
     </div>
 
-    <div class="mypage_upperright_right">
+    <div class="users_show_right_right">
     <h4 class="favorite_ranking"> <strong> いいねランキング </strong> </h4>
     <table>
       <%# @artists.each do |artist| %>
@@ -56,10 +59,8 @@
           <div> カートに入れる </div>
         </tr>
       </tbody>
-
     </table>
     </div>
-
     </div>
 
 <div class="users_show_bottom">
