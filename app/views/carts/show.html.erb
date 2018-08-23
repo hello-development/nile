@@ -1,3 +1,4 @@
+<div class="box">
 <% sum = 0 %>
 <h1>あなたのカート</h1>
 <% if @cart_items.count == 0 %>
@@ -35,6 +36,7 @@
           <td>(<%= ci.units %>点)<span  class="price"> ¥ <%= ci.units * ci.item.price %>円</span></td>
           <!-- 合計を出す準備の計算です -->
           <% sum = ci.units * ci.item.price + sum %>
+        </tr>
           <% end %>
       <br>
   </tbody>
@@ -45,6 +47,7 @@
 (税込 <%= taxincl.round %>円)
 <%= link_to carts_register_path do %><button class="btn-sm">レジに進む</button><% end %>
 <% end %>
+</div>
 
 
 

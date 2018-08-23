@@ -102,6 +102,9 @@ class ArtistsController < ApplicationController
 		@genres = Genre.all
 		@labels = Label.all
 		@items = Item.where(artist_id: @artist.id)
+
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
+		# @rank_item = @rank.where(artist_id: @artist.id)
 	end
 
 	def edit
