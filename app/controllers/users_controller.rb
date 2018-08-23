@@ -37,7 +37,7 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@users = User.all
+		# @users = User.all
 		@user = User.find(params[:id])
 		@artists = Artist.all
 		@items = Item.all
