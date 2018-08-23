@@ -109,8 +109,8 @@ class ItemsController < ApplicationController
 		@songs = Song.all
 		@cart_item =CartItem.new
 		@likes = Like.all
-    
-		# @cart_item = current_cart.cart_item.find(params[:item_id])
+
+
 	end
 
 	def admin_index

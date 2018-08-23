@@ -2,7 +2,9 @@
 <h1>あなたのカート</h1>
 <% if @cart_items.count == 0 %>
 
-カートに入っている商品はありません
+カートに入っている商品はありません<br>
+<%= link_to items_path do %><button class="btn-sm">商品一覧へ</button><% end %>
+
 
 <% else %>
 <p class="update"><%= notice %></p><p class="alert"><%= alert %></p>
@@ -39,11 +41,10 @@
 </table>
 
 合計<span  class="price"><%= sum %>円</span><br>
-<% taxincl = sum * 1.08 %>
+<% taxincl = sum * 1.08 %><br>
 (税込 <%= taxincl.round %>円)
-<% end %>
-
 <%= link_to carts_register_path do %><button class="btn-sm">レジに進む</button><% end %>
+<% end %>
 
 
 
