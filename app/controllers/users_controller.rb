@@ -38,25 +38,24 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@artists = Artist.all
 		@items = Item.all
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
 		@genre = Genre.limit(1).order('created_at desc')
-        @purchases = Purchase.where(user_id: current_user)
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)
-			flash[:notice]="住所を登録して下さい" and return
 		end
 		end
 		end
 	end
 
 	def edit
-		if admin_signed_in? || user_signed_in?
-		# elsif user_signed_in?
-		# 	redirect_to root_path
+		if admin_signed_in?
+		elsif user_signed_in?
+			redirect_to root_path
 		else
 			redirect_to root_path
 		end
@@ -116,9 +115,10 @@ class UsersController < ApplicationController
 	end
 
 	def cart_destroy!
-      # 退会時にカートを削除する意図で記述しています。上手く動くかは確認しておりません
       cart = Cart.find_by(user_id: current_user)
-      cart.destroy
+      unless cart.nil?
+        cart.destroy
+      end
 	end
 
 end
