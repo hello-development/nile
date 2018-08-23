@@ -87,7 +87,6 @@
     </div>
 
     <% if admin_signed_in? %>
-    
     <div class="input-group">
       <%= form_tag(users_path, method: "get") do %>
       <%= label_tag :last_name, "姓" %><%= text_field_tag :last_name, params[:last_name] %>
