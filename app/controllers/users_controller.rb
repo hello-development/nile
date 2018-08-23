@@ -37,9 +37,9 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		@users = User.all
+		# @users = User.all
 		@user = User.find(params[:id])
-		@artists = Artist.all
+		# @artists = Artist.all
 		@items = Item.all
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
@@ -47,15 +47,16 @@ class UsersController < ApplicationController
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)
+			flash[:notice]="住所を登録して下さい" and return
 		end
 		end
 		end
 	end
 
 	def edit
-		if admin_signed_in?
-		elsif user_signed_in?
-			redirect_to root_path
+		if admin_signed_in? || user_signed_in?
+		# elsif user_signed_in?
+		# 	redirect_to root_path
 		else
 			redirect_to root_path
 		end

@@ -22,12 +22,17 @@
 
     <div class="users_show_right">
     <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
-    <% @users.each do |user| %>
-    <% @artists.each do |artist| %>
-      <div> <% if user.artist_id == artist.id %> <%= artist.artist_name %> <% end %> </div>
-      <div> <% if user.artist_id == artist.id %> <%= attachment_image_tag artist, :artist_image, :fill, 100, 100, format: "jpg" %> <% end %> </div>
-    <% end %>
-    <% end %>
+    <%# @users.each do |user| %>
+    <%# @artists.each do |artist| %>
+      <div> <%# if user.artist_id == artist.id %> <%#= artist.artist_name %> <%# end %> </div>
+      <div> <%# if user.artist_id == artist.id %> <%#= attachment_image_tag artist, :artist_image, :fill, 100, 100, format: "jpg" %> <%# end %> </div>
+    <%# end %>
+    <%# end %>
+    <% unless @user.artist_id.nil? %>
+    <%= @user.artist.artist_name %>
+    <%= attachment_image_tag @user.artist, :artist_image, :fill, 100, 100, format: "jpg" %>
+
+
 
     <div> <strong> 最新のCD </strong> </div>
     <%# @users.each do |user| %>
@@ -40,6 +45,7 @@
     <%# end %>
     <%# end %>
     <%# end %>
+    <% end %>
 
     </div>
 

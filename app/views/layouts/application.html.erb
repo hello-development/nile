@@ -30,9 +30,11 @@
             <li class="li">
               <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
+            <% if Address.exists?(user_id: current_user.id) %>
             <li class="li">
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
+            <% end %>
             <li class="li">
               <%= link_to "カート", user_carts_path(current_user.id) %>
             </li>

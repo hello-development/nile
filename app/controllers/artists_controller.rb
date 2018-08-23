@@ -74,6 +74,7 @@ class ArtistsController < ApplicationController
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)
+			flash[:notice]="住所を登録して下さい" and return
 		end
 		end
 		end
