@@ -115,9 +115,10 @@ class UsersController < ApplicationController
 	end
 
 	def cart_destroy!
-      # 退会時にカートを削除する意図で記述しています。上手く動くかは確認しておりません
       cart = Cart.find_by(user_id: current_user)
-      cart.destroy
+      unless cart.nil?
+        cart.destroy
+      end
 	end
 
 end
