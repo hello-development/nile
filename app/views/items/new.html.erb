@@ -55,6 +55,7 @@
         <thead>
           <tr>
             <th>アルバム/シングル</th>
+            <th>アーティスト</th>
             <th>価格</th>
             <th>在庫</th>
             <th></th>
@@ -65,6 +66,8 @@
           <% @items.each do |item| %>
           <tr>
             <td><%= item.item_name %></td>
+            <td><% @artists.each do |artist| %><%= link_to artist_path(artist.id) do %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %><% end %><br></td>
+            <%#= link_to artist_path(@artist.id) do %><%#= item.artist.artist_name %><%# end %>
             <td><%= item.price %></td>
             <td><%= item.inventory %></td>
             <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>

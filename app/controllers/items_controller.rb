@@ -56,9 +56,10 @@ class ItemsController < ApplicationController
 	def new
 		@item = Item.new
 		@items = Item.all
-		# @artists = Artist.all
+		@artists = Artist.all
 		# @genres = Genre.all
 		# @labels = Label.all
+
 		if params[:genre_id].present?
 			@items = @items.get_by_genre_id params[:genre_id]
 		end
@@ -110,6 +111,7 @@ class ItemsController < ApplicationController
 		@songs = Song.all
 		@cart_item =CartItem.new
 		@likes = Like.all
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
 
 
 	end
