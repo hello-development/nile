@@ -35,9 +35,6 @@
                 <%= link_to "商品登録", new_item_path %>
             </li>
             <li class="li">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-            </li>
-            <li class="li">
               <%= link_to "アーティスト管理", artists_admin_index_path %>
             </li>
             <li class="li">
@@ -46,6 +43,10 @@
             <li class="li">
               <%= link_to "ユーザー一覧", users_path %>
             </li>
+            <li class="li">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            </li>
+
 
           <% elsif user_signed_in? %>
             <li class="li">
@@ -58,10 +59,10 @@
               <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              <%= link_to "カート", user_carts_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "カート", user_carts_path(current_user.id) %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
 
           <% else %>
@@ -103,7 +104,5 @@
       <footer class="footer">
         Copyright © Infratop Inc. All Rights Reserved.
       </footer>
-
-  </body>
-
-</html>
+    </body>
+    </html>

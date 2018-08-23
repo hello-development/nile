@@ -35,10 +35,10 @@
               <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              <%= link_to "カート", user_carts_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "カート", user_carts_path(current_user.id) %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
 
           <% elsif admin_signed_in? %>
@@ -108,7 +108,5 @@
       <footer class="footer">
         Copyright © Infratop Inc. All Rights Reserved.
       </footer>
-
-  </body>
-
-</html>
+    </body>
+    </html>

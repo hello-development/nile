@@ -27,7 +27,9 @@
       <p> お気に入りアーティストは未登録です </p>
     <% end %>
     <% unless @user.artist_id.nil? %>
-      <div> <% if @user.artist_id == @user.artist.id %> <%= @uer.artist.artist_name %> <% end %> </div>
+
+      <div> <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %> <% end %> </div>
+
       <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 100, 100, format: "jpg" %> </div>
 
 
