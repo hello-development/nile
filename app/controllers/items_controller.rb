@@ -109,6 +109,8 @@ class ItemsController < ApplicationController
 		@songs = Song.all
 		@cart_item =CartItem.new
 		@likes = Like.all
+
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
     
 		# @cart_item = current_cart.cart_item.find(params[:item_id])
 	end
