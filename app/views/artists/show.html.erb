@@ -1,3 +1,4 @@
+
 <div class='box'>
 	<div class='row'>
 		<div  class="col-md-8 col-sm-8">
@@ -58,7 +59,7 @@
 				<h3  class="artist_item_nil">このアーティストのCDは現在お取り扱いしておりません。</h3>
 				<% else %>
 				<% @items.each do |item| %>
-				<div class="item-box artist_directory">
+				<div class="item-box directory">
 					<dl>
 						<dt><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></dt>
 						<dd><h4><%= item.item_name %></h4></dd>
@@ -74,7 +75,7 @@
 		</div>
 		<div class='col-md-4 col-sm-4'>
 			<h3>CD総合いいねランキング</h3>
-			<div  class="artist_over_3">
+			<div  class="over_3">
 				<table  class="table-hover table">
 					<tbody>
 						<% @rank.each.with_index(1) do |rank, i| %>
@@ -82,9 +83,8 @@
 							<td><%= "#{i}位" %></td>
 							<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
 							<td><%= rank.item_name %></td>
+							<td><% Artist.all.each do |artist| %><% if rank.artist_id == artist.id %><%= artist. artist_name %><% end %><% end %></td>
 							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
-							<td><% @genres.each do |genre| %><% if rank.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
-							<td><% @labels.each do |label| %><% if rank.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
 						</tr>
 						<% end %>
 					</tbody>
