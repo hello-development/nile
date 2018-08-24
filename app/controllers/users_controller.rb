@@ -5,6 +5,12 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.all
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+		# group(:item_id)で、アイテムの番号が同じものにグループを分ける
+  		# order('count(item_id) desc')で、番号の多い順に並び替える
+  		# limit()で、表示する最大数を指定して
+  		# pluck(:item_id)で:item_idカラムのみを取り出すように指定。
+  		# Item.find(integer)最終的に、取り出される数値オブジェクトをアイテムのIDとすることで表示される
 		if admin_signed_in?
 		if params[:last_name].present?
 			@users = @users.get_by_last_name params[:last_name]
@@ -43,6 +49,11 @@ class UsersController < ApplicationController
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
 		@genre = Genre.limit(1).order('created_at desc')
+		@artists = Artist.all
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+		@cart_item =CartItem.new
+		@itemid = Item.find(params[:id])
+		@purchases = Purchase.all
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
