@@ -18,7 +18,7 @@
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
       <nav class="nav">
-        <ul>
+        <ul class="ruled">
             <li class="li">
                 <%= link_to "アーティスト", artists_path %>
             </li>
@@ -32,7 +32,6 @@
             <li class="li">
                 <%= link_to "商品登録", new_item_path %>
             </li>
-            
             <li class="li">
               <%= link_to "アーティスト管理", artists_admin_index_path %>
             </li>
@@ -52,7 +51,7 @@
 
     <div class="input-group">
       <%= form_tag(artists_admin_index_path, method: "get") do %>
-      <%= label_tag :artist_name, "アーティスト名" %><br><%= text_field_tag :artist_name, params[:artist_name] %>
+      <%= label_tag :artist_name, "アーティスト名" %><%= text_field_tag :artist_name, params[:artist_name] %>
       <%= label_tag :ジャンル, "ジャンル" %>
       <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
       <%= label_tag :"レーベル" %>
