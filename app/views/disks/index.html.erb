@@ -1,6 +1,8 @@
-  <div class="container">
-    <div class="row">
-      <div class="col-md-5" style="">
+<div class='box'>
+  <div class='row'>
+    <div  class="col-md-4 col-sm-4">
+      <h3> <%= @item.item_name %></h3>
+      <div class="box2">
       <% if @disk.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
           <ul>
@@ -10,21 +12,17 @@
           </ul>
         </div>
       <% end %>
-      <%= @item.item_name %><br>
+
       <%= form_for [@item, @disk], url: item_disks_path do |f| %>
-      No.<%= f.number_field :disk_number %><br>
-      <%= f.submit 'ディスクを追加する' %>
-      <% end %><br>
+      <h4>No.<%= f.number_field :disk_number, class:"data" %></h4>
+      <%= f.submit 'ディスクを追加する', class:"data" %>
+      <% end %>
       </div>
-      <div class="col-md-7" style="">
+    </div>
+      <div  class="col-md-8 col-sm-8">
+        <h3> ディスク</h3>
+        <div  class="over_2">
         <table  class="table-hover table">
-          <thead>
-            <tr>
-              <!-- <th>ディスクID</th> -->
-              <th>ディスク</th>
-              <th></th>
-            </tr>
-          </thead>
           <tbody>
             <% @disks.each do |disk| %>
             <tr>
@@ -37,6 +35,7 @@
       </div>
     </div>
   </div>
+</div>
 
 
 
