@@ -35,8 +35,8 @@
   <div class="field">
     <div> パスワード（半角英数字6桁以上） </div>
     <%# if @minimum_password_length %>
-<!--     <em>(<%#= @minimum_password_length %> characters minimum)</em> -->
-    <%# end %><!-- <br /> -->
+    <!-- <em>(<%#= @minimum_password_length %> characters minimum)</em>
+    <%# end %> -->
     <%= f.text_field :password, autocomplete: "off" %>
   </div>
 
@@ -46,19 +46,11 @@
   </div>
 
   <div class="actions">
-    <input type="submit" class="bg-danger" value="上記の内容で変更する" data-disable-with="上記の内容で変更する">
+    <input type="submit" class="btn btn-danger" value="上記の内容で変更する" data-disable-with="上記の内容で変更する">
   </div>
-
-  
-
 <% end %>
-
-<div class="actions">
-  <%#= link_to "住所変更及び新しい住所を登録する", user_address_path(current_user, @address) %>
-  <%= link_to "住所変更及び新しい住所を登録する", user_address_path(current_user, current_user.addresses.first), class: 'btn btn-primary' %>
-    <input type="submit" class="bg-danger" value="住所変更及び新しい住所を登録する" data-disable-with="住所変更及び新しい住所を登録する">
+  <div class="actions">
+    <%= link_to "住所変更及び新しい住所を登録する", user_address_path(current_user,current_user.addresses.first), class: 'btn btn-primary' %>
   </div>
-
-<%#= render "users/shared/links" %>
 
 </div>
