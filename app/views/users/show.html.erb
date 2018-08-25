@@ -5,7 +5,7 @@
       <div class="users_show_left">
         <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
         <div> <%= @user.last_name %> <%= @user.first_name %> さん </div>
-        <div> <%= link_to "編集", edit_user_path, class: 'btn btn-success' %> </div>
+        <div> <%= link_to "編集", edit_user_path(current_user), class: 'btn btn-success' %> </div>
         <div> <%= link_to "退会", user_path, class: 'btn btn-danger', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
       </div>
     <div class="users_show_right">
