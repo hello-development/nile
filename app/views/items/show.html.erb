@@ -63,10 +63,14 @@
 
     					<strong><div class="search-results"><%= notice %></div></strong>
 
+    					<%# unless @review.id == current_user.@review.id %>
+
 						<%= form_for [@item, @review] do |f| %>
 				   		<%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
 				    	<%= f.submit "送信する", class: "" %>
 						<% end %>
+
+						<%# end %>
 					
 					<% elsif admin_signed_in? %>
        			<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= @item.likes.count %><br>レビュー<%= @item.reviews.count %>件<br>
