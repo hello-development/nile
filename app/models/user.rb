@@ -9,7 +9,7 @@ class User < ApplicationRecord
    has_many :likes, dependent: :destroy
    has_one :cart, dependent: :destroy
    has_many :addresses, dependent: :destroy
-   has_many :purchases
+   has_many :purchases, dependent: :destroy
    belongs_to :artist, optional: true
    belongs_to :purchase, optional: true
 
