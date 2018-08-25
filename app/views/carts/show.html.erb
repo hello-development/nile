@@ -2,7 +2,7 @@
 <% sum = 0 %>
 <h1>あなたのカート</h1>
 <% if @cart_items.count == 0 %>
-
+<p class="update"><%= notice %></p><p class="alert"><%= alert %></p><br>
 カートに入っている商品はありません<br>
 <%= link_to items_path do %><button class="btn-sm">商品一覧へ</button><% end %>
 
@@ -15,8 +15,9 @@
           <tr>
             <th></th>
             <th><h4>商品名</h4></th>
+            <th><h4>在庫</h4></th>
             <th><h4>価格</h4></th>
-            <th><h4>数量</h4></th>
+            <th><h4>注文数量</h4></th>
             <th></th>
             <th><h4>小計</h4></th>
           </tr>
@@ -25,6 +26,7 @@
         <tr  class="cart_item_box">
           <td><%= link_to item_path(ci.item.id) do %><%= attachment_image_tag ci.item, :item_image, :fill, 100, 100, format: 'jpg' %><% end %><br></td>
           <td><%= ci.item.item_name %></td>
+          <td><%= ci.item.inventory %></td>
           <td><span class="price">¥  <%= ci.item.price %></span></td>
           <td><%= form_for (ci), url: carts_update_item_path(ci.item.id) do |f| %>
           <%= f.label :"数量を変える(現在の数量が表示されています)" %><br>
@@ -46,6 +48,7 @@
 <% taxincl = sum * 1.08 %><br>
 (税込 <%= taxincl.round %>円)
 <%= link_to carts_register_path do %><button class="btn-sm">レジに進む</button><% end %>
+<%= link_to carts_delete_all_path, "data-confirm" => "全ての商品をカートから外しますか？"  do %><button class="btn-sm">全ての商品を戻す</button><% end %>
 <% end %>
 </div>
 

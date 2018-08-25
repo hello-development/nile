@@ -1,11 +1,13 @@
 <% n = 1 %>
+<% boolean = true %>
 <%= form_for (@purchase), url: purchases_path do |f| %>
   <% current_user.addresses.each do |address| %>
     <h3>宛先<%= n %><br></h3>
-    <label><%= f.radio_button :delivery_address, address.address_name %><%= address.address_name %></label><br>
+    <label><%= f.radio_button :delivery_address, address.address_name, {:checked => boolean } %><%= address.address_name %></label><br>
     <%= f.label :"郵便番号" %><br><%= address.postal_code %><br>
     <%= f.label :"お届け先" %><br><%= address.address %><br>
     <% n += 1 %>
+    <% boolean = false %>
   <% end %>
 <%= link_to "お届け先を追加される方はこちらから", user_address_path(current_user, current_user.addresses.first) %><br>
 
@@ -13,7 +15,7 @@
 <% taxincl = @sum * 1.08 %>
 (税込<%= taxincl.round %>円)<br>
 <!-- このボタンを押すとpurchasesコントローラーのcreateが実行されます -->
-<%= f.submit '購入確定(お届け先を選択してから押してください)' %>
+<%= f.submit '購入確定' %>
 <%= link_to "カートに戻る", user_carts_path(current_user) %>
 
 

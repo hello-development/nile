@@ -1,115 +1,126 @@
-    <div class="box">
-    <div class="message"> <%= flash[:notice] %> </div>
-
-    <div class="users_show_upper clearfix" >
-
+<div class="box">
+  <div class="message"></div>
+  <p class="update"><%= notice %></p><p class="alert"><%= alert %></p>
+  <div class="users_show_upper clearfix" >
     <div class="users_show_left">
       <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
       <div> <%= @user.last_name %> <%= @user.first_name %> さん </div>
       <div> <%= link_to "編集", edit_user_path, class: 'btn btn-success' %> </div>
       <div> <%= link_to "退会", user_path, class: 'btn btn-danger', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
     </div>
-
-    <div class="users_show_right">
+  <div class="users_show_right">
     <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
     <% if @user.artist_id.nil? %>
       <p> お気に入りアーティストは未登録です </p>
     <% end %>
     <% unless @user.artist_id.nil? %>
-
       <div> <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %> <% end %> </div>
-
       <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 100, 100, format: "jpg" %> </div>
-
-
-    <div> <strong> 最新のCD </strong> </div>
+      <div> <strong> 最新のCD </strong> </div>
       <div> <% @item.each do |item| %> <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %> <% end %> </div>
       <div> <%# if @user.item_id == item.id %> <%#= item.item_name %> <%# end %> </div>
       <div> <%# if @user.item_id == genre.id %> <%#= genre.genre_name %> <%# end %> </div>
       <div> <%# if @user.item_id == item.id %> <%#= item.price %> <%# end %> </div>
-
-
-
-      <% end %>
-
-    </div>
-
-    <div class="users_show_right_right">
+    <% end %>
+  </div>
+  <div class="users_show_right_right">
     <h4 class="favorite_ranking"> <strong> いいねランキング </strong> </h4>
-    <table>
+      <table>
       <%# @artists.each do |artist| %>
-      <tbody>
-        <tr>
-          <div> ジャケ写<%#= @artist.artist_image %> </div>
-          <div> CD名<%#= @item.item_name %> </div>
-          <div> カートに入れる </div>
-        </tr>
-        <tr>
-          <div> ジャケ写<%#= @artist.artist_image %> </div>
-          <div> CD名<%#= @item.item_name %> </div>
-          <div> カートに入れる </div>
-        </tr>
-        <tr>
-          <div> ジャケ写<%#= @artist.artist_image %> </div>
-          <div> CD名<%#= @item.item_name %> </div>
-          <div> カートに入れる </div>
-        </tr>
-      </tbody>
-    </table>
+        <tbody>
+          <tr>
+            <div> ジャケ写<%#= @artist.artist_image %> </div>
+            <div> CD名<%#= @item.item_name %> </div>
+            <div> カートに入れる </div>
+          </tr>
+          <tr>
+            <div> ジャケ写<%#= @artist.artist_image %> </div>
+            <div> CD名<%#= @item.item_name %> </div>
+            <div> カートに入れる </div>
+          </tr>
+          <tr>
+            <div> ジャケ写<%#= @artist.artist_image %> </div>
+            <div> CD名<%#= @item.item_name %> </div>
+            <div> カートに入れる </div>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    </div>
-
-<div class="users_show_bottom">
-<h4 class="purchase_histories"> <strong> 購入履歴 </strong> </h4>
-<%# @purchases.each do |purchase| %>
-<section>
-  <div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title accordion-toggle">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%#= purchase.purchased_date.strftime('%Y/%m/%d') %></a>
-        </h4>
-      </div>
-      <div id="collapseOne" class="panel-collapse collapse in">
-        <div class="panel-body">
+    <div class="users_show_bottom">
+      <h4 class="purchase_histories"> <strong> 購入履歴 </strong> </h4>
+      <%# @purchases.each do |purchase| %>
+        <section>
+          <!--   <div class="panel-group" id="accordion">
+          <div class="panel panel-default">
+          <div class="panel-heading">
+          <h4 class="panel-title accordion-toggle"> -->
+          <!-- <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%#= purchase.purchased_date.strftime('%Y/%m/%d') %></a> -->
+          <!-- </div> -->
+          <!-- <div id='collapse' class="panel-collapse collapse in">
+          <div class="panel-body"> -->
           <%# purchase.purchase_datails.each do |datail| %>
-          <p></p>
-          <span>商品名</span>：<span><%#= datail.item.item_name %></span>
-          <span>商品写真</span>：<span><%#= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %></span>
-          <span>購入時の単価</span>：<span><%#= datail.price %></span>
-          <span>数量</span>：<span><%#= datail.quantity %></span>
-          <span>小計</span>：<span><%#= datail.price * datail.quantity %></span>
+            <!-- <p></p>
+            <span>商品名</span>：<span><%#= datail.item.item_name %></span>
+            <span>商品写真</span>：<span><%#= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %></span>
+            <span>購入時の単価</span>：<span><%#= datail.price %></span>
+            <span>数量</span>：<span><%#= datail.quantity %></span>
+            <span>小計</span>：<span><%#= datail.price * datail.quantity %></span> -->
           <%# end %>
-        </div>
+          <!--</div>
+          </div>
+          </div>
+          </div>-->
+        </section>
       </div>
+      <%# end %>
+      <% n = 1 %>
+      <% @purchases.each do |purchase| %>
+      <div class="panel-group" id='sampleAccordion<%= n %>'>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <a data-toggle="collapse" data-parent='#sampleAccordion<%= n %>' href='#sampleAccordionCollapse<%= n %>'>
+          <%= purchase.purchased_date.strftime('%Y/%m/%d') %>
+        </a>
+      </h3>
     </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title accordion-toggle">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">　月　日購入</a>
-        </h4>
-      </div>
-      <div id="collapseTwo" class="panel-collapse collapse">
-        <div class="panel-body">
-          <p>コメントコメントコメントコメントコメントコメントコメント </p>
+    <div id='sampleAccordionCollapse<%= n %>' class="panel-collapse collapse">
+      <% purchase.purchase_datails.each do |datail| %>
+      <div class="panel-body">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3" style="">
+              <%= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %>
+            </div>
+            <div class="col-md-3" style="">
+               アーティスト名：<%= datail.item.artist.artist_name %><br>
+               商品名：<%= datail.item.item_name %>
+            </div>
+            <div class="col-md-3" style="">
+               単価：<%= datail.price %><br>
+               数量：<%= datail.quantity %>
+            </div>
+            <div class="col-md-3" style="">
+               小計：<%= datail.quantity * datail.price %>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title accordion-toggle">
-          <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">　月　日購入</a>
-        </h4>
-      </div>
-      <div id="collapseThree" class="panel-collapse collapse">
-        <div class="panel-body">
-          <p>コメントコメントコメントコメントコメントコメントコメント </p>
-        </div>
-      </div>
+      <% end %>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-9" style=""></div>
+          <div class="col-md-3" style="">
+            <div class="border">
+              合計：<%= purchase.total_price %>円(税込)
+              配送状況：<%= purchase.status %>
+            </div>
+          </div>
     </div>
   </div>
-</section>
-<%# end %>
+</div>
+      <% n += 1%>
+      <% end %>
+    </div>
+  </div>
 
-</div>
-</div>
