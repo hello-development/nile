@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
 		@cart_item =CartItem.new
 		@itemid = Item.find(params[:id])
-		@purchases = @user.purchases
+		@purchases = current_user.purchases
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
@@ -64,12 +64,12 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		if admin_signed_in?
-		elsif user_signed_in?
-			redirect_to root_path
-		else
-			redirect_to root_path
-		end
+		# if admin_signed_in?
+		# elsif user_signed_in?
+		# 	redirect_to root_path
+		# else
+		# 	redirect_to root_path
+		# end
 		@user = User.find(params[:id])
 	end
 
