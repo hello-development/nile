@@ -86,6 +86,9 @@ class UsersController < ApplicationController
 	def new
 	end
 
+	def new
+	end
+
 	def create
 		@user = User.all
 		@user.user_id = current_user.id
