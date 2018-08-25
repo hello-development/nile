@@ -13,14 +13,15 @@ devise_for :users, controllers: {
   root 'items#index'
 
   get 'carts/register'
+  get 'carts/delete_all'
   post 'carts/:item_id/add_item' => 'carts#add_item', as: :carts_add_item #item_idをurlに含めて送信
   patch 'carts/:item_id/update_item' => 'carts#update_item', as: :carts_update_item
   delete 'carts/:item_id/delete_item' => 'carts#delete_item', as: :carts_delete_item
-  get 'carts/confirmation'
+  # get 'carts/confirmation'
   get 'artists/admin_index'
   get 'items/admin_index'
   patch 'users/:id' => 'users#favorite'
-  get 'purchase/:purchase_id/confirmation' => 'purchase_datails#confirmation', as: :confirmation
+  # get 'purchase/:purchase_id/confirmation' => 'purchase_datails#confirmation', as: :confirmation
 
   resources :users, only: [:show, :edit, :update, :index, :destroy]do
     resources :addresses, only: [:new, :create, :edit, :show, :update, :destroy]
