@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@artists = Artist.all
-		@items = @user.items
+		@items = Item.all
 		@review = Review.new
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
