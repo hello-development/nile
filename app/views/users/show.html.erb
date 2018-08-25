@@ -14,13 +14,34 @@
         <p> お気に入りアーティストは未登録です </p>
       <% end %>
       <% unless @user.artist_id.nil? %>
-        <div> <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %> <% end %> </div>
+        <div>
+          <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %>
+          <% end %>
+        </div>
         <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 100, 100, format: "jpg" %> </div>
-        <div> <strong> 最新のCD </strong> </div>
-        <div> <% @item.each do |item| %> <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %> <% end %> </div>
-        <div> <%# if @user.item_id == item.id %> <%#= item.item_name %> <%# end %> </div>
-        <div> <%# if @user.item_id == genre.id %> <%#= genre.genre_name %> <%# end %> </div>
-        <div> <%# if @user.item_id == item.id %> <%#= item.price %> <%# end %> </div>
+        <span>
+          <strong> 最新のCD： </strong>
+        </span>
+            <span>
+              <% @item.each do |item| %> <%= item.item_name %>
+              <% end %>
+            </span>
+            <div>
+              <span>ジャンル：</span>
+              <% @genre.each do |genre| %> <%= genre.genre_name %>
+              <% end %>
+            </div>
+            <%# if @user.item_id == genre.id %> <%#= genre.genre_name %>
+            <div>
+              <span>価格：￥</span>
+              <% @item.each do |item| %> <%= item.price %>
+              <% end %>
+            </div>
+            <div>
+              <% @item.each do |item| %>
+              <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %>
+              <% end %>
+            </div>
       <% end %>
     </div>
     <div class="users_show_right_right">
@@ -36,13 +57,16 @@
                       <%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %>
                       <% end %>
                     </td>
+                     <td>
+                      <span> <%= rank.item_name %> </span>
+                    </td>
                     <td>
                       <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
                       <%= rank.likes.count %>
                     </td>
                     <td>
                       <%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %>
-                      <%= f.number_field :units %>
+                      <span>数量</span><%= f.number_field :units ,min:0 %>
                       <%= f.submit 'カートに入れる' %>
                       <% end %>
                     </td>
