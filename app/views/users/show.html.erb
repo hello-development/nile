@@ -67,6 +67,8 @@
                     <td>
                       <%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %>
                       <span>数量</span><%= f.number_field :units ,min:0 %><br>
+                    </td>
+                    <td>
                       <%= f.submit 'カートに入れる' %>
                       <% end %>
                     </td>
@@ -120,16 +122,36 @@
               <div class="panel-body">
                 <div class="container">
                   <div class="row">
-                    <div class="col-md-3" style="">
+                    <div class="col-md-2" style="">
                       <%= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %>
                     </div>
-                    <div class="col-md-3" style="">
+                    <div class="col-md-2" style="">
                        アーティスト名：<%= datail.item.artist.artist_name %><br>
                        商品名：<%= datail.item.item_name %>
                     </div>
-                    <div class="col-md-3" style="">
+                    <div class="col-md-2" style="">
                        単価：<%= datail.price %>円<br>
                        数量：<%= datail.quantity %>
+                    </div>
+                    <div class="col-md-3" style="">
+                      <p>レビュー<%#= @item.reviews.count %>件<br>
+                      <% datail.item.reviews.each do |review| %>
+                      <!-- コメント -->
+                        <%= review.comment %><br>
+                        <!-- 日付 -->
+                        <%= review.created_at.strftime('%Y/%m/%d') %>
+                        <!-- 名前 -->
+                        <%#= review.user.first_name %>                     
+                        <%# if review.user == current_user %>
+                          <%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><br><% end %>
+                        <% end %></p>
+                      <%# end %>
+
+                      <%= form_for [datail.item, @review] do |f| %>
+                        <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
+                        <%= f.submit "送信する", class: "" %>
+                      <% end %> 
+
                     </div>
                     <div class="col-md-3" style="">
                        小計：<%= datail.quantity * datail.price %>円
