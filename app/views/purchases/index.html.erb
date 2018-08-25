@@ -21,10 +21,11 @@
 	  <%= form_for(purchase) do |f| %>
 	  <tr>
 		<td><%= purchase.purchased_date.strftime('%Y/%m/%d') %></td>
-		<td><%= purchase.user.id %></td>
-		<td><%= purchase.user.last_name + purchase.user.first_name %></td>
+		<td><%= link_to "#{purchase.user.id}", user_path(purchase.user) %></td>
+		<% user_name = purchase.user.last_name + purchase.user.first_name %>
+		<td><%= link_to "#{user_name}", user_path(purchase.user) %></td>
 		<td><%= purchase.delivery_address %></td>
-		<td><%= datail.item.item_name %></td>
+		<td><%= link_to "#{datail.item.item_name}", edit_item_path(datail.item) %></td>
 		<td><%= datail.price %></td>
 		<td><%= datail.quantity %></td>
 		<td><%= datail.quantity * datail.price %></td>
