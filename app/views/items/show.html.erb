@@ -129,37 +129,7 @@
 			</div>
 		</div>
 
-<<<<<<< HEAD
-    					<%# unless @review.id == current_user.@review.id %>
 
-						<%= form_for [@item, @review] do |f| %>
-				   		<%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
-				    	<%= f.submit "送信する", class: "" %>
-						<% end %>
-
-						<%# end %>
-					
-					<% elsif admin_signed_in? %>
-       			<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= @item.likes.count %><br>レビュー<%= @item.reviews.count %>件<br>
-						<% @item.reviews.each do |review| %>
-    						<!-- 日付 -->
-   							<%= review.created_at.strftime('%Y/%m/%d') %>
-							  <!-- 名前 -->
-							  <%= review.user.first_name %><br>
-							  <!-- コメント -->
-    						<%= review.comment %>
-          
-    						<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><% end %><br>
-    					<% end %></p>
-    				<!-- No login -->
-					<% else %>
-						<p>いいね<%= @item.likes.count %><br>レビュー<%= @item.reviews.count %>件<br>
-						<% @item.reviews.each do |review| %>
-    						<%= review.comment %><br>
-    					<% end %></p>
-					<% end %>
-				</div>
-=======
 		<div class="col-md-4">
 			<h3> CD総合いいねランキング</h3>
 			<div class="over_3">
@@ -174,13 +144,8 @@
 							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
 						</tr>
 						<% end %>
-<<<<<<< HEAD
-
->>>>>>> 0c197a45597759975fd0234c953a5f3553053ad6
-=======
 					</tbody>
 				</table>
->>>>>>> eff91ab1eca09961352eac3660bfb3e0a7d76394
 			</div>
 		</div>
 	</div>
