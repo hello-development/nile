@@ -3,28 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-.item-list {
-	display: block;
-	overflow-y: scroll;
-	height: 500px;
-	width: 100%;
-	margin: 40px;
-	padding-bottom: 100px;
-}
 
-.item-box{
-	float: left;
- 	width: 200px;
- 	// border: 1px solid #333333;
- 	padding: 5px;
- 	margin: 5px 5px 5px 10px;
-}
 
-.item-rank-list{
-	display: block;
-	overflow-y: scroll;
-	height: 500px;
-}
 a {
 	text-decoration: none;
 	.black {
@@ -36,3 +16,12 @@ a {
 	}
 }
 
+ .item_contents_box {
+ border:1px;
+ border-style:solid;
+ border-color:#999;
+ width: 100%;
+ float: right;
+ padding: 10px;
+ margin-bottom: 20px;
+ }

@@ -53,7 +53,7 @@ class UsersController < ApplicationController
 		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
 		@cart_item =CartItem.new
 		@itemid = Item.find(params[:id])
-		@purchases = Purchase.all
+		@purchases = @user.purchases
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
@@ -127,8 +127,13 @@ class UsersController < ApplicationController
 
 	def cart_destroy!
       cart = Cart.find_by(user_id: current_user)
-      unless cart.nil?
-        cart.destroy
+      unless cart.nil? #cartがnilでなければ(つまりcartが存在していれば)
+        if cart.cart_items.nil? #カートの中は空ですか？空ならカート消しても良いからdestroy
+          cart.destroy
+        else
+          redirect_to user_path(current_user)
+          flash[:alert]="あなたのカートに商品が存在しています。退会する前に確認して下さい。"
+        end
       end
 	end
 
