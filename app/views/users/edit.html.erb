@@ -49,11 +49,15 @@
     <input type="submit" class="bg-danger" value="上記の内容で変更する" data-disable-with="上記の内容で変更する">
   </div>
 
-  <div class="actions">
-    <input type="submit" class="bg-danger" value="住所変更及び新しい住所を登録する" data-disable-with="住所変更及び新しい住所を登録する">
-  </div>
+  
 
 <% end %>
+
+<div class="actions">
+  <%#= link_to "住所変更及び新しい住所を登録する", user_address_path(current_user, @address) %>
+  <%= link_to "住所変更及び新しい住所を登録する", user_address_path(current_user, current_user.addresses.first), class: 'btn btn-primary' %>
+    <input type="submit" class="bg-danger" value="住所変更及び新しい住所を登録する" data-disable-with="住所変更及び新しい住所を登録する">
+  </div>
 
 <%#= render "users/shared/links" %>
 
