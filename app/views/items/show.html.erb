@@ -1,129 +1,149 @@
-<body>
-	<div class="box">
-		<div class='row'>
-			<h1></h1>
-			<div class="col-md-8">
-				<div class="col-md-4">
-					<div class="item-image-show">
-						<%= attachment_image_tag @item, :item_image, :fill, 200, 200, format: 'jpeg' %><br>
-						<p>Description<br><%= @item.item_contents %></p>
+
+<div class="box">
+	<div class='row'>
+		<div class="col-md-8">
+			<div  class="clearfix">
+				<div class="artist_profile_box  clearfix">
+					<%= attachment_image_tag @item, :item_image, :fill, 250, 250, format: 'jpeg', class: "artist_show_image" %>
+					<div  class="item_contents">
+						<h1> <%= @item.item_name %></h1>
+						<h4>
+							・<% @artists.each do |artist| %><% if @item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %>
+							<span  class="artist_tag">
+								<% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %>
+							</span>
+							<span  class="artist_tag">
+								<% @labels.each do |label| %><% if @item.label_id == label.id %><%= label.label_name %><% end %><% end %>
+							</span>
+						</h4>
+						<p> 価格　¥<%= @item.price %></p>
+            <p class="alert"><%= alert %></p>
+            <% if @item.inventory == 0 %>
+              <p>売り切れ：申し訳ありません！<br>次回の入荷までお待ちください</p>
+            <% elsif @item.inventory <= 5 %>
+             <p>☆人気の商品です☆<br>
+              <% if @item.inventory == 1 %>
+               残り１個です！お早めに！
+              <% else %>
+               在庫残りわずかにつきお早めに!</p>
+            <% end %>
+						<% if user_signed_in? %>
+							<% if @item.favorited_by?(current_user) %>
+								<%= render 'likes/like_destroy' %>
+								<% else %>
+								<%= render 'likes/like_create' %>
+							<% end %>
+							<% else %>
+								<p>いいね<%= @item.likes.count %></p>
+						<% end %>
+            <% if @item.inventory == 0 %>
+            <% else %>
+              <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
+              <%= f.label :"数量を選ぶ" %>
+              <%= f.number_field :units %>
+              <%= f.submit 'カートに入れる' %><br>
+              <% end %>
+            <% end %>
+						<div  class="artist_contents_box directory">
+							<p>・Description<br><%= @item.item_contents %></p>
+						</div>
 					</div>
 				</div>
-				<div class="item-box-show">
-					<div class="col-md-4">
-					<h3><%= @item.item_name %></h3>
-					<p><% @artists.each do |artist| %><% if @item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %><br>
-					<% @genres.each do |genre| %><% if @item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %><br>
-					<% @labels.each do |label| %><% if @item.label_id == label.id %><%= label.label_name %><% end %><% end %></p>
-					<p>¥<%= @item.price %></p>
-					<p>在庫<%= @item.inventory %></p>
-					<p class="alert"><%= alert %></p>
-<% if @item.inventory == 0 %>
-                      <p>売り切れ：申し訳ありません！<br>次回の入荷までお待ちください</p>
-<% elsif @item.inventory <= 5 %>
-                    <p>☆人気の商品です☆<br>
-      <% if @item.inventory == 1 %>
-                    残り１個です！お早めに！
-      <% else %>
-                    在庫残りわずかにつきお早めに!</p>
-      <% end %>
-                      <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
-                      <br>
-                      <%= f.label :"数量を選ぶ" %>
-                      <%= f.number_field :units %><br>
-                      <%= f.submit 'カートに入れる' %><br>
-                      <% end %>
-<% else %>
-                      <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
-                      <br>
-                      <%= f.label :"数量を選ぶ" %>
-                      <%= f.number_field :units %><br>
-                      <%= f.submit 'カートに入れる' %><br>
-                      <% end %>
-<% end %>
-				　　　　</div>
-				<div class="disk-box-show">
-					<div class="col-md-8">
-					<!-- <div class="disk-box-show"> -->
-						<h4>収録曲</h4>
-						<% @disks.each do |disk| %>
-							<% if @item.id == disk.item_id %>
-							<h5>ディスク<%= disk.disk_number %></h5>
-							<ol>
-								<% @songs.each do |song| %>
+				
+				<% @disks.each.with_index(1) do |disk,i| %>
+				<% if @item.id == disk.item_id %>
+				<button type="button" class="btn btn-default btn-block">
+					<div class="accordion-group">
+						<div class="accordion-heading">
+							<a class="accordion-toggle" data-toggle="collapse" data-parent="#faq" href="#faqpost_<%= "#{i}" %><%= @item.id %><%= disk.id %>">ディスク<%= disk.disk_number %></a>
+						</div>
+						<div id="faqpost_<%= "#{i}" %><%= @item.id %><%= disk.id %>" class="accordion-body collapse">
+							<div class="accordion-inner">
+								<ol>
+									<% @songs.each do |song| %>
+
 									<% if disk.id == song.disk_id %>
 									<li><%= song.song_name %></li>
 									<% end %>
+									<% end %>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</button>
+				<% end %>
+				<% end %>
+
+				<strong><div class="search-results"><%= notice %></div></strong>
+				<div class="artist_item_box">
+					<div class="directory">
+						<% if user_signed_in? %>
+						<p>レビュー<%= @item.reviews.count %>件<br>
+							<% @item.reviews.each do |review| %>
+							<!-- 日付 -->
+							<%= review.created_at.strftime('%Y/%m/%d') %>
+							<!-- 名前 -->
+							<%= review.user.first_name %><br>
+							<!-- コメント -->
+							<%= review.comment %><br>
+						</p>
+								<% if review.user == current_user %>
+									<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+										<button class="">削除</button><br>
+									<% end %>
 								<% end %>
-							</ol>
+							<% end %>
+
+							<%= form_for [@item, @review] do |f| %>
+							<%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
+							<%= f.submit "送信する", class: "" %>
+							<% end %>
+						<% elsif admin_signed_in? %>
+							<p>
+								レビュー<%= @item.reviews.count %>件<br>
+								<% @item.reviews.each do |review| %>
+								<!-- 日付 -->
+								<%= review.created_at.strftime('%Y/%m/%d') %>
+								<!-- 名前 -->
+								<%= review.user.first_name %><br>
+								<!-- コメント -->
+								<%= review.comment %>
+								<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+									<button class="">削除</button><br>
+								<% end %>
+								<% end %>
+							</p>
+						<% else %>
+							<p>
+								レビュー<%= @item.reviews.count %>件<br>
+								<% @item.reviews.each do |review| %>
+								<%= review.created_at.strftime('%Y/%m/%d') %>
+								<%= review.user.first_name %><br>
+		    					<%= review.comment %><br>
+		    				</p>
 							<% end %>
 						<% end %>
 					</div>
 				</div>
-				<div class="col-md-8">
-					<% if user_signed_in? %>
-						<% if @item.favorited_by?(current_user) %>
-							<%= render 'likes/like_destroy' %>
-							<% else %>
-							<%= render 'likes/like_create' %>
-    					<% end %>
-       					<p>レビュー<%= @item.reviews.count %>件<br>
-						<% @item.reviews.each do |review| %>
-    					  <!-- 日付 -->
-   							<%= review.created_at.strftime('%Y/%m/%d') %>
-						    <!-- 名前 -->
-							  <%= review.user.first_name %><br>
-						    <!-- コメント -->
-    						<%= review.comment %><br>
-    						<% if review.user == current_user %><%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><% end %><% end %><br>
-    					<% end %></p>
-
-    					<strong><div class="search-results"><%= notice %></div></strong>
-
-						<%= form_for [@item, @review] do |f| %>
-				   		<%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
-				    	<%= f.submit "送信する", class: "" %>
-						<% end %>
-
-					<% elsif admin_signed_in? %>
-       			<p><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= @item.likes.count %><br>レビュー<%= @item.reviews.count %>件<br>
-						<% @item.reviews.each do |review| %>
-    						<!-- 日付 -->
-   							<%= review.created_at.strftime('%Y/%m/%d') %>
-							  <!-- 名前 -->
-							  <%= review.user.first_name %><br>
-							  <!-- コメント -->
-    						<%= review.comment %>
-
-    						<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><% end %><br>
-    					<% end %></p>
-    				<!-- No login -->
-					<% else %>
-						<p>いいね<%= @item.likes.count %><br>レビュー<%= @item.reviews.count %>件<br>
-						<% @item.reviews.each do |review| %>
-    						<%= review.comment %><br>
-    					<% end %></p>
-					<% end %>
-				</div>
 			</div>
 		</div>
+
 		<div class="col-md-4">
-        	<div class="item-rank-box">
-          		<h3> CDいいねランキング</h3>
-          		<table  class="table-hover table">
-            		<tbody>
-            		<% @rank.each.with_index(1) do |rank, i| %>
-              			<tr>
-                			<td><%= "#{i}位" %></td>
-                			<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
-               				<td><%= rank.item_name %></td>
-                			<td><% @artists.each do |artist| %><% if rank.artist_id == artist.id %><%= artist. artist_name %><% end %><% end %></td>
-                			<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
-              			</tr>
-            		<% end %>
-           			</tbody>
-          		</table>
-        	</div>
-      	</div>
+			<h3> CD総合いいねランキング</h3>
+			<div class="over_3">
+				<table  class="table-hover table">
+					<tbody>
+						<% @rank.each.with_index(1) do |rank, i| %>
+						<tr>
+							<td><%= "#{i}位" %></td>
+							<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
+							<td><%= rank.item_name %></td>
+							<td><% @artists.each do |artist| %><% if rank.artist_id == artist.id %><%= artist. artist_name %><% end %><% end %></td>
+							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
+						</tr>
+						<% end %>
+
+			</div>
+		</div>
 	</div>
-</body>
+</div>

@@ -8,8 +8,8 @@ class ItemsController < ApplicationController
 			@labels = Label.all
 			@review = Review.all
 			@likes = Like.all
-			# render layout: "item"
-			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
+			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
+			render :index, layout: "item" and return
 
 
 		if params[:genre_id].present?
@@ -112,7 +112,7 @@ class ItemsController < ApplicationController
 		@songs = Song.all
 		@cart_item =CartItem.new
 		@likes = Like.all
-		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
 
 
 	end
