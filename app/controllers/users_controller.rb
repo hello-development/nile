@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@artists = Artist.all
-		@items = Item.all
+		@items = @user.items
 		@review = Review.new
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
@@ -53,6 +53,7 @@ class UsersController < ApplicationController
 		@purchases = @user.purchases
 		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
 		@cart_item =CartItem.new
+		# @address = Address.find(params[:id])
 
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
@@ -71,6 +72,7 @@ class UsersController < ApplicationController
 		# 	redirect_to root_path
 		# end
 		@user = User.find(params[:id])
+		# @address = Address.find(params[:id])
 	end
 
 	def update

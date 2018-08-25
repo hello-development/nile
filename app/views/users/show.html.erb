@@ -5,7 +5,7 @@
       <div class="users_show_left">
         <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
         <div> <%= @user.last_name %> <%= @user.first_name %> さん </div>
-        <div> <%= link_to "編集", edit_user_path, class: 'btn btn-success' %> </div>
+        <div> <%= link_to "編集", edit_user_path(current_user), class: 'btn btn-success' %> </div>
         <div> <%= link_to "退会", user_path, class: 'btn btn-danger', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
       </div>
     <div class="users_show_right">
@@ -135,22 +135,26 @@
                     </div>
                     <div class="col-md-3" style="">
                       <p>レビュー<%#= @item.reviews.count %>件<br>
+                        <% @item.each do |item| %>
                       <% datail.item.reviews.each do |review| %>
+                      <% if review.item.id == item.id %>
                       <!-- コメント -->
                         <%= review.comment %><br>
                         <!-- 日付 -->
                         <%= review.created_at.strftime('%Y/%m/%d') %>
                         <!-- 名前 -->
-                        <%#= review.user.first_name %>                     
+                        <%#= review.user.first_name %>
                         <%# if review.user == current_user %>
                           <%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><br><% end %>
                         <% end %></p>
+                        <% end %>
+                        <% end %>
                       <%# end %>
 
                       <%= form_for [datail.item, @review] do |f| %>
                         <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
                         <%= f.submit "送信する", class: "" %>
-                      <% end %> 
+                      <% end %>
 
                     </div>
                     <div class="col-md-3" style="">
