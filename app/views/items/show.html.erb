@@ -17,6 +17,7 @@
 							</span>
 						</h4>
 						<p> 価格　¥<%= @item.price %></p>
+						<p> 在庫　<%= @item.inventory %></p>
             <p class="alert"><%= alert %></p>
             <% if @item.inventory == 0 %>
               <p>売り切れ：申し訳ありません！<br>次回の入荷までお待ちください</p>
@@ -26,6 +27,7 @@
                残り１個です！お早めに！
               <% else %>
                在庫残りわずかにつきお早めに!</p>
+              <% end %>
             <% end %>
 						<% if user_signed_in? %>
 							<% if @item.favorited_by?(current_user) %>

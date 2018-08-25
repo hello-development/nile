@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create]
 
   def create
     cart_items = current_cart.cart_items
@@ -33,6 +33,12 @@ class PurchasesController < ApplicationController
       current_cart.cart_items.delete_all #current_cartのcart_item全て削除します
       redirect_to user_path(current_user)
       flash[:notice]="ご注文ありがとうございました！注文内容は下記をご確認下さい。"
+    end
+  end
+
+  def index
+    unless admin_signed_in?
+      redirect_to root_path
     end
   end
 

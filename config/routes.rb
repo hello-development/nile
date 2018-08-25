@@ -40,8 +40,8 @@ devise_for :users, controllers: {
     end
   end
 
-  resources :purchases, only: [:create, :update]do
-    resource :purchase_datails, only: [:new, :create, :index]
+  resources :purchases, only: [:create, :update, :index]do
+    resource :purchase_datails, only: [:new, :create]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
