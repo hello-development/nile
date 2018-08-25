@@ -38,8 +38,15 @@ class PurchasesController < ApplicationController
 
   def index
     unless admin_signed_in?
-      redirect_to root_path
+      redirect_to root_path and return
     end
+    @purchases = Purchase.all
+  end
+
+  def update
+    purchase = Purchase.find(params[:id])
+    purchase.update(purchase_params)
+    redirect_to purchases_path
   end
 
 	  private

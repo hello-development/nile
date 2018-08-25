@@ -1,0 +1,40 @@
+  <table  class="table-hover table directory">
+    <tbody>
+	  <thead>
+	  	<tr>
+	  	<th>購入日</th>
+	  	<th>会員ID</th>
+		<th>会員名</th>
+		<th>宛名</th>
+		<th>商品名</th>
+		<th>単価(円)</th>
+		<th>数量</th>
+		<th>小計(円)</th>
+		<th>詳細ID</th>
+		<th>配送状況</th>
+		<th>配送状況を更新</th>
+		<th>購入履歴ID</th>
+		</tr>
+	  </thead>
+	  <% @purchases.each do |purchase| %>
+	  <% purchase.purchase_datails.each do |datail| %>
+	  <%= form_for(purchase) do |f| %>
+	  <tr>
+		<td><%= purchase.purchased_date.strftime('%Y/%m/%d') %></td>
+		<td><%= purchase.user.id %></td>
+		<td><%= purchase.user.last_name + purchase.user.first_name %></td>
+		<td><%= purchase.delivery_address %></td>
+		<td><%= datail.item.item_name %></td>
+		<td><%= datail.price %></td>
+		<td><%= datail.quantity %></td>
+		<td><%= datail.quantity * datail.price %></td>
+		<td><%= datail.id %></td>
+		<td><%= f.select(:status, [['受付', 0], ['商品準備中', 1],['出荷済', 2]]) %></td>
+		<td><%= f.submit '左記で更新', class:"btn btn-link active data" %></td>
+		<td><%= purchase.id %></td>
+	  </tr>
+	  <% end %>
+	  <% end %>
+     <% end %>
+    </tbody>
+  </table>
