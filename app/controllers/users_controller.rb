@@ -49,11 +49,11 @@ class UsersController < ApplicationController
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
 		@genre = Genre.limit(1).order('created_at desc')
-		@artists = Artist.all
+		@purchases = @user.purchases
 		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
 		@cart_item =CartItem.new
 		@itemid = Item.find(params[:id])
-		@purchases = current_user.purchases
+
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
