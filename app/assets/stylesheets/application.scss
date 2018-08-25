@@ -37,7 +37,7 @@
 }
 
 .nav {
-  width: 80%;
+  width: 30%;
   float: right;
   margin: 5px 0px 0px 0px;
 }
@@ -50,6 +50,10 @@
   background-color: yellow;
 }
 
+.ruled li {
+    border-bottom: 1px solid gray; /* 太さ、線種、色 */
+    height: 1.3em;
+}
 
 .search_container{
   box-sizing: border-box;

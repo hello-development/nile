@@ -1,54 +1,44 @@
-<body>
-  <div class="box">
-    <div class="row">
-      <div class="col-lg-9" style="">
-        <h2>商品情報変更</h2>
 
-        <%= attachment_image_tag @item, :item_image, :fill, 200, 200, format: 'jpeg' %>
+<div  class="container">
+  <div class="row">
+    <h1  class="artist_edit_headline">商品情報変更</h1>
 
+    <div  class="box2">
 
-        <%= form_for(@item) do |f| %>
+    <%= attachment_image_tag @item, :item_image, :fill, 200, 200, format: 'jpeg' %>
 
-          <%= f.label :"シングル/アルバム" %><br>
-          <%= f.text_field :item_name %><br>
+    <%= form_for(@item) do |f| %>
 
-          <%= f.label :"収録曲" %><br>
-          <%= f.text_field :item_name %><br>
+    <%= f.label :"シングル/アルバム名" %><br>
+    <%= f.text_field :item_name, class:"data" %><br>
 
-          <%= f.label :"商品説明" %><br>
-          <%= f.text_area :item_contents %><br>
+    <%= f.label :"商品説明" %><br>
+    <%= f.text_area :item_contents, class:"data" %><br>
 
-          <%= f.label :"アーティスト" %><br>
-          <%= f.select :artist_id,Artist.all.collect { |p| [ p.artist_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+    <%= f.label :"アーティスト" %><br>
+    <%= f.select :artist_id,Artist.all.collect { |p| [ p.artist_name, p.id ] }, {include_blank: true}, {class: 'data'} %><br>
 
-          <%= f.label :"ジャンル" %><br>
-          <%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+    <%= f.label :"ジャンル" %><br>
+    <%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'data'} %><br>
 
-          <%= f.label :"レーベル" %><br>
-          <%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+    <%= f.label :"レーベル" %><br>
+    <%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'data'} %><br>
 
-          <%= f.label :"ジャケット写真" %><br>
-          <%= f.attachment_field :item_image, placeholder:"ジャケット画像", class:"item_data" %><br>
-           <!-- f.submit class:"btn btn-primary item_data" -->
+    <%= f.label :"ジャケット写真" %><br>
+    <%= f.attachment_field :item_image, placeholder:"ジャケット画像", class:"data" %><br>
+    <!-- f.submit class:"btn btn-primary item_data" -->
 
-          <%= f.label :"価格（税抜き）" %><br>
-          <%= f.text_field :price %><br>
+    <%= f.label :"価格（税抜き）" %><br>
+    <%= f.text_field :price, class:"data" %><br>
 
-          <%= f.label :"在庫" %><br>
-          <%= f.text_field :inventory %><br>
+    <%= f.label :"在庫" %><br>
+    <%= f.text_field :inventory, class:"data" %><br>
 
-          <%= f.submit '上記の内容で変更する', class:"btn btn-success active" %>
+    <%= f.submit '上記の内容で変更する', class:"btn btn-success active data" %>
 
-        <% end %>
+    <% end %>
 
-        <p><button  class="btn btn-warning"><%= link_to "DISK編集", item_disks_path(@item.id) %></button></p>
-
-
-      </div>
+    <p><button  class="btn btn-warning data"><%= link_to "DISK編集", item_disks_path(@item.id) %></button></p>
     </div>
   </div>
-</body>
-
-<!-- <button type="button" class="btn btn-success active">上記の内容で変更する</button> -->
-
-
+</div>
