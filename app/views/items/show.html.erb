@@ -15,7 +15,8 @@
 							<span  class="artist_tag">
 								<% @labels.each do |label| %><% if @item.label_id == label.id %><%= label.label_name %><% end %><% end %>
 							</span>
-						</h4>
+            </h4>
+
 						<p>・価格　¥<%= @item.price %></p>
 						<p>・在庫　<%= @item.inventory %></p>
 						<% if @item.inventory == 0 %>
@@ -28,6 +29,7 @@
 						・在庫残りわずかにつきお早めに!</p>
 						<% end %>
 						<% end %>
+
 						<% if user_signed_in? %>
 							<% if @item.favorited_by?(current_user) %>
 								<%= render 'likes/like_destroy' %>
