@@ -15,21 +15,21 @@
 							<span  class="artist_tag">
 								<% @labels.each do |label| %><% if @item.label_id == label.id %><%= label.label_name %><% end %><% end %>
 							</span>
-						</h4>
-						<p> 価格　¥<%= @item.price %></p>
-						<p> 在庫　<%= @item.inventory %></p>
+            </h4>
 
-            <p class="alert"><%= alert %></p>
-            <% if @item.inventory == 0 %>
-              <p>売り切れ：申し訳ありません！<br>次回の入荷までお待ちください</p>
-            <% elsif @item.inventory <= 5 %>
-             <p>☆人気の商品です☆<br>
-              <% if @item.inventory == 1 %>
-               残り１個です！お早めに！
-              <% else %>
-               在庫残りわずかにつきお早めに!</p>
-              <% end %>
-            <% end %>
+						<p>・価格　¥<%= @item.price %></p>
+						<p>・在庫　<%= @item.inventory %></p>
+						<% if @item.inventory == 0 %>
+						<p>・売り切れ：申し訳ありません！<br>・次回の入荷までお待ちください</p>
+						<% elsif @item.inventory <= 5 %>
+						<p>・☆人気の商品です☆
+							<% if @item.inventory == 1 %>
+							・残り１個です！お早めに！</p>
+							<% else %>
+						・在庫残りわずかにつきお早めに!</p>
+						<% end %>
+						<% end %>
+
 						<% if user_signed_in? %>
 							<% if @item.favorited_by?(current_user) %>
 								<%= render 'likes/like_destroy' %>
@@ -37,12 +37,12 @@
 								<%= render 'likes/like_create' %>
 							<% end %>
 							<% else %>
-								<p>いいね<%= @item.likes.count %></p>
+								<p>・いいね<%= @item.likes.count %></p>
 						<% end %>
 						<% if @item.inventory == 0 %>
 						<% else %>
 						<%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
-						<%= f.label :"数量を選ぶ" %>
+						<%= f.label :"・数量を選ぶ" %>
 						<%= f.number_field :units %>
 						<%= f.submit 'カートに入れる' %><br>
 						<% end %>

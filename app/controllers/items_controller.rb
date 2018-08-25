@@ -9,8 +9,6 @@ class ItemsController < ApplicationController
 			@review = Review.all
 			@likes = Like.all
 			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
-			render :index, layout: "item" and return
-
 
 		if params[:genre_id].present?
 			@items = @items.get_by_genre_id params[:genre_id]
@@ -39,6 +37,8 @@ class ItemsController < ApplicationController
 		end
 		end
 
+		render :index, layout: "item"
+		# itemのレイアウトを適用させる。
 
 		if user_signed_in?
 		  if current_user.last_sign_in_at == current_user.current_sign_in_at
@@ -49,8 +49,6 @@ class ItemsController < ApplicationController
 		  end
 		return
 		end
-		render :index, layout: "item"
-		# itemのレイアウトを適用させる。
 
 	end
 
