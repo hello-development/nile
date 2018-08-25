@@ -21,6 +21,12 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
+      <% if user_signed_in? %>
+          <div> こんにちは　<%= current_user.last_name %> <%= current_user.first_name %>　さん </div>
+      <% elsif admin_signed_in? %>
+          <p>管理者</p>
+      <% end %>
+
       <nav class="nav">
         <ul class="ruled">
 
@@ -61,7 +67,6 @@
               <%= link_to "商品管理", items_admin_index_path %>
             </li>
             <li class="li">
-              <!-- リンク先が違う・・・ -->
               <%= link_to "ユーザー一覧", users_path %>
             </li>
             <li class="li">

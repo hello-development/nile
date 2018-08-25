@@ -18,6 +18,12 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
+      <% if user_signed_in? %>
+          <div> こんにちは　<%= current_user.last_name %> <%= current_user.first_name %>　さん </div>
+      <% elsif admin_signed_in? %>
+          <p>管理者としてログインしています</p>
+      <% end %>
+
       <nav class="nav">
         <ul class="ruled">
 
