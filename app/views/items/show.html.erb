@@ -17,16 +17,17 @@
 							</span>
 						</h4>
 						<p> 価格　¥<%= @item.price %></p>
-            <p class="alert"><%= alert %></p>
-            <% if @item.inventory == 0 %>
-              <p>売り切れ：申し訳ありません！<br>次回の入荷までお待ちください</p>
-            <% elsif @item.inventory <= 5 %>
-             <p>☆人気の商品です☆<br>
-              <% if @item.inventory == 1 %>
-               残り１個です！お早めに！
-              <% else %>
-               在庫残りわずかにつきお早めに!</p>
-            <% end %>
+						<p> 在庫　<%= @item.inventory %></p>
+						<% if @item.inventory == 0 %>
+						<p>売り切れ：申し訳ありません！・次回の入荷までお待ちください</p>
+						<% elsif @item.inventory <= 5 %>
+						<p>☆人気の商品です☆
+							<% if @item.inventory == 1 %>
+							・残り１個です！お早めに！
+							<% else %>
+						・在庫残りわずかにつきお早めに!</p>
+						<% end %>
+						<% end %>
 						<% if user_signed_in? %>
 							<% if @item.favorited_by?(current_user) %>
 								<%= render 'likes/like_destroy' %>
@@ -36,43 +37,20 @@
 							<% else %>
 								<p>いいね<%= @item.likes.count %></p>
 						<% end %>
-            <% if @item.inventory == 0 %>
-            <% else %>
-              <%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
-              <%= f.label :"数量を選ぶ" %>
-              <%= f.number_field :units %>
-              <%= f.submit 'カートに入れる' %><br>
-              <% end %>
-            <% end %>
-						<div  class="artist_contents_box directory">
+						<% if @item.inventory == 0 %>
+						<% else %>
+						<%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
+						<%= f.label :"数量を選ぶ" %>
+						<%= f.number_field :units %>
+						<%= f.submit 'カートに入れる' %><br>
+						<% end %>
+						<% end %>
+						<p class="alert"><%= alert %></p>
+						<div  class="item_contents_box directory">
 							<p>・Description<br><%= @item.item_contents %></p>
 						</div>
 					</div>
 				</div>
-				
-				<% @disks.each.with_index(1) do |disk,i| %>
-				<% if @item.id == disk.item_id %>
-				<button type="button" class="btn btn-default btn-block">
-					<div class="accordion-group">
-						<div class="accordion-heading">
-							<a class="accordion-toggle" data-toggle="collapse" data-parent="#faq" href="#faqpost_<%= "#{i}" %><%= @item.id %><%= disk.id %>">ディスク<%= disk.disk_number %></a>
-						</div>
-						<div id="faqpost_<%= "#{i}" %><%= @item.id %><%= disk.id %>" class="accordion-body collapse">
-							<div class="accordion-inner">
-								<ol>
-									<% @songs.each do |song| %>
-
-									<% if disk.id == song.disk_id %>
-									<li><%= song.song_name %></li>
-									<% end %>
-									<% end %>
-								</ol>
-							</div>
-						</div>
-					</div>
-				</button>
-				<% end %>
-				<% end %>
 
 				<% @disks.each.with_index(1) do |disk,i| %>
 				<% if @item.id == disk.item_id %>
@@ -165,7 +143,8 @@
 							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
 						</tr>
 						<% end %>
-
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
