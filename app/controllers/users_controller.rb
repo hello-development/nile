@@ -45,6 +45,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@artists = Artist.all
+		@artist = Artist.find(params[:id])
 		@items = Item.all
 		@review = Review.new
 		@genres = Genre.all
@@ -71,7 +72,7 @@ class UsersController < ApplicationController
 		# 	redirect_to root_path
 		# end
 		@user = User.find(params[:id])
-		addresses = Address.all
+		@addresses = Address.all
 	end
 
 	def update

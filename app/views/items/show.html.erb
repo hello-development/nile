@@ -43,7 +43,7 @@
 						<% else %>
 						<%= form_for (@cart_item), url: carts_add_item_path(@item.id) do |f| %>
 						<%= f.label :"・数量を選ぶ" %>
-						<%= f.number_field :units %>
+						<%= f.number_field :units, min:0 %>
 						<%= f.submit 'カートに入れる' %><br>
 						<% end %>
 						<% end %>
