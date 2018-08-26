@@ -80,7 +80,13 @@
     </div>
 
       <div class="users_show_bottom">
-        <h4 class="purchase_histories"> <strong> 購入履歴 </strong> </h4>
+        <div class="container">
+          <div class="row">
+            <div class="">
+              <h4 class="purchase_histories">  <strong> 購入履歴 </strong> </h4>
+            </div>
+          </div>
+        </div>
         <%# @purchases.each do |purchase| %>
           <section>
             <!--   <div class="panel-group" id="accordion">
@@ -104,7 +110,7 @@
             </div>
             </div>-->
           </section>
-        </div>
+      </div>
         <%# end %>
         <% n = 1 %>
         <% @purchases.each do |purchase| %>
@@ -113,7 +119,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 <a data-toggle="collapse" data-parent='#sampleAccordion<%= n %>' href='#sampleAccordionCollapse<%= n %>'>
-                  <%= purchase.purchased_date.strftime('%Y/%m/%d') %>
+                  ▼<%= purchase.purchased_date.strftime('%Y/%m/%d') %>
                 </a>
               </h3>
             </div>
@@ -126,7 +132,7 @@
                       <%= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %>
                     </div>
                     <div class="col-md-2" style="">
-                       アーティスト名：<%= datail.item.artist.artist_name %><br>
+                       アーティスト名：<%= link_to datail.item.artist.artist_name, artist_path(@artist) %> <%#= datail.item.artist.artist_name %><br>
                        商品名：<%= datail.item.item_name %>
                     </div>
                     <div class="col-md-2" style="">

@@ -16,7 +16,7 @@
         <%= form_for [@disk, @song], url: item_disk_songs_path do |f| %>
         <h4>曲名登録</h4>
         <h4>曲順</h4>
-        <%= f.number_field :song_order, class:"data" %>
+        <%= f.number_field :song_order, min:0, class:"data" %>
         <h4>曲名</h4>
         <%= f.text_field :song_name, class:"data" %>
         <%= f.submit '上記の内容で登録する', class:"data btn-primary btn" %>

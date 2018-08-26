@@ -18,6 +18,8 @@ class AddressesController < ApplicationController
   def show
     @address = Address.new
     @addresses = current_user.addresses
+    # @user = User.find(params[:id])
+    # @addresses = @user.id.addresses
   end
 
   def edit
