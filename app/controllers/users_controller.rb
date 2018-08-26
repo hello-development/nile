@@ -24,15 +24,17 @@ class UsersController < ApplicationController
 		if @users.count == 0
 			# usersの数が０の時
 			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			render :action => :index
+			render :action => :index, layout: "user_index" and return
 			# renderにする事で変更された情報を維持しつつnoticeを表示させる
 		elsif @users.count > 0
           	flash.now[:notice] = "#{@users.count}件のユーザーがヒットしました。"
           	#{@users.count}で絞り込まれた数を表示させる
-          	render :action => :index
+          	render :action => :index, layout: "user_index" and return
           	# renderにする事で変更された情報を維持しつつnoticeを表示させる
 		end
 		end
+
+		render :index, layout: "user_index"
 
 		elsif user_signed_in?
 			redirect_to root_path
