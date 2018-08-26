@@ -18,8 +18,14 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
+      <% if user_signed_in? %>
+          <div> こんにちは　<%= current_user.last_name %> <%= current_user.first_name %>　さん </div>
+      <% elsif admin_signed_in? %>
+          <p>管理者としてログインしています</p>
+      <% end %>
+
       <nav class="nav">
-        <ul>
+        <ul class="ruled">
 
           <% if user_signed_in? %>
             <li class="li">
@@ -48,8 +54,7 @@
                 <%= link_to "CD", items_path %>
             </li>
             <li class="li">
-                <%#= link_to "購入履歴一覧", new_purchase_purchase_datails_path %>
-                <%= link_to "購入履歴一覧" %>
+                <%= link_to "購入履歴一覧", purchases_path %>
             </li>
             <li class="li">
                 <%= link_to "商品登録", new_item_path %>

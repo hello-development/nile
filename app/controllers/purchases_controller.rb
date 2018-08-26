@@ -1,5 +1,5 @@
 class PurchasesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create]
 
   def create
     cart_items = current_cart.cart_items
@@ -13,11 +13,11 @@ class PurchasesController < ApplicationController
           flash[:alert]="売り切れまたは在庫が足りなくなった商品がございます。恐れ入りますが注文数量を確認して下さい。" and return
         end
       end
-  	  purchase = Purchase.new(purchase_params)
-  	  purchase.user_id = current_user.id
+      purchase = Purchase.new(purchase_params)
+      purchase.user_id = current_user.id
       sum = 0 #sum初期化
-	    cart_items.each do |cart_item|
-	      sum += cart_item.units * cart_item.item.price #合計を計算しています
+      cart_items.each do |cart_item|
+        sum += cart_item.units * cart_item.item.price #合計を計算しています
       end
       purchase.purchased_date = Time.now
       tax_included = sum * tax #taxはapplication_controllerから呼び出しています
@@ -36,10 +36,23 @@ class PurchasesController < ApplicationController
     end
   end
 
-	  private
+  def index
+    unless admin_signed_in?
+      redirect_to root_path and return
+    end
+    @purchases = Purchase.all
+  end
+
+  def update
+    purchase = Purchase.find(params[:id])
+    purchase.update(purchase_params)
+    redirect_to purchases_path
+  end
+
+    private
       def purchase_params
-	      params.require(:purchase).permit(:purchased_date, :total_price,
-	                                       :status, :delivery_address, :user_id)
+        params.require(:purchase).permit(:purchased_date, :total_price,
+                                         :status, :delivery_address, :user_id)
       end
 
       def purchase_datail_params

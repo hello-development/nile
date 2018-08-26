@@ -15,7 +15,8 @@
 							<span  class="artist_tag">
 								<% @labels.each do |label| %><% if @item.label_id == label.id %><%= label.label_name %><% end %><% end %>
 							</span>
-						</h4>
+            </h4>
+
 						<p>・価格　¥<%= @item.price %></p>
 						<p>・在庫　<%= @item.inventory %></p>
 						<% if @item.inventory == 0 %>
@@ -28,6 +29,7 @@
 						・在庫残りわずかにつきお早めに!</p>
 						<% end %>
 						<% end %>
+
 						<% if user_signed_in? %>
 							<% if @item.favorited_by?(current_user) %>
 								<%= render 'likes/like_destroy' %>
@@ -84,21 +86,21 @@
 							<!-- 日付 -->
 							<%= review.created_at.strftime('%Y/%m/%d') %>
 							<!-- 名前 -->
-							<%= review.user.first_name %><br>
+							<%#= review.user.first_name %><br>
 							<!-- コメント -->
 							<%= review.comment %><br>
 						</p>
-								<% if review.user == current_user %>
-									<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
-										<button class="">削除</button><br>
-									<% end %>
-								<% end %>
+								<%# if review.user == current_user %>
+									<%#= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+										<!-- <button class="">削除</button><br> -->
+									<%# end %>
+								<%# end %>
 							<% end %>
 
-							<%= form_for [@item, @review] do |f| %>
-							<%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
-							<%= f.submit "送信する", class: "" %>
-							<% end %>
+							<%#= form_for [@item, @review] do |f| %>
+							<%#= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
+							<%#= f.submit "送信する", class: "" %>
+							<%# end %>
 						<% elsif admin_signed_in? %>
 							<p>
 								レビュー<%= @item.reviews.count %>件<br>
@@ -108,7 +110,8 @@
 								<!-- 名前 -->
 								<%= review.user.first_name %><br>
 								<!-- コメント -->
-								<%= review.comment %>
+								<%= review.comment %><br>
+								
 								<%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
 									<button class="">削除</button><br>
 								<% end %>
@@ -118,8 +121,8 @@
 							<p>
 								レビュー<%= @item.reviews.count %>件<br>
 								<% @item.reviews.each do |review| %>
-								<%= review.created_at.strftime('%Y/%m/%d') %>
-								<%= review.user.first_name %><br>
+								<%#= review.user.first_name %>
+		    					<%= review.created_at.strftime('%Y/%m/%d') %><br>
 		    					<%= review.comment %><br>
 		    				</p>
 							<% end %>
@@ -128,7 +131,6 @@
 				</div>
 			</div>
 		</div>
-
 		<div class="col-md-4">
 			<h3> CD総合いいねランキング</h3>
 			<div class="over_3">

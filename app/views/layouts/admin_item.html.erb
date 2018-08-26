@@ -17,8 +17,14 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
+      <% if user_signed_in? %>
+          <div> こんにちは　<%= current_user.last_name %> <%= current_user.first_name %>　さん </div>
+      <% elsif admin_signed_in? %>
+          <p>管理者としてログインしています</p>
+      <% end %>
+
       <nav class="nav">
-        <ul>
+        <ul class="ruled">
 
           <% if admin_signed_in? %>
             <li class="li">
@@ -28,8 +34,7 @@
                 <%= link_to "CD", items_path %>
             </li>
             <li class="li">
-                <%#= link_to "購入履歴一覧", new_purchase_purchase_datails_path %>
-                <%= link_to "購入履歴一覧" %>
+                <%= link_to "購入履歴一覧", purchases_path %>
             </li>
             <li class="li">
                 <%= link_to "商品登録", new_item_path %>
@@ -86,7 +91,7 @@
 
     <div class="input-group">
       <%= form_tag(items_admin_index_path, method: "get") do %>
-      <%= label_tag :item_name, "シングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %>
+      <%= label_tag :item_name, "シングル/アルバム名" %><%= text_field_tag :item_name, params[:item_name] %>
       <%= label_tag :ジャンル, "ジャンル" %>
       <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
       <%= label_tag :"レーベル" %>

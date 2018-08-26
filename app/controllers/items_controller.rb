@@ -1,56 +1,52 @@
 class ItemsController < ApplicationController
 
 	def index
-			@items = Item.all
-			@item = Item.new
-			@artists = Artist.all
-			@genres = Genre.all
-			@labels = Label.all
-			@review = Review.all
-			@likes = Like.all
-			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
+	  @items = Item.all
+	  @item = Item.new
+	  @artists = Artist.all
+	  @genres = Genre.all
+	  @labels = Label.all
+	  @review = Review.all
+	  @likes = Like.all
+	  @rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
 
-		if params[:genre_id].present?
-			@items = @items.get_by_genre_id params[:genre_id]
-		end
-		if params[:label_id].present?
-			@items = @items.get_by_label_id params[:label_id]
-		end
-		if params[:item_name].present?
-			@items = @items.get_by_item_name params[:item_name]
-		end
+	  if params[:genre_id].present?
+		@items = @items.get_by_genre_id params[:genre_id]
+	  end
+	  if params[:label_id].present?
+		@items = @items.get_by_label_id params[:label_id]
+	  end
+	  if params[:item_name].present?
+		@items = @items.get_by_item_name params[:item_name]
+	  end
 
-		unless @items.count == Item.all.count
-			# itemsの数がitems.allから変わっているか確認する
+	  unless @items.count == Item.all.count
+	  # itemsの数がitems.allから変わっているか確認する
 		if @items.count == 0
-			# itemsの数が０の時
-			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			render :action => :index, layout: "item" and return
-			# indexに戻りitemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
+		# itemsの数が０の時
+		  flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+		  render :action => :index, layout: "item" and return
+		  # indexに戻りitemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
 		elsif @items.count > 0
-
-          	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
-          	#{@items.count}で絞り込まれた数を表示させる
-
-          	render :action => :index, layout: "item" and return
-          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+          flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
+          #{@items.count}で絞り込まれた数を表示させる
+          render :action => :index, layout: "item" and return
+          # renderにする事で変更された情報を維持しつつnoticeを表示させる
 		end
-		end
+	  end
 
-		render :index, layout: "item"
-		# itemのレイアウトを適用させる。
+	  render :index, layout: "item"
+	  # itemのレイアウトを適用させる。
 
-		if user_signed_in?
-		  if current_user.last_sign_in_at == current_user.current_sign_in_at
-		    unless Address.exists?(user_id: current_user.id)
-			  redirect_to new_user_address_path(current_user)
-			  flash[:notice]="住所を登録して下さい"
-		    end
+      if user_signed_in?
+	    if current_user.last_sign_in_at == current_user.current_sign_in_at
+		  unless Address.exists?(user_id: current_user.id)
+			redirect_to new_user_address_path(current_user)
+			flash[:notice]="住所を登録して下さい" and return
 		  end
-		return
 		end
-
-	end
+	  end
+    end
 
 	def new
 		@item = Item.new
