@@ -5,14 +5,14 @@
 	  	<th>購入日</th>
 	  	<th>会員ID</th>
 		<th>会員名</th>
-		<th>宛名</th>
+		<th>送付先住所および氏名</th>
 		<th>商品名</th>
 		<th>単価(円)</th>
 		<th>数量</th>
 		<th>小計(円)</th>
 		<th>詳細ID</th>
 		<th>配送状況</th>
-		<th>配送状況を更新</th>
+		<th>状況更新</th>
 		<th>購入履歴ID</th>
 		</tr>
 	  </thead>
@@ -30,10 +30,10 @@
 		<td><%= datail.quantity * datail.price %></td>
 		<td><%= datail.id %></td>
 	      <%= form_for(purchase) do |f| %>
-		<td><%= f.select(:status, [['受付', 0], ['商品準備中', 1],['出荷済', 2]]) %></td>
-		<!-- 上記と下記の挙動は同じです -->
-		<!-- <td><%#= f.select :status, Purchase.statuses.keys.to_a, {} %></td>渡邉さんが記述しました -->
-		<td><%= f.submit '左記で更新', class:"btn btn-link active data" %></td>
+		<!-- <td><%#= f.select :status, [['受付', 0], ['商品準備中', 1],['出荷済', 2]] %></td> -->
+		<!-- 帰宅してからもう一度挙動確認したら、上記だと動きませんでしたので下記の渡邉さんが記述してくれた方でセレクトを表示させます -->
+		<td><%= f.select :status, Purchase.statuses.keys.to_a, {} %></td>
+		<td><%= f.submit '更新', class:"btn btn-link active data" %></td>
 		<td><%= purchase.id %></td>
 		  <% end %>
 	  </tr>

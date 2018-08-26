@@ -46,10 +46,7 @@ class PurchasesController < ApplicationController
 
   def update
     purchase = Purchase.find(params[:id])
-    # purchase.status = @status.to_i
     purchase.update(purchase_params)
-    # binding.pry
-    # purchase.save
     redirect_to purchases_path
   end
 

@@ -35,7 +35,7 @@ class ItemsController < ApplicationController
 		end
 	  end
 
-	  render :index, layout: "item"
+	  # render :index, layout: "item"
 	  # itemのレイアウトを適用させる。
 
       if user_signed_in?
@@ -110,6 +110,7 @@ class ItemsController < ApplicationController
 
 
 	end
+
 
 	def admin_index
 
