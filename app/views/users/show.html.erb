@@ -176,11 +176,11 @@
                   <div class="col-md-3" style="">
                     <div class="border">
                       合計：<%= purchase.total_price %>円(税込)
-                      配送状況：
-                      <% if purchase.status == 0 %>受付
-                      <% elsif purchase.status == 1 %>商品準備中
-                      <% else purchase.status == 2 %>出荷済
-                      <% end %>
+                      配送状況：<%= purchase.status %>
+                      <!-- <%# if purchase.status == 0 %>受付 -->
+                      <!-- <%# elsif purchase.status == 1 %>商品準備中 -->
+                      <!-- <%# else purchase.status == 2 %>出荷済 -->
+                      <%# end %>
                     </div>
                   </div>
             </div>

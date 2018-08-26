@@ -3,6 +3,7 @@
 <%= form_for (@purchase), url: purchases_path do |f| %>
   <% current_user.addresses.each do |address| %>
     <h3>宛先<%= n %><br></h3>
+    <% de
     <label><%= f.radio_button :delivery_address, address.address_name, {:checked => boolean } %><%= address.address_name %></label><br>
     <%= f.label :"郵便番号" %><br><%= address.postal_code %><br>
     <%= f.label :"お届け先" %><br><%= address.address %><br>
