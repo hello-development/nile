@@ -20,7 +20,7 @@
       <% if user_signed_in? %>
           <span> こんにちは　<strong> <%= current_user.last_name %> <%= current_user.first_name %> </strong>　さん </span>
       <% elsif admin_signed_in? %>
-          <span><strong>管理者としてログインしています</strong></span>
+          <span><strong>管理者</strong>としてログインしています</span>
       <% end %>
 
       <nav class="nav">
