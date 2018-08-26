@@ -52,11 +52,11 @@ class PurchasesController < ApplicationController
     private
       def purchase_params
         params.require(:purchase).permit(:purchased_date, :total_price,
-                                         :status, :delivery_address, :user_id, :deletde_at)
+                                         :status, :delivery_address, :user_id)
       end
 
       def purchase_datail_params
         params.require(:purchase_datail).permit(:item_id, :price, :quantity,
-                                                :purchase_id, :purchase_date, :deleted_at)
+                                                :purchase_id, :purchase_date)
       end
 end
