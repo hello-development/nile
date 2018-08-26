@@ -71,7 +71,7 @@ class UsersController < ApplicationController
 		# 	redirect_to root_path
 		# end
 		@user = User.find(params[:id])
-		# @address = Address.find(params[:id])
+		addresses = Address.all
 	end
 
 	def update
