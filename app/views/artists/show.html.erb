@@ -10,6 +10,7 @@
 					<div class="artist_profile_box  clearfix">
 						<span  class="artist_tag">
 							<% unless @artist.genre_id == nil %><%= @artist.genre.genre_name %><% end %>
+							<!-- unlessでnilだった場合を記述しておかないとnilの場合にgenre_idがないよと怒られます。 -->
 						</span>
 						<span  class="artist_tag">
 							<% unless @artist.label_id == nil %><%= @artist.label.label_name %><% end %>
