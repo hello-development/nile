@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
 		end
 		end
 
-		# render :index, layout: "item"
+		 render :index, layout: "item"
 		# itemのレイアウトを適用させる。
 
 		if user_signed_in?
@@ -87,7 +87,7 @@ class ItemsController < ApplicationController
 		end
 		end
 
-		render :new, layout: "item_new"
+		# render :new, layout: "item_new"
 	end
 
 	def create

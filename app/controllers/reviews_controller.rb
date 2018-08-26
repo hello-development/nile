@@ -17,7 +17,7 @@ class ReviewsController < ApplicationController
 			@songs = Song.all
 			@cart_item =CartItem.new
 			@likes = Like.all
-			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))
+			@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(10).pluck(:item_id))			
 			flash.now[:notice] = "100文字以内で投稿してください"
 			render :template => 'items/show'
 		end
@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
 
 	private
 	def review_params
-		params.require(:review).permit(:user_id, :item_id, :comment)
+		params.require(:review).permit(:user_id, :item_id, :comment)		
 	end
 
 end

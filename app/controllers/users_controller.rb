@@ -47,6 +47,8 @@ class UsersController < ApplicationController
 		@artists = Artist.all
 		@items = Item.all
 		@review = Review.new
+		# @reviews = Review.all
+		@reviews = Review.where(user_id: @user.id)
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
 		@genre = Genre.limit(1).order('created_at desc')
