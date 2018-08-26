@@ -1,27 +1,54 @@
-<% if @address.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <ul>
-      <% @address.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-住所変更およびお届け先追加<br>
-住所を追加する<br>
-<%= form_for [current_user, @address], url: user_addresses_path do |f| %>
-郵便番号(半角ハイフン無し)<br>
-<%= f.text_field :postal_code %><br>
-住所<br>
-<%= f.text_field :address %><br>
-お届け先名(ご登録されているお名前と異なる場合に入力して下さい)<br>
-<%= f.text_field :address_name %><br>
-<%= f.submit "上記の住所を追加する" %>
-<% end %>
-<% @addresses.each do |ad| %>
-<%= ad.address_name %>
-<%= ad.postal_code %>
-<%= ad.address %>
-<%= link_to "編集", edit_user_address_path(current_user, ad) %>
-<%= link_to "削除", user_address_path(current_user, ad), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
-<% end %>
+
+<div class='box'>
+	<div class='row'>
+		<div  class="col-md-4 col-sm-4">
+			<h3> 住所変更およびお届け先追加<br>・住所を追加する</h3>
+			<div class="box2">
+			<% if @address.errors.any? %>
+				<div id="error_explanation" class="alert alert-danger">
+					<ul>
+						<% @address.errors.full_messages.each do |message| %>
+						<li><%= message %></li>
+						<% end %>
+					</ul>
+				</div>
+				<% end %>
+				<%= form_for [current_user, @address], url: user_addresses_path do |f| %>
+				<h4> お届け先名(ご登録されているお名前と異なる場合に入力して下さい)</h4>
+				<%= f.text_field :address_name, class:"data" %>
+				<h4> 郵便番号(半角ハイフン無し)</h4>
+				<%= f.text_field :postal_code, class:"data" %>
+				<h4> 住所</h4>
+				<%= f.text_field :address, class:"data" %>
+				<%= f.submit "上記の住所を追加する", class:"btn btn-primary data" %>
+				<% end %>
+			</div>
+		</div>
+
+
+		<div  class="col-md-8 col-sm-8">
+			<h1> 住所一覧</h1>
+			<div  class="over_2">
+				<table  class="table-hover table">
+					<tbody>
+						<% @addresses.each do |ad| %>
+						<tr>
+							<td><%= ad.address_name %></td>
+							<td><%= ad.postal_code %></td>
+							<td><%= ad.address %></td>
+							<td><%= link_to edit_user_address_path(current_user, ad) do %>
+									<button class="btn btn-default btn-success">編集</button>
+								<% end %>
+							</td>
+							<td><%= link_to user_address_path(current_user, ad), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+									<button class="btn btn-default btn-danger">削除</button>
+								<% end %>
+							</td>
+						</tr>
+						<% end %>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

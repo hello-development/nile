@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   		# limit()で、表示する最大数を指定して
   		# pluck(:item_id)で:item_idカラムのみを取り出すように指定。
   		# Item.find(integer)最終的に、取り出される数値オブジェクトをアイテムのIDとすることで表示される
-		if admin_signed_in?
 		if params[:last_name].present?
 			@users = @users.get_by_last_name params[:last_name]
 		end
@@ -36,6 +35,7 @@ class UsersController < ApplicationController
 
 		render :index, layout: "user_index"
 
+		if admin_signed_in?
 		elsif user_signed_in?
 			redirect_to root_path
 		else
