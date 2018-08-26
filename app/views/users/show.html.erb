@@ -78,7 +78,6 @@
           </table>
       </div>
     </div>
-
       <div class="users_show_bottom">
         <div class="container">
           <div class="row">
@@ -132,7 +131,7 @@
                       <%= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %>
                     </div>
                     <div class="col-md-2" style="">
-                       アーティスト名：<%= link_to datail.item.artist.artist_name, artist_path(@artist) %> <%#= datail.item.artist.artist_name %><br>
+                       アーティスト名：<%= link_to datail.item.artist.artist_name, artist_path(datail.item.artist.id) %><br>
                        商品名：<%= datail.item.item_name %>
                     </div>
                     <div class="col-md-2" style="">
@@ -140,27 +139,24 @@
                        数量：<%= datail.quantity %>
                     </div>
                     <div class="col-md-3" style="">
-                      <p>レビュー<%#= @item.reviews.count %>件<br>
-                        <% @item.each do |item| %>
-                      <% datail.item.reviews.each do |review| %>
-                      <% if review.item.id == item.id %>
-                      <!-- コメント -->
-                        <%= review.comment %><br>
-                        <!-- 日付 -->
-                        <%= review.created_at.strftime('%Y/%m/%d') %>
-                        <!-- 名前 -->
-                        <%#= review.user.first_name %>
-                        <%# if review.user == current_user %>
-                          <%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><br><% end %>
-                        <% end %></p>
-                        <% end %>
-                        <% end %>
-                      <%# end %>
 
-                      <%= form_for [datail.item, @review] do |f| %>
-                        <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
-                        <%= f.submit "送信する", class: "" %>
+                      <% user_comment = 0 %>
+
+                      <% datail.item.reviews.each do |review| %>
+                        <% if review.user_id == @user.id %><% user_comment = 1 %>
+                          <%= review.comment %><br>
+                          <%= review.created_at.strftime('%Y/%m/%d') %>
+                          <% if review.user == current_user %>
+                            <%= link_to item_review_path(review.item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><br><% end %>
+                          <% end %></p>
+                        <% end %>
                       <% end %>
+
+                      <% if user_comment == 0 %>
+                      <%= form_for [datail.item, @review] do |f| %>
+                        <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力してください" %>
+                        <%= f.submit "送信する", class: "" %>
+                      <% end %><% end %>
 
                     </div>
                     <div class="col-md-3" style="">

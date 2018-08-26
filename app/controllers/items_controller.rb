@@ -111,6 +111,7 @@ class ItemsController < ApplicationController
 
 	end
 
+
 	def admin_index
 
 		@items = Item.all
