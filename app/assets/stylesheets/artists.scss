@@ -2,15 +2,6 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
- .clearfix::after {
-  content: "";
-  display: block;
-  clear: both;
-}
-
- .box {
- margin : 0 40px;
- }
  .box2 {
  border:1px;
  border-style:solid;
@@ -30,13 +21,15 @@
  .artist_show_image {
  float: left;
  }
- .artist_tag_box {
- text-align: right;
+ .artist_profile_box {
  border-bottom: 6px dotted #add8e6;
+ border-top: 6px dotted #add8e6;
  margin-bottom: 10px;
+ padding: 15px 0
  }
  .artist_tag {
  margin: 0 10px;
+  float: right;
  }
  .artist_profile {
  margin: 0 auto;
@@ -45,9 +38,9 @@
  margin-left: 20px;
  }
  .favorite_button {
- margin-top: 5px;
+ margin: 5px 20px;
  }
- .artist_data {
+ .data {
  width: 80%;
  margin: 0 auto;
  margin-bottom: 20px;
@@ -55,31 +48,51 @@
  .artist_edit_headline {
  margin:30px;
  }
- .artist_over_1 {
+ .over_1 {
  width: 900px;
  height: 600px;
  overflow: scroll;
  direction:rtl;
+ border-top: 6px dotted #add8e6;
+ padding-top: 10px;
 }
- .artist_over_2 {
+ .over_2 {
  width: 900px;
  height: 600px;
  overflow: scroll;
+ border-top: 6px dotted #add8e6;
+ padding-top: 10px;
 }
-.artist_over_3 {
+.over_3 {
  width: 420px;
- height: 600px;
+ height: 700px;
  overflow: scroll;
 }
- .artist_directory {
+ .directory {
  direction:ltr;
  }
  .notice {
  color: green;
  }
  strong {.search-results{
-     background-color: yellow;
-     color: red;
-     font-size: 36px;
-     }
+ background-color: yellow;
+ color: red;
+ font-size: 36px;
+ }
+ }
+ .artist_item_box {
+ border:1px;
+ border-style:solid;
+ border-color:#add8e6;
+ height: 300px;
+ width: 100%;
+ padding: 10px 0 0 30px;
+ margin-bottom: 20px;
+ overflow: scroll;
+ direction:rtl;
+ }
+ .artist_item_nil {
+ font-size: 30px;
+ float: left;
+ direction:ltr;
  }

@@ -5,7 +5,7 @@
       <div class="users_show_left">
         <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
         <div> <%= @user.last_name %> <%= @user.first_name %> さん </div>
-        <div> <%= link_to "編集", edit_user_path(current_user), class: 'btn btn-success' %> </div>
+        <div> <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-success' %> </div>
         <div> <%= link_to "退会", user_path, class: 'btn btn-danger', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
       </div>
     <div class="users_show_right">
@@ -80,8 +80,38 @@
     </div>
 
       <div class="users_show_bottom">
-        <h4 class="purchase_histories"> <strong> 購入履歴 </strong> </h4>
+        <div class="container">
+          <div class="row">
+            <div class="">
+              <h4 class="purchase_histories">  <strong> 購入履歴 </strong> </h4>
+            </div>
+          </div>
+        </div>
+        <%# @purchases.each do |purchase| %>
+          <section>
+            <!--   <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+            <div class="panel-heading">
+            <h4 class="panel-title accordion-toggle"> -->
+            <!-- <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%#= purchase.purchased_date.strftime('%Y/%m/%d') %></a> -->
+            <!-- </div> -->
+            <!-- <div id='collapse' class="panel-collapse collapse in">
+            <div class="panel-body"> -->
+            <%# purchase.purchase_datails.each do |datail| %>
+              <!-- <p></p>
+              <span>商品名</span>：<span><%#= datail.item.item_name %></span>
+              <span>商品写真</span>：<span><%#= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %></span>
+              <span>購入時の単価</span>：<span><%#= datail.price %></span>
+              <span>数量</span>：<span><%#= datail.quantity %></span>
+              <span>小計</span>：<span><%#= datail.price * datail.quantity %></span> -->
+            <%# end %>
+            <!--</div>
+            </div>
+            </div>
+            </div>-->
+          </section>
       </div>
+        <%# end %>
         <% n = 1 %>
         <% @purchases.each do |purchase| %>
         <div class="panel-group" id='sampleAccordion<%= n %>'>
@@ -89,7 +119,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 <a data-toggle="collapse" data-parent='#sampleAccordion<%= n %>' href='#sampleAccordionCollapse<%= n %>'>
-                  <%= purchase.purchased_date.strftime('%Y/%m/%d') %>
+                  ▼<%= purchase.purchased_date.strftime('%Y/%m/%d') %>
                 </a>
               </h3>
             </div>
@@ -102,44 +132,43 @@
                       <%= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %>
                     </div>
                     <div class="col-md-2" style="">
-                       アーティスト名：<%= datail.item.artist.artist_name %><br>
+                       アーティスト名：<%= link_to datail.item.artist.artist_name, artist_path(datail.item.artist.id) %><br>
                        商品名：<%= datail.item.item_name %>
                     </div>
                     <div class="col-md-2" style="">
                        単価：<%= datail.price %>円<br>
                        数量：<%= datail.quantity %>
                     </div>
+
+                   
+
+
+
+
                     <div class="col-md-3" style="">
+                      <% user_comment = 0 %>
+                      <% datail.item.reviews.each do |review| %>
 
-                    <% datail.item.reviews.each do |review| %>
-
-                    <% if review.user_id == @user.id %>
+                      <% if review.user_id == @user.id %><% user_comment = 1 %>
                       <!-- コメント -->
-                    <%= review.comment %><br>
+                        <%= review.comment %><br>
                         <!-- 日付 -->
-                    <%= review.created_at.strftime('%Y/%m/%d') %>
+                        <%= review.created_at.strftime('%Y/%m/%d') %>
                         <!-- 名前 -->
-                    <%= review.user.first_name %> 
-                    <% end %>
-
-                        <% if review.user_id == current_user.id %>
+                        <%#= review.user.first_name %>
+                        <% if review.user == current_user %>
                           <%= link_to item_review_path(review.item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
-                          <button class="">削除</button><br><% end %>
+                          <button class="">再投稿</button><br><% end %>
                         <% end %></p>
-                  <% end %>
+                        <% end %>
+                      <% end %>
 
 
-
-
-
+                      <% if user_comment == 0 %>
                       <%= form_for [datail.item, @review] do |f| %>
-                        <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力（購入者のみ表示）" %>
+                        <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力してください" %>
                         <%= f.submit "送信する", class: "" %>
-                      <% end %> 
-
-
-
-
+                      <% end %><% end %>
 
 
 

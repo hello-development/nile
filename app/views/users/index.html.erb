@@ -1,14 +1,4 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	    <title>NILE</title>
-	    <%= csrf_meta_tags %>
-	    <%= csp_meta_tag %>
-	    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-		<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-	</head>
 
-	<body>
 
 <!-- 	<div class="users_data">
 		<p>ユーザー検索</p>
@@ -20,10 +10,10 @@
 	      </form>
 	    </div>
 	</div> -->
-<strong><div class="search-results"><%= notice %></div></strong>
+<div class="box">
+	<strong><div class="search-results"><%= notice %></div></strong>
 	<div>
-
-		<table class="users_index_table">
+		<table class="users_index_table" rules="rows">
 			<thread class="users_index_thread">
 				<tr>
 					<th class="users_index_thread_th" width="50px"> ID </th>
@@ -47,6 +37,4 @@
 			</tbody>
 		</table>
 	</div>
-
-	</body>
-</html>
+</div>

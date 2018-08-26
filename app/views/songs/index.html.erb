@@ -1,34 +1,48 @@
-<%= @disk.item.item_name %> > <%= @disk.disk_number %> <br>
+<div class='box'>
+  <div class='row'>
+    <div  class="col-md-4 col-sm-4">
+      <h3> <%= @disk.item.item_name %> > <%= @disk.disk_number %></h3>
+      <div class="box2">
+        <% if @song.errors.any? %>
+        <div id="error_explanation" class="alert alert-danger">
+          <ul>
+            <% @song.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
 
+        <%= form_for [@disk, @song], url: item_disk_songs_path do |f| %>
+        <h4>曲名登録</h4>
+        <h4>曲順</h4>
+        <%= f.number_field :song_order, min:0, class:"data" %>
+        <h4>曲名</h4>
+        <%= f.text_field :song_name, class:"data" %>
+        <%= f.submit '上記の内容で登録する', class:"data btn-primary btn" %>
+        <% end %>
+      </div>
+      <button clabtn btn-default btn-danger><%= link_to "商品一覧へ", items_admin_index_path %></button>
+    </div>
 
-<% if @song.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <ul>
-      <% @song.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
+    <div  class="col-md-8 col-sm-8">
+      <h3> 収録曲</h3>
+      <div  class="over_2">
+        <table  class="table-hover table">
+          <tbody>
+            <% @songs.each do |song| %>
+            <tr>
+              <td>曲ID=><%= song.id %></td>
+              <td>曲順=><%= song.song_order %></td>
+              <td>曲名=><%= song.song_name %></td>
+              <td><%= link_to edit_item_disk_song_path(@disk.item, @disk, song) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
+              <td><%= link_to item_disk_song_path(@disk.item, @disk, song), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="btn btn-default btn-danger">削除</button><% end %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
-<% end %>
+</div>
 
-<%= form_for [@disk, @song], url: item_disk_songs_path do |f| %>
-
-曲名登録<br>
-曲順<br>
-<%= f.number_field :song_order %><br>
-曲名<br>
-<%= f.text_field :song_name %><br>
-
-<%= f.submit '上記の内容で登録する' %>
-
-<% end %><br>
-
-<% @songs.each do |song| %>
-	曲ID=><%= song.id %>
-	曲順=><%= song.song_order %>
-	曲名=><%= song.song_name %>
-	<%= link_to "編集", edit_item_disk_song_path(@disk.item, @disk, song) %>
-	<%= link_to "削除", item_disk_song_path(@disk.item, @disk, song), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
-<% end %>
-
-<button clabtn btn-default btn-danger><%= link_to "商品一覧", items_admin_index_path %></button>

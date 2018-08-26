@@ -1,4 +1,5 @@
 class ArtistsController < ApplicationController
+	before_action :authenticate_admin!, except: [:index, :show,]
 
 	def admin_index
 		@artists = Artist.all
@@ -34,8 +35,6 @@ class ArtistsController < ApplicationController
 
 	def index
 		@artists = Artist.all
-		@genres = Genre.all
-		@labels = Label.all
 
   		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
   		# group(:item_id)で、アイテムの番号が同じものにグループを分ける
@@ -74,6 +73,7 @@ class ArtistsController < ApplicationController
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
 			redirect_to new_user_address_path(current_user)
+			flash[:notice]="住所を登録して下さい" and return
 		end
 		end
 		end
@@ -99,8 +99,11 @@ class ArtistsController < ApplicationController
 
 	def show
 		@artist = Artist.find(params[:id])
-		@genres = Genre.all
-		@labels = Label.all
+		@items = Item.where(artist_id: @artist.id)
+		# whereで@aritstのidを持っているitemだけを絞り込み
+
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
+		# @rank_item = @rank.where(artist_id: @artist.id)
 	end
 
 	def edit
