@@ -78,7 +78,6 @@
           </table>
       </div>
     </div>
-
       <div class="users_show_bottom">
         <div class="container">
           <div class="row">
@@ -139,38 +138,25 @@
                        単価：<%= datail.price %>円<br>
                        数量：<%= datail.quantity %>
                     </div>
-
-                   
-
-
-
-
                     <div class="col-md-3" style="">
-                      <% user_comment = 0 %>
-                      <% datail.item.reviews.each do |review| %>
 
-                      <% if review.user_id == @user.id %><% user_comment = 1 %>
-                      <!-- コメント -->
-                        <%= review.comment %><br>
-                        <!-- 日付 -->
-                        <%= review.created_at.strftime('%Y/%m/%d') %>
-                        <!-- 名前 -->
-                        <%#= review.user.first_name %>
-                        <% if review.user == current_user %>
-                          <%= link_to item_review_path(review.item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
-                          <button class="">再投稿</button><br><% end %>
-                        <% end %></p>
+                      <% user_comment = 0 %>
+
+                      <% datail.item.reviews.each do |review| %>
+                        <% if review.user_id == @user.id %><% user_comment = 1 %>
+                          <%= review.comment %><br>
+                          <%= review.created_at.strftime('%Y/%m/%d') %>
+                          <% if review.user == current_user %>
+                            <%= link_to item_review_path(review.item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><br><% end %>
+                          <% end %></p>
                         <% end %>
                       <% end %>
-
 
                       <% if user_comment == 0 %>
                       <%= form_for [datail.item, @review] do |f| %>
                         <%= f.text_area :comment, rows:'5', class: "",placeholder: "レビューを入力してください" %>
                         <%= f.submit "送信する", class: "" %>
                       <% end %><% end %>
-
-
 
                     </div>
                     <div class="col-md-3" style="">
