@@ -135,7 +135,7 @@
                     </div>
                     <div class="col-md-3" style="">
                       <p>レビュー<%#= @item.reviews.count %>件<br>
-                        <%# @item.each do |item| %>
+                        <% @item.each do |item| %>
                       <% datail.item.reviews.each do |review| %>
                       <% if review.item.id == item.id %>
                       <!-- コメント -->
@@ -146,7 +146,7 @@
                         <%#= review.user.first_name %>
                         <%# if review.user == current_user %>
                           <%= link_to item_review_path(@item,review), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="">削除</button><br><% end %>
-                        <%# end %></p>
+                        <% end %></p>
                         <% end %>
                         <% end %>
                       <%# end %>
