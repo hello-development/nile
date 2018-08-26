@@ -1,19 +1,26 @@
-<% if @address.errors.any? %>
-  <div id="error_explanation" class="alert alert-danger">
-    <ul>
-      <% @address.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
-住所変更
-<%= form_for [current_user, @address] do |f| %>
-郵便番号(半角ハイフン無し)<br>
-<%= f.text_field :postal_code %><br>
-住所<br>
-<%= f.text_field :address %><br>
-お届け先名<br>
-<%= f.text_field :address_name %><br>
-<%= f.submit "上記の内容で変更する" %>
-<% end %>
+
+<div  class="container">
+	<div  class="row">
+		<h1  class="artist_edit_headline">住所変更</h1>
+		<div  class="box2">
+			<% if @address.errors.any? %>
+			<div id="error_explanation" class="alert alert-danger">
+				<ul>
+					<% @address.errors.full_messages.each do |message| %>
+					<li><%= message %></li>
+					<% end %>
+				</ul>
+			</div>
+			<% end %>
+			<%= form_for [current_user, @address] do |f| %>
+			<h4> お届け先名</h4>
+			<%= f.text_field :address_name, class:"data" %>
+			<h4> 郵便番号(半角ハイフン無し)</h4>
+			<%= f.text_field :postal_code, class:"data" %>
+			<h4> 住所</h4>
+			<%= f.text_field :address, class:"data" %>
+			<%= f.submit "上記の内容で変更する", class:"btn btn-primary data" %>
+			<% end %>
+		</div>
+	</div>
+</div>
