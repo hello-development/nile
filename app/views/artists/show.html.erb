@@ -9,10 +9,10 @@
 				<div  class="clearfix">
 					<div class="artist_profile_box  clearfix">
 						<span  class="artist_tag">
-							<% @genres.each do |genre| %><% if @artist.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %>
+							<% unless @artist.genre_id == nil %><%= @artist.genre.genre_name %><% end %>
 						</span>
 						<span  class="artist_tag">
-							<% @labels.each do |label| %><% if @artist.label_id == label.id %><%= label.label_name %><% end %><% end %>
+							<% unless @artist.label_id == nil %><%= @artist.label.label_name %><% end %>
 						</span>
 						<%= attachment_image_tag @artist, :artist_image, :fill, 250, 250, format: 'jpeg', class: "artist_show_image" %>
 						<h3  class="artist_profile">・プロフィール</h3>
@@ -65,8 +65,8 @@
 						<dt><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></dt>
 						<dd><h4><%= item.item_name %></h4></dd>
 						<dd><%= @artist.artist_name %></dd>
-						<dd><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></dd>
-						<dd><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></dd>
+						<dd><%= item.genre.genre_name %></dd>
+						<dd><%= item.label.label_name %></dd>
 						<dd>￥<%= item.price %></dd>
 					</dl>
 				</div>
@@ -84,7 +84,7 @@
 							<td><%= "#{i}位" %></td>
 							<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
 							<td><%= rank.item_name %></td>
-							<td><% Artist.all.each do |artist| %><% if rank.artist_id == artist.id %><%= artist. artist_name %><% end %><% end %></td>
+							<td><%= rank.artist.artist_name %></td>
 							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
 						</tr>
 						<% end %>
