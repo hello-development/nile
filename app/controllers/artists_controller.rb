@@ -31,9 +31,9 @@ class ArtistsController < ApplicationController
 			end
 			end
 	
-			render :admin_index, layout: "admin_artist"
+			render :admin_index, layout: "admin_artist" and return
 		else
-			redirect_to artists_path
+			redirect_to artists_path and return
 		end
 	end
 
@@ -82,7 +82,7 @@ class ArtistsController < ApplicationController
 		end
 		end
 
-		render :index, layout: "artist"
+		render :index, layout: "artist" and return
 		# artistのレイアウトを適用させる。
 	end
 
