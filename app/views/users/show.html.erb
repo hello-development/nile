@@ -4,47 +4,61 @@
   <div class="users_show_upper clearfix" >
     <div class="users_show_left">
       <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
-      <div> <%= @user.last_name %> <%= @user.first_name %> さん </div>
-      <div> <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-success btn-user-show' %> </div>
+      <div class="glyphicon glyphicon-user">
+        <span> <%= @user.last_name %> <%= @user.first_name %> さん </span>
+      </div><br>
+      <div> <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-success btn-user-show' %> </div><br>
       <div> <%= link_to "登録住所を確認する", user_address_path(@user.id), class: 'btn btn-info btn-user-show' %> </div>
       <div> <%= link_to "退会", user_path, class: 'btn btn-danger btn-user-show', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
-    </div>
+     </div>
+
     <div class="users_show_right">
       <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
+
       <% if @user.artist_id.nil? %>
         <p> お気に入りアーティストは未登録です </p>
       <% end %>
+
       <% unless @user.artist_id.nil? %>
-      <div>
+      <div class="glyphicon glyphicon-paperclip"></div>
+      <span class="favorite_artist_name">
         <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %>
         <% end %>
+      </span>
+      <div>
+        <%= attachment_image_tag @user.artist, :artist_image, :fill, 150, 150, format: "jpg" %> 
+      </div><br>
+
+      <div>
+        <strong> 最新のCD： </strong>
       </div>
-      <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 150, 150, format: "jpg" %> </div>
-        <span>
-          <strong> 最新のCD： </strong>
-        </span>
-        <span>
-          <% @item.each do |item| %> <%= item.item_name %>
-          <% end %>
-        </span>
-        <div>
-          <span>ジャンル：</span>
-          <% @genre.each do |genre| %> <%= genre.genre_name %>
-          <% end %>
-        </div>
+
+      <div class="glyphicon glyphicon-paperclip"></div>
+      <span class="favorite_artist_name">
+        <% @item.each do |item| %> <%= item.item_name %><% end %>
+      </span>
+      <div>
+        <span>ジャンル：</span>
+        <% @genre.each do |genre| %> <%= genre.genre_name %>
+        <% end %>
+      </div>
         <%# if @user.item_id == genre.id %> <%#= genre.genre_name %>
-        <div>
-          <span>価格：￥</span>
-          <% @item.each do |item| %> <%= item.price %>
-          <% end %>
-        </div>
-        <div>
-          <% @item.each do |item| %>
-          <%= attachment_image_tag item, :item_image, :fill, 150, 150, format: "jpg" %>
-          <% end %>
-        </div>
-      <% end %>
-    </div>
+      <div>
+        <span>価格：￥</span>
+        <% @item.each do |item| %> <%= item.price %>
+        <% end %>
+      </div>
+      <div>
+        <% @item.each do |item| %>
+        <%= attachment_image_tag item, :item_image, :fill, 150, 150, format: "jpg" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+
+
+
+
     <div class="users_show_right_right">
       <h4 class="favorite_ranking"> <strong> いいねランキング </strong> </h4>
       <table  class="table-hover table">
