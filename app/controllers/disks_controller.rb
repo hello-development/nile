@@ -5,7 +5,7 @@ class DisksController < ApplicationController
       @disk = Disk.new
       @disks = @item.disks
     else
-      redirect_to items_path
+      redirect_to items_path and return
     end
   end
 
