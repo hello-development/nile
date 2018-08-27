@@ -69,7 +69,7 @@
                 <td><%= link_to artist_path(item.artist_id) do %><%= item.artist.artist_name %><% end %><br></td>
                 <td><%= item.price %></td>
                 <td><%= item.inventory %></td>
-                <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>
+                <td><%= link_to edit_item_path(item.id) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
               </tr>
               <% end %>
             </tbody>

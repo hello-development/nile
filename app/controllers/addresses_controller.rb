@@ -17,9 +17,9 @@ class AddressesController < ApplicationController
 
   def show
     @address = Address.new
-    @addresses = current_user.addresses
-    # @user = User.find(params[:id])
-    # @addresses = @user.id.addresses
+    @user = User.find(params[:id])
+    # @addresses = current_user.addresses
+    @addresses = @user.addresses
   end
 
   def edit

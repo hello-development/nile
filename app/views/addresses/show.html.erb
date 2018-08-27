@@ -33,11 +33,11 @@
 							<td><%= ad.address_name %></td>
 							<td><%= ad.postal_code %></td>
 							<td><%= ad.address %></td>
-							<td><%= link_to edit_user_address_path(current_user, ad) do %>
+							<td><%= link_to edit_user_address_path(@user.id, ad) do %>
 									<button class="btn btn-default btn-success">編集</button>
 								<% end %>
 							</td>
-							<td><%= link_to user_address_path(current_user, ad), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+							<td><%= link_to user_address_path(@user.id, ad), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
 									<button class="btn btn-default btn-danger">削除</button>
 								<% end %>
 							</td>

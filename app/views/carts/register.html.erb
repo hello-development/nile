@@ -13,8 +13,8 @@
 
 				<h3>宛先<%= n %><br></h3>
 
-				<% delivery_address = address.postal_code+"_"+address.address+"_"+address.address_name %>
-				<!-- 郵便番号,住所,宛名をまとめてdelivery_addressに入れています。_を境に入れているのはあとで使いやすくするためです。 -->
+				<% delivery_address = address.postal_code+","+address.address+","+address.address_name %>
+				<!-- 郵便番号,住所,宛名をまとめてdelivery_addressに入れています。,を境に入れているのはあとで使いやすくするためです。 -->
 
 			    <label><%= f.radio_button :delivery_address, delivery_address, {:checked => boolean } %><%= address.address_name %>様</label><br>
 

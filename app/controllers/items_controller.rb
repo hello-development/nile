@@ -35,8 +35,9 @@ class ItemsController < ApplicationController
 		end
 	  end
 
-	  # render :index, layout: "item"
-	  # itemのレイアウトを適用させる。
+		 render :index, layout: "item"
+		# itemのレイアウトを適用させる。
+
 
       if user_signed_in?
 	    if current_user.last_sign_in_at == current_user.current_sign_in_at
