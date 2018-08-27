@@ -20,7 +20,7 @@ devise_for :users, controllers: {
   # get 'carts/confirmation'
   get 'artists/admin_index'
   get 'items/admin_index'
-  patch 'users/:id' => 'users#favorite'
+  patch 'users/:id/favorite' => 'users#favorite', as: :user_favorite
   # get 'purchase/:purchase_id/confirmation' => 'purchase_datails#confirmation', as: :confirmation
 
   resources :users, only: [:show, :edit, :update, :index, :destroy]do

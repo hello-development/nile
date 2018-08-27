@@ -83,8 +83,8 @@ class UsersController < ApplicationController
     end
 
 	def update
-		user = User.find(params[:id])
-	    if user.update(user_params)
+		@user = User.find(params[:id])
+	    if @user.update(user_params)
 	        redirect_to user_path(@user.id)
 	    else
 	    	@users =User.all
@@ -131,7 +131,7 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:artist_id, :user_id)
+		params.require(:user).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:phone_number,:email,:artist_id)
 	end
 
 	def cart_destroy!

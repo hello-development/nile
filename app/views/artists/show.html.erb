@@ -37,17 +37,17 @@
 						<% if user_signed_in? %>
 						<!-- ユーザーの持っているアーティストIDとアーティストIDと同じ時 -->
 						<% if current_user.artist_id == @artist.id %>
-						<%= link_to user_path(@artist.id), method: :patch, "data-confirm" => "本当に解除しますか？" do %>
+						<%= link_to user_favorite_path(@artist.id), method: :patch, "data-confirm" => "本当に解除しますか？" do %>
 						<button type="button" class="btn btn-danger btn-sm favorite_button">このアーティストのお気に入りを解除する</button>
 						<% end %>
 						<!-- ユーザーがアーティストIDを持っていない時 -->
 						<% elsif current_user.artist_id == nil %>
-						<%= link_to user_path(@artist.id), method: :patch do %>
+						<%= link_to user_favorite_path(@artist.id), method: :patch do %>
 						<button type="button" class="btn btn-primary btn-sm favorite_button">このアーティストをお気に入り登録する</button>
 						<% end %>
 						<!-- ユーザーがアーティストIDを持っているが登録したいアーティストIDと違う時 -->
 						<% else %>
-						<%= link_to user_path(@artist.id), method: :patch, "data-confirm" => "お気に入りは１つのみ登録できます。このアーティストに変更しますか？" do %>
+						<%= link_to user_favorite_path(@artist.id), method: :patch, "data-confirm" => "お気に入りは１つのみ登録できます。このアーティストに変更しますか？" do %>
 						<button type="button" class="btn btn-primary btn-sm favorite_button">このアーティストをお気に入り登録する</button>
 						<% end %>
 						<% end %>
