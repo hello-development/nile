@@ -22,10 +22,10 @@
               <tr>
               <% @items.each do |item| %>
                 <td></td>
-                <td><%= item.item_name %></td>
-                <td><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></td>
-                <td><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
-                <td><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
+                <td><%= link_to item_path(item.id) do %><%= item.item_name %><% end %></td>
+                <td><%= link_to artist_path(item.artist.id) do %><%= item.artist.artist_name %><% end %></td>
+                <td><%= item.genre.genre_name %></td>
+                <td><%= item.label.label_name %></td>
                 <td><%= item.price %></td>
                 <td><%= item.inventory %></td>
                 <td><%= link_to edit_item_path(item.id) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
