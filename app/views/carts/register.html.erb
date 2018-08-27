@@ -1,19 +1,21 @@
+<!-- <h1  class="artist_edit_headline">商品情報変更</h1> -->
 <div  class="container">
   <div class="row">
-    <!-- <h1  class="artist_edit_headline">商品情報変更</h1> -->
+  	<div  class="box2">
 
-    <div  class="box2">
-
-
-		<% n = 1 %>
-		<% boolean = true %>
 		<%= form_for (@purchase), url: purchases_path do |f| %>
 
+		    <% boolean = true %>
+
+		    <% n = 1 %>
+
 			<% current_user.addresses.each do |address| %>
-				
+
 				<h3>宛先<%= n %><br></h3>
 
-			    <label><%= f.radio_button :delivery_address, address.address_name, {:checked => boolean } %><%= address.address_name %></label><br>
+				<% delivery_address = "<郵便番号>"+address.postal_code+"<住所>"+address.address+"<送付先名>"+address.address_name %>
+
+			    <label><%= f.radio_button :delivery_address, delivery_address, {:checked => boolean } %><%= address.address_name %>様</label><br>
 
 			    <%= f.label :"郵便番号" %><br><%= address.postal_code %><br>
 
@@ -21,7 +23,11 @@
 
 			    <% n += 1 %>
 
-			    <% boolean = false %>
+                <% if n ==  2 %>
+
+			      <% boolean = false %>
+
+			    <% end %>
 
 			 <% end %>
 
@@ -38,8 +44,8 @@
 
 			<%= link_to "カートに戻る", user_carts_path(current_user) %>
 
+		<% end %>
 
-			<% end %>
-		</div>
-  	</div>
+	</div>
+  </div>
 </div>
