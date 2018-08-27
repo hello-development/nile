@@ -7,9 +7,10 @@
       <div class="glyphicon glyphicon-user">
         <span> <%= @user.last_name %> <%= @user.first_name %> さん </span>
       </div><br>
-      <div> <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-success' %> </div><br>
-      <div> <%= link_to "退会", user_path, class: 'btn btn-danger', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
-    </div>
+      <div> <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-success btn-user-show' %> </div><br>
+      <div> <%= link_to "登録住所を確認する", user_address_path(@user.id), class: 'btn btn-info btn-user-show' %> </div>
+      <div> <%= link_to "退会", user_path, class: 'btn btn-danger btn-user-show', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
+     </div>
 
     <div class="users_show_right">
       <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
