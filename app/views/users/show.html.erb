@@ -24,24 +24,21 @@
         </span>
         <span>
           <% @item.each do |item| %> <%= item.item_name %>
-          <% end %>
         </span>
         <div>
           <span>ジャンル：</span>
-          <% @genre.each do |genre| %> <%= genre.genre_name %>
-          <% end %>
+          <%= item.genre.genre_name %>
+
         </div>
         <%# if @user.item_id == genre.id %> <%#= genre.genre_name %>
         <div>
           <span>価格：￥</span>
-          <% @item.each do |item| %> <%= item.price %>
-          <% end %>
+          <%= item.price %>
         </div>
         <div>
-          <% @item.each do |item| %>
           <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %>
-          <% end %>
         </div>
+      <% end %>
       <% end %>
     </div>
     <div class="users_show_right_right">

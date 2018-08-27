@@ -102,7 +102,7 @@ class ArtistsController < ApplicationController
 		@items = Item.where(artist_id: @artist.id)
 		# whereで@aritstのidを持っているitemだけを絞り込み
 
-		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
+		@rank = Item.find_by(artist_id: @artist.id, Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
 		# @rank_item = @rank.where(artist_id: @artist.id)
 	end
 
