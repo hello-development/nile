@@ -67,10 +67,6 @@
               <tr>
                 <td><%= link_to item_path(item.id) do %><%= item.item_name %><% end %></td>
                 <td><%= link_to artist_path(item.artist_id) do %><%= item.artist.artist_name %><% end %><br></td>
-<<<<<<< HEAD
-                <%#= link_to artist_path(@artist.id) do %><%#= item.artist.artist_name %><%# end %>
-=======
->>>>>>> cfdbcb7a3daab206879d72bfe3c6bf7d14511e79
                 <td><%= item.price %></td>
                 <td><%= item.inventory %></td>
                 <td><%= link_to edit_item_path(item.id) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
