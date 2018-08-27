@@ -67,15 +67,18 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		# if admin_signed_in?
-		# elsif user_signed_in?
-		# 	redirect_to root_path
-		# else
-		# 	redirect_to root_path
-		# end
 		@user = User.find(params[:id])
 		@addresses = Address.all
-	end
+		unless admin_signed_in?
+		  if user_signed_in?
+		    if @user.id != current_user.id
+		    redirect_to edit_user_path(current_user) and return
+		    end
+		  else
+            redirect_to new_user_session_path
+		  end
+        end
+    end
 
 	def update
 		user = User.find(params[:id])
@@ -140,5 +143,4 @@ class UsersController < ApplicationController
         end
       end
 	end
-
 end
