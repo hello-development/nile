@@ -131,7 +131,7 @@ class ArtistsController < ApplicationController
 	def destroy
 		@artist = Artist.find(params[:id])
 		@artist.destroy
-		redirect_to artists_admin_index_path
+		redirect_to artists_admin_index_path 
 	end
 
 	private
