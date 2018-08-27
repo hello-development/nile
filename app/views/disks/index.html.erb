@@ -14,7 +14,7 @@
       <% end %>
 
       <%= form_for [@item, @disk], url: item_disks_path do |f| %>
-      <h4>No.<%= f.number_field :disk_number, class:"data" %></h4>
+      <h4>No.<%= f.number_field :disk_number, min:0, class:"data" %></h4>
       <%= f.submit 'ディスクを追加する', class:"data" %>
       <% end %>
       </div>

@@ -9,7 +9,7 @@ class AddressesController < ApplicationController
     # 宛名に氏名（姓＋名）を入れます、宛名が空欄の時は
     @address.address_name = current_user.last_name + current_user.first_name if @address.address_name.blank?
     if @address.save
-      redirect_to user_address_path(current_user, @address)
+      redirect_to user_path(current_user)
     else
       render :edit
     end
@@ -18,6 +18,8 @@ class AddressesController < ApplicationController
   def show
     @address = Address.new
     @addresses = current_user.addresses
+    # @user = User.find(params[:id])
+    # @addresses = @user.id.addresses
   end
 
   def edit
