@@ -78,6 +78,7 @@
           </table>
       </div>
     </div>
+    <% if @purchases.exists? %>
       <div class="users_show_bottom">
         <div class="container">
           <div class="row">
@@ -86,31 +87,7 @@
             </div>
           </div>
         </div>
-        <%# @purchases.each do |purchase| %>
-          <section>
-            <!--   <div class="panel-group" id="accordion">
-            <div class="panel panel-default">
-            <div class="panel-heading">
-            <h4 class="panel-title accordion-toggle"> -->
-            <!-- <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><%#= purchase.purchased_date.strftime('%Y/%m/%d') %></a> -->
-            <!-- </div> -->
-            <!-- <div id='collapse' class="panel-collapse collapse in">
-            <div class="panel-body"> -->
-            <%# purchase.purchase_datails.each do |datail| %>
-              <!-- <p></p>
-              <span>商品名</span>：<span><%#= datail.item.item_name %></span>
-              <span>商品写真</span>：<span><%#= attachment_image_tag datail.item, :item_image, :fill, 50, 50, format: 'jpeg' %></span>
-              <span>購入時の単価</span>：<span><%#= datail.price %></span>
-              <span>数量</span>：<span><%#= datail.quantity %></span>
-              <span>小計</span>：<span><%#= datail.price * datail.quantity %></span> -->
-            <%# end %>
-            <!--</div>
-            </div>
-            </div>
-            </div>-->
-          </section>
       </div>
-        <%# end %>
         <% n = 1 %>
         <% @purchases.each do |purchase| %>
         <div class="panel-group" id='sampleAccordion<%= n %>'>
@@ -168,15 +145,22 @@
               <% end %>
               <div class="container">
                 <div class="row">
+                  <div class="col-md-6" style=""></div>
+                  <div class="col-md-6" style="">
+                    <% a = purchase.delivery_address.split(",") %>
+                    <!-- .split(",")でdelivery_address内の文字列を,で区切った配列を作りaに入れています -->
+                      ご指定の配送先<br>〒<%= a[0] %><br>住所：<%= a[1] %><br>宛名：<%= a[2] %>様宛
+                      <!-- a[n]で配列の中のn番目の情報を取り出して下さいと指定しています -->
+                  </div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
                   <div class="col-md-9" style=""></div>
                   <div class="col-md-3" style="">
                     <div class="border">
                       合計：<%= purchase.total_price %>円(税込)
-                      配送状況：
-                      <% if purchase.status == 0 %>受付
-                      <% elsif purchase.status == 1 %>商品準備中
-                      <% else purchase.status == 2 %>出荷済
-                      <% end %>
+                      配送状況：<%= purchase.status %>
                     </div>
                   </div>
             </div>
@@ -186,5 +170,6 @@
     </div>
       <% n += 1%>
       <% end %>
+    <% end %>
   </div>
 </div>
