@@ -12,7 +12,7 @@
 				</ul>
 			</div>
 			<% end %>
-			<%= form_for [current_user, @address] do |f| %>
+			<%= form_for [@user, @address] do |f| %>
 			<h4> お届け先名</h4>
 			<%= f.text_field :address_name, class:"data" %>
 			<h4> 郵便番号(半角ハイフン無し)</h4>
