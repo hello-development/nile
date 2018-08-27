@@ -5,7 +5,7 @@ class SongsController < ApplicationController
       @song = Song.new
       @songs = @disk.songs
     else
-      redirect_to ites_path
+      redirect_to items_path
     end
   end
 
