@@ -5,7 +5,7 @@
 		<h2> ユーザー一覧</h2>
 		<div  class="over_4">
 			<table class="table-hover table">
-				<thread class="users_index_thread">
+				<thead class="users_index_thread">
 					<tr>
 						<th class="users_index_thread_th" width="50px"> ID </th>
 						<th colspan="2" class="users_index_thread_th" width="150px"> ユーザー名 </th>
@@ -13,7 +13,7 @@
 						<th colspan="2" class="users_index_thread_th"> </th>
 						<th colspan="2" class="users_index_thread_th"> </th>
 					</tr>
-				</thread>
+				</thead>
 				<tbody class="test">
 					<% @users.each do |user| %>
 					<tr>
