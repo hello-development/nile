@@ -4,7 +4,10 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @review = Review.new
-    @item = Item.limit(1).order('created_at desc')
+    unless @user.artist_id.nil?
+    @artist = @user.artist
+    @item = Item.where(artist_id: @artist.id).limit(1).order('created_at desc')
+  end
     @genre = Genre.limit(1).order('created_at desc')
     @purchases = @user.purchases
     @rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
