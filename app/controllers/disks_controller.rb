@@ -1,8 +1,12 @@
 class DisksController < ApplicationController
 	def index
-    @item = Item.find(params[:item_id])
-	  @disk = Disk.new
-    @disks = @item.disks
+    if admin_signed_in?
+      @item = Item.find(params[:item_id])
+      @disk = Disk.new
+      @disks = @item.disks
+    else
+      redirect_to items_path and return
+    end
   end
 
   def create

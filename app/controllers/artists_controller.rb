@@ -1,36 +1,40 @@
 class ArtistsController < ApplicationController
-	before_action :authenticate_admin!, except: [:index, :show,]
+	# before_action :authenticate_admin!, except: [:index, :show,]
 
 	def admin_index
-		@artists = Artist.all
-		@artist = Artist.new
-		if params[:genre_id].present?
-			@artists = @artists.get_by_genre_id params[:genre_id]
+		if admin_signed_in?
+			@artists = Artist.all
+			@artist = Artist.new
+			if params[:genre_id].present?
+				@artists = @artists.get_by_genre_id params[:genre_id]
+			end
+			if params[:label_id].present?
+				@artists = @artists.get_by_label_id params[:label_id]
+			end
+			if params[:artist_name].present?
+				@artists = @artists.get_by_artist_name params[:artist_name]
+			end
+	
+			unless @artists.count == Artist.all.count
+				# artistsの数がArtist.allから変わっているか確認する
+			if @artists.count == 0
+				# artistsの数が０の時
+				flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+        	    render :action => :admin_index, layout: "admin_artist" and return
+			elsif @artists.count > 0
+	
+        	  	flash.now[:notice] = "#{@artists.count}件のアーティストがヒットしました。"
+        	  	#{@artists.count}で絞り込まれた数を表示させる
+	
+        	  	render :action => :admin_index, layout: "admin_artist" and return
+        	  	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+			end
+			end
+	
+			render :admin_index, layout: "admin_artist" and return
+		else
+			redirect_to artists_path and return
 		end
-		if params[:label_id].present?
-			@artists = @artists.get_by_label_id params[:label_id]
-		end
-		if params[:artist_name].present?
-			@artists = @artists.get_by_artist_name params[:artist_name]
-		end
-
-		unless @artists.count == Artist.all.count
-			# artistsの数がArtist.allから変わっているか確認する
-		if @artists.count == 0
-			# artistsの数が０の時
-			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-            render :action => :admin_index, layout: "admin_artist" and return
-		elsif @artists.count > 0
-
-          	flash.now[:notice] = "#{@artists.count}件のアーティストがヒットしました。"
-          	#{@artists.count}で絞り込まれた数を表示させる
-
-          	render :action => :admin_index, layout: "admin_artist" and return
-          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
-		end
-		end
-
-		render :admin_index, layout: "admin_artist"
 	end
 
 	def index
@@ -78,7 +82,7 @@ class ArtistsController < ApplicationController
 		end
 		end
 
-		render :index, layout: "artist"
+		render :index, layout: "artist" and return
 		# artistのレイアウトを適用させる。
 	end
 
@@ -107,7 +111,11 @@ class ArtistsController < ApplicationController
 	end
 
 	def edit
-		@artist = Artist.find(params[:id])
+		if admin_signed_in?
+			@artist = Artist.find(params[:id])
+		else
+			redirect_to artists_path
+		end
 	end
 
 	def update
@@ -123,7 +131,7 @@ class ArtistsController < ApplicationController
 	def destroy
 		@artist = Artist.find(params[:id])
 		@artist.destroy
-		redirect_to artists_admin_index_path
+		redirect_to artists_admin_index_path 
 	end
 
 	private

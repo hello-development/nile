@@ -1,5 +1,6 @@
 class ItemsController < ApplicationController
 
+
 	def index
 	  @items = Item.all
 	  @item = Item.new
@@ -35,6 +36,10 @@ class ItemsController < ApplicationController
 		end
 	  end
 
+		 #render :index, layout: "item"
+		# itemのレイアウトを適用させる。
+
+
       if user_signed_in?
 	    if current_user.last_sign_in_at == current_user.current_sign_in_at
 		  unless Address.exists?(user_id: current_user.id)
@@ -46,40 +51,44 @@ class ItemsController < ApplicationController
     end
 
 	def new
-		@item = Item.new
-		@items = Item.all
-		@artists = Artist.all
-		# @genres = Genre.all
-		# @labels = Label.all
-
-		if params[:genre_id].present?
-			@items = @items.get_by_genre_id params[:genre_id]
+		if admin_signed_in?
+			@item = Item.new
+			@items = Item.all
+			@artists = Artist.all
+			# @genres = Genre.all
+			# @labels = Label.all
+	
+			if params[:genre_id].present?
+				@items = @items.get_by_genre_id params[:genre_id]
+			end
+			if params[:label_id].present?
+				@items = @items.get_by_label_id params[:label_id]
+			end
+			if params[:item_name].present?
+				@items = @items.get_by_item_name params[:item_name]
+			end
+	
+			unless @items.count == Item.all.count
+				# itemsの数がitems.allから変わっているか確認する
+			if @items.count == 0
+				# itemsの数が０の時
+				flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+				render :action => :new, layout: "item_new" and return
+				# newに戻りitem_newのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
+			elsif @items.count > 0
+	
+        	  	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
+        	  	#{@items.count}で絞り込まれた数を表示させる
+	
+        	  	render :action => :new, layout: "item_new" and return
+        	  	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+			end
+			end
+	
+			render :new, layout: "item_new"
+		else
+			redirect_to items_path
 		end
-		if params[:label_id].present?
-			@items = @items.get_by_label_id params[:label_id]
-		end
-		if params[:item_name].present?
-			@items = @items.get_by_item_name params[:item_name]
-		end
-
-		unless @items.count == Item.all.count
-			# itemsの数がitems.allから変わっているか確認する
-		if @items.count == 0
-			# itemsの数が０の時
-			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			render :action => :new, layout: "item_new" and return
-			# newに戻りitem_newのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
-		elsif @items.count > 0
-
-          	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
-          	#{@items.count}で絞り込まれた数を表示させる
-
-          	render :action => :new, layout: "item_new" and return
-          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
-		end
-		end
-
-		render :new, layout: "item_new"
 	end
 
 	def create
@@ -110,47 +119,54 @@ class ItemsController < ApplicationController
 
 
 	def admin_index
-
-		@items = Item.all
-		@item = Item.new
-		@artists = Artist.all
-		@genres = Genre.all
-		@labels = Label.all
-		if params[:genre_id].present?
-			@items = @items.get_by_genre_id params[:genre_id]
-		end
-		if params[:label_id].present?
-			@items = @items.get_by_label_id params[:label_id]
-		end
-		if params[:item_name].present?
-			@items = @items.get_by_item_name params[:item_name]
-		end
-
-		unless @items.count == Item.all.count
-			# itemsの数がitems.allから変わっているか確認する
-		if @items.count == 0
-			# itemsの数が０の時
-			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			render :action => :admin_index, layout: "admin_item" and return
-			# admin_indexに戻りadmin_itemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
-		elsif @items.count > 0
-
-          	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
-          	#{@items.count}で絞り込まれた数を表示させる
-
-          	render :action => :admin_index, layout: "admin_item" and return
-          	# renderにする事で変更された情報を維持しつつnoticeを表示させる
-		end
-		end
-		render :admin_index, layout: "admin_item"
-		# admin_itemのレイアウトを適用させる。
+		if admin_signed_in? 
+			@items = Item.all
+			@item = Item.new
+			@artists = Artist.all
+			@genres = Genre.all
+			@labels = Label.all
+			if params[:genre_id].present?
+				@items = @items.get_by_genre_id params[:genre_id]
+			end
+			if params[:label_id].present?
+				@items = @items.get_by_label_id params[:label_id]
+			end
+			if params[:item_name].present?
+				@items = @items.get_by_item_name params[:item_name]
+			end
+	
+			unless @items.count == Item.all.count
+				# itemsの数がitems.allから変わっているか確認する
+			if @items.count == 0
+				# itemsの数が０の時
+				flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+				render :action => :admin_index, layout: "admin_item" and return
+				# admin_indexに戻りadmin_itemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
+			elsif @items.count > 0
+	
+        	  	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
+        	  	#{@items.count}で絞り込まれた数を表示させる
+	
+        	  	render :action => :admin_index, layout: "admin_item" and return
+        	  	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+			end
+			end
+			render :admin_index, layout: "admin_item" and return
+			# admin_itemのレイアウトを適用させる。
+		else
+			redirect_to items_path and return
+		end 
 	end
 
 	def edit
-		@item = Item.find(params[:id])
-		# @artists = Artist.find(params[:id])
-		# @genres = Genre.find(params[:id])
-		# @labels = Label.find(params[:id])
+		if admin_signed_in? 
+			@item = Item.find(params[:id])
+			# @artists = Artist.find(params[:id])
+			# @genres = Genre.find(params[:id])
+			# @labels = Label.find(params[:id])
+		else
+			redirect_to items_path 
+		end
 	end
 
 

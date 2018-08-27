@@ -18,7 +18,7 @@
         <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %>
         <% end %>
       </div>
-      <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 100, 100, format: "jpg" %> </div>
+      <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 150, 150, format: "jpg" %> </div>
         <span>
           <strong> 最新のCD： </strong>
         </span>
@@ -36,7 +36,13 @@
           <%= item.price %>
         </div>
         <div>
+
           <%= attachment_image_tag item, :item_image, :fill, 100, 100, format: "jpg" %>
+
+          <% @item.each do |item| %>
+          <%= attachment_image_tag item, :item_image, :fill, 150, 150, format: "jpg" %>
+          <% end %>
+
         </div>
       <% end %>
       <% end %>
