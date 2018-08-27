@@ -83,7 +83,7 @@ class ItemsController < ApplicationController
 		end
 		end
 
-		# render :new, layout: "item_new"
+		render :new, layout: "item_new"
 	end
 
 	def create
