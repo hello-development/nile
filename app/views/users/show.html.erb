@@ -148,7 +148,7 @@
                   <div class="col-md-6" style=""></div>
                   <div class="col-md-6" style="">
                     <% a = purchase.delivery_address.split(",") %>
-                    <!-- .split("_")でdelivery_address内の文字列を_で区切った配列を作りaに入れています -->
+                    <!-- .split(",")でdelivery_address内の文字列を_で区切った配列を作りaに入れています -->
                       ご指定の配送先<br>〒<%= a[0] %><br>住所：<%= a[1] %><br>宛名：<%= a[2] %>様宛
                       <!-- a[n]で配列の中のn番目の情報を取り出して下さいと指定しています -->
                   </div>
