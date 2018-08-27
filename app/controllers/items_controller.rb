@@ -151,11 +151,11 @@ class ItemsController < ApplicationController
         	  	# renderにする事で変更された情報を維持しつつnoticeを表示させる
 			end
 			end
-			render :admin_index, layout: "admin_item"
+			render :admin_index, layout: "admin_item" and return
 			# admin_itemのレイアウトを適用させる。
 		else
-			redirect_to items_path
-		end
+			redirect_to items_path and return
+		end 
 	end
 
 	def edit
@@ -165,7 +165,7 @@ class ItemsController < ApplicationController
 			# @genres = Genre.find(params[:id])
 			# @labels = Label.find(params[:id])
 		else
-			redirect_to items_path
+			redirect_to items_path 
 		end
 	end
 
