@@ -27,54 +27,47 @@
 
 
 .users_show_left {
-	background-color: pink;
 	width: 20%;
 	float: left;
 }
 
 .users_show_right {
-	background-color: orange;
-	width: 50%;
+	width: 35%;
 	float: left;
 }
 
-.mypage_upperright_right {
-	background-color: pink;
-	width: 30%;
-	float: right;
+.users_show_right_right {
+	width: 45%;
+	float: left;
 }
 
 .users_show_bottom {
 	width: 100%;
-	background-color: green;
 }
-
-.mypage_upperright_left {
-	float: left
-}
-
-.mypage_upperright_right {
-	float: left
+.purchase_histories {
+	text-align: center;
 }
 
 
 
 
-.users_index_thread {
-	display: block;
-}
-.users_index_tbody {
-	display: block;
-	overflow-y: scroll;
-	height: 500px;
-}
 
-.users_index_table {
-  width: 40%;
+
+ .panel-heading {
+    cursor: pointer;
 }
-.users_index_tbody_td {
-	border: 1px solid #bbb;
+ .accordion-toggle a:after {
+    font-family: 'Glyphicons Halflings';
+    content:"\e113";
+    float: right;
+    color: inherit;
 }
-.users_index_thread_th {
-	border: 1px solid #bbb;
+ .accordion-toggle a.collapsed:after {
+    font-family: 'Glyphicons Halflings';
+    content:"\e114";
+    float: right;
+    color: inherit;
+}
+.border {
+	border-bottom: solid;
 }

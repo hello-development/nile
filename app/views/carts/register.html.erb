@@ -1,21 +1,52 @@
-<% n = 1 %>
-<%= form_for (@purchase), url: purchases_path do |f| %>
-  <% current_user.addresses.each do |address| %>
-    <h3>宛先<%= n %><br></h3>
-    <label><%= f.radio_button :delivery_address, address.address_name %><%= address.address_name %></label><br>
-    <%= f.label :"郵便番号" %><br><%= address.postal_code %><br>
-    <%= f.label :"お届け先" %><br><%= address.address %><br>
-    <% n += 1 %>
-  <% end %>
-<%= link_to "お届け先を追加される方はこちらから", user_address_path(current_user, current_user.addresses.first) %><br>
+<!-- <h1  class="artist_edit_headline">商品情報変更</h1> -->
+<div  class="container">
+  <div class="row">
+  	<div  class="box2">
 
-合計<%= @sum %>円<br>
-<% taxincl = @sum * 1.08 %>
-(税込<%= taxincl.round %>円)<br>
-<!-- このボタンを押すとpurchasesコントローラーのcreateが実行されます -->
-<%= f.submit '購入確定(お届け先を選択してから押してください)' %>
-<%= link_to "カートに戻る", user_carts_path(current_user) %>
+		<%= form_for (@purchase), url: purchases_path do |f| %>
 
+		    <% boolean = true %>
 
+		    <% n = 1 %>
 
-<% end %>
+			<% current_user.addresses.each do |address| %>
+
+				<h3>宛先<%= n %><br></h3>
+
+				<% delivery_address = address.postal_code+","+address.address+","+address.address_name %>
+				<!-- 郵便番号,住所,宛名をまとめてdelivery_addressに入れています。,を境に入れているのはあとで使いやすくするためです。 -->
+
+			    <label><%= f.radio_button :delivery_address, delivery_address, {:checked => boolean } %><%= address.address_name %>様</label><br>
+
+			    <%= f.label :"郵便番号" %><br><%= address.postal_code %><br>
+
+			    <%= f.label :"お届け先" %><br><%= address.address %><br>
+
+			    <% n += 1 %>
+
+                <% if n ==  2 %>
+
+			      <% boolean = false %>
+
+			    <% end %>
+
+			 <% end %>
+
+			<%= link_to "お届け先を追加される方はこちらから", user_address_path(current_user, current_user.addresses.first) %><br>
+
+			合計<%= @sum %>円<br>
+
+			<% taxincl = @sum * 1.08 %>
+
+			(税込<%= taxincl.round %>円)<br>
+
+			<!-- このボタンを押すとpurchasesコントローラーのcreateが実行されます -->
+			<%= f.submit '購入確定' %><br>
+
+			<%= link_to "カートに戻る", user_carts_path(current_user) %>
+
+		<% end %>
+
+	</div>
+  </div>
+</div>

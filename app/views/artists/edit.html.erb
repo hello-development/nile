@@ -15,14 +15,14 @@
 			<% end %>
 			<%= form_for(@artist) do |f| %>
 			<h4> アーティスト名</h4>
-			<%= f.text_field :artist_name, autofocus:true, placeholder:"アーティスト名", class:"artist_data" %>
+			<%= f.text_field :artist_name, autofocus:true, placeholder:"アーティスト名", class:"data" %>
 			<h4> アーティスト説明文</h4>
-			<%= f.text_area :artist_contents, autofocus:true, placeholder:"アーティスト説明文", class:"artist_data" %>
+			<%= f.text_area :artist_contents, autofocus:true, placeholder:"アーティスト説明文", class:"data" %>
 			<h4> アーティスト写真</h4>
-			<%= f.attachment_field :artist_image, class:"artist_data" %>
-			<%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %>
-			<%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %>
-			<%= f.submit class:"btn btn-primary artist_data" %>
+			<%= f.attachment_field :artist_image, class:"data" %>
+			<%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'data'} %>
+			<%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'data'} %>
+			<%= f.submit class:"btn btn-primary data" %>
 			<% end %>
 		</div>
 	</div>

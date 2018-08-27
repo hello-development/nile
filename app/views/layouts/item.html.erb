@@ -7,6 +7,10 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -17,8 +21,14 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
+      <% if user_signed_in? %>
+          <span> こんにちは　<strong> <%= current_user.last_name %> <%= current_user.first_name %> </strong>　さん </span>
+      <% elsif admin_signed_in? %>
+          <span><strong>管理者</strong>としてログインしています</span>
+      <% end %>
+
       <nav class="nav">
-        <ul>
+        <ul class="ruled">
 
           <% if user_signed_in? %>
             <li class="li">
@@ -31,10 +41,10 @@
               <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+              <%= link_to "カート", user_carts_path(current_user.id) %>
             </li>
             <li class="li">
-              <%= link_to "カート", user_carts_path(current_user.id) %>
+              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
             </li>
 
           <% elsif admin_signed_in? %>
@@ -45,14 +55,10 @@
                 <%= link_to "CD", items_path %>
             </li>
             <li class="li">
-                <%#= link_to "購入履歴一覧", new_purchase_purchase_datails_path %>
-                <%= link_to "購入履歴一覧" %>
+                <%= link_to "購入履歴一覧", purchases_path %>
             </li>
             <li class="li">
                 <%= link_to "商品登録", new_item_path %>
-            </li>
-            <li class="li">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </li>
             <li class="li">
               <%= link_to "アーティスト管理", artists_admin_index_path %>
@@ -61,8 +67,10 @@
               <%= link_to "商品管理", items_admin_index_path %>
             </li>
             <li class="li">
-              <!-- リンク先が違う・・・ -->
               <%= link_to "ユーザー一覧", users_path %>
+            </li>
+            <li class="li">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </li>
 
           <% else %>
@@ -84,18 +92,19 @@
 
     </div>
 
-    <div class="input-group">
-      <%= form_tag(items_path, method: "get") do %>
-      <%= label_tag :item_name, "シングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %>
-      <%= label_tag :ジャンル, "ジャンル" %>
-      <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
-      <%= label_tag :"レーベル" %>
-      <%= select_tag :label_id, options_for_select(Item.labels), include_blank: true %>
-      <%= button_tag( class: " btn-primary") do %>
-      <%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
-      <% end %>
-      <% end %>
-    </div>
+    <!-- <div class="input-group"> -->
+      <%#= form_tag(items_path, method: "get") do %>
+      <%#= label_tag :item_name, "シングル/アルバム名" %><%#= text_field_tag :item_name, params[:item_name] %>
+      <%#= label_tag :ジャンル, "ジャンル" %>
+      <%#= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
+      <%#= label_tag :"レーベル" %>
+      <%#= select_tag :label_id, options_for_select(Item.labels), include_blank: true %>
+      <%#= button_tag( class: " btn-primary") do %>
+      <%#= content_tag :span, "", class: "glyphicon glyphicon-search" %>
+      <%# end %>
+      <%# end %>
+    <!-- </div> -->
+
 
   </header>
 
@@ -104,7 +113,5 @@
       <footer class="footer">
         Copyright © Infratop Inc. All Rights Reserved.
       </footer>
-
-  </body>
-
-</html>
+    </body>
+    </html>

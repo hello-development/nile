@@ -1,8 +1,12 @@
 class SongsController < ApplicationController
   def index
-  	@disk = Disk.find(params[:disk_id])
-  	@song = Song.new
-  	@songs = @disk.songs
+    if admin_signed_in?
+      @disk = Disk.find(params[:disk_id])
+      @song = Song.new
+      @songs = @disk.songs
+    else
+      redirect_to ites_path
+    end
   end
 
   def create
@@ -19,8 +23,12 @@ class SongsController < ApplicationController
   end
 
   def edit
-  	@disk = Disk.find(params[:disk_id])
-  	@song = Song.find(params[:id])
+    if admin_signed_in?
+      @disk = Disk.find(params[:disk_id])
+      @song = Song.find(params[:id])
+    else
+      redirect_to items_path
+    end
   end
 
 

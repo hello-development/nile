@@ -1,0 +1,52 @@
+<div class="box">
+	<div class="row">
+		<h2> 購入履歴一覧</h2>
+		<div  class="over_4">
+      <table  class="table-hover table directory">
+        <tbody>
+	        <thead>
+	  	      <tr>
+              <th>購入日</th>
+              <th>会員ID</th>
+              <th>会員名</th>
+              <th>配送先</th>
+              <th>商品名</th>
+              <th>単価(円)</th>
+              <th>数量</th>
+              <th>小計(円)</th>
+              <th>詳細ID</th>
+              <th>配送状況</th>
+              <th>状況更新</th>
+              <th>購入履歴ID</th>
+		        </tr>
+	        </thead>
+	        <% @purchases.each do |purchase| %>
+	          <% purchase.purchase_datails.each do |datail| %>
+	          <tr>
+              <td><%= purchase.purchased_date.strftime('%Y/%m/%d') %></td>
+              <td><%= link_to "#{purchase.user.id}", user_path(purchase.user) %></td>
+              <% user_name = purchase.user.last_name + purchase.user.first_name %>
+              <td><%= link_to "#{user_name}", user_path(purchase.user) %></td>
+              <% a = purchase.delivery_address.split(",") %>
+              <td>〒<%= a[0] %><br>住所：<%= a[1] %><br>宛名：<%= a[2] %></td>
+              <td><%= link_to "#{datail.item.item_name}", edit_item_path(datail.item) %></td>
+              <td><%= datail.price %></td>
+              <td><%= datail.quantity %></td>
+              <td><%= datail.quantity * datail.price %></td>
+              <td><%= datail.id %></td>
+	            <%= form_for(purchase) do |f| %>
+		            <!-- <td><%#= f.select :status, [['受付', 0], ['商品準備中', 1],['出荷済', 2]] %></td> -->
+		            <!-- 帰宅してからもう一度挙動確認したら、上記だと動きませんでしたので下記の渡邉さんが記述してくれた方でセレクトを表示させます。上記の表示が下記で実現できます -->
+		          <td><%= f.select :status, Purchase.statuses.keys.to_a, {} %></td>
+		          <td><%= f.submit '更新', class:"btn btn-link active data" %></td>
+		          <td><%= purchase.id %></td>
+		          <% end %>
+	          </tr>
+	          <% end %>
+          <% end %>
+        </tbody>
+      </table>
+		</div>
+	</div>
+</div>
+

@@ -5,7 +5,12 @@ class UsersController < ApplicationController
 
 	def index
 		@users = User.all
-		if admin_signed_in?
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+		# group(:item_id)で、アイテムの番号が同じものにグループを分ける
+  		# order('count(item_id) desc')で、番号の多い順に並び替える
+  		# limit()で、表示する最大数を指定して
+  		# pluck(:item_id)で:item_idカラムのみを取り出すように指定。
+  		# Item.find(integer)最終的に、取り出される数値オブジェクトをアイテムのIDとすることで表示される
 		if params[:last_name].present?
 			@users = @users.get_by_last_name params[:last_name]
 		end
@@ -18,16 +23,19 @@ class UsersController < ApplicationController
 		if @users.count == 0
 			# usersの数が０の時
 			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			render :action => :index
+			render :action => :index, layout: "user_index" and return
 			# renderにする事で変更された情報を維持しつつnoticeを表示させる
 		elsif @users.count > 0
           	flash.now[:notice] = "#{@users.count}件のユーザーがヒットしました。"
           	#{@users.count}で絞り込まれた数を表示させる
-          	render :action => :index
+          	render :action => :index, layout: "user_index" and return
           	# renderにする事で変更された情報を維持しつつnoticeを表示させる
 		end
 		end
 
+		render :index, layout: "user_index"
+
+		if admin_signed_in?
 		elsif user_signed_in?
 			redirect_to root_path
 		else
@@ -37,12 +45,20 @@ class UsersController < ApplicationController
 	end
 
 	def show
-		# @users = User.all
 		@user = User.find(params[:id])
 		@artists = Artist.all
+		# @artist = Artist.find(params[:id])
 		@items = Item.all
+		@review = Review.new
+		# @reviews = Review.all
+		@reviews = Review.where(user_id: @user.id)
 		@genres = Genre.all
 		@item = Item.limit(1).order('created_at desc')
+		@genre = Genre.limit(1).order('created_at desc')
+		@purchases = @user.purchases
+		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(3).pluck(:item_id))
+		@cart_item =CartItem.new
+
 		if user_signed_in?
 		if current_user.last_sign_in_at == current_user.current_sign_in_at
 		unless Address.exists?(user_id: current_user.id)
@@ -53,18 +69,22 @@ class UsersController < ApplicationController
 	end
 
 	def edit
-		if admin_signed_in?
-		elsif user_signed_in?
-			redirect_to root_path
-		else
-			redirect_to root_path
-		end
 		@user = User.find(params[:id])
-	end
+		@addresses = Address.all
+		unless admin_signed_in?
+		  if user_signed_in?
+		    if @user.id != current_user.id
+		    redirect_to edit_user_path(current_user) and return
+		    end
+		  else
+            redirect_to new_user_session_path
+		  end
+        end
+    end
 
 	def update
-		user = User.find(params[:id])
-	    if user.update(user_params)
+		@user = User.find(params[:id])
+	    if @user.update(user_params)
 	        redirect_to user_path(@user.id)
 	    else
 	    	@users =User.all
@@ -111,13 +131,18 @@ class UsersController < ApplicationController
 
 	private
 	def user_params
-		params.require(:user).permit(:artist_id, :user_id)
+		params.require(:user).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:phone_number,:email,:artist_id)
 	end
 
 	def cart_destroy!
-      # 退会時にカートを削除する意図で記述しています。上手く動くかは確認しておりません
       cart = Cart.find_by(user_id: current_user)
-      cart.destroy
+      unless cart.nil? #cartがnilでなければ(つまりcartが存在していれば)
+        if cart.cart_items.nil? #カートの中は空ですか？空ならカート消しても良いからdestroy
+          cart.destroy
+        else
+          redirect_to user_path(current_user)
+          flash[:alert]="あなたのカートに商品が存在しています。退会する前に確認して下さい。"
+        end
+      end
 	end
-
 end

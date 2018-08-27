@@ -18,35 +18,13 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
-      <% if user_signed_in? %>
-          <span> こんにちは　<strong> <%= current_user.last_name %> <%= current_user.first_name %> </strong>　さん </span>
-      <% elsif admin_signed_in? %>
-          <span><strong>管理者</strong>としてログインしています</span>
+      <% if admin_signed_in? %>
+          <span>管理者としてログインしています</span>
       <% end %>
 
       <nav class="nav">
         <ul class="ruled">
 
-          <% if user_signed_in? %>
-            <li class="li">
-              <%= link_to "アーティスト", artists_path %>
-            </li>
-            <li class="li">
-              <%= link_to "CD", items_path %>
-            </li>
-            <li class="li">
-              <%= link_to "マイページ", user_path(current_user.id) %>
-            </li>
-            <li class="li">
-              <%= link_to "カート", user_carts_path(current_user.id) %>
-            </li>
-            <% if Address.exists?(user_id: current_user.id) %>
-            <li class="li">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            </li>
-            <% end %>
-
-          <% elsif admin_signed_in? %>
             <li class="li">
                 <%= link_to "アーティスト", artists_path %>
             </li>
@@ -72,23 +50,20 @@
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </li>
 
-          <% else %>
-            <li class="li">
-              <%= link_to "アーティスト", artists_path %>
-            </li>
-            <li class="li">
-              <%= link_to "CD", items_path %>
-            </li>
-            <li class="li">
-              <%= link_to "Log in", new_user_session_path %>
-            </li>
-            <li class="li">
-              <%= link_to "Sign Up", new_user_registration_path %>
-            </li>
-          <% end %>
         </ul>
       </nav>
 
+    </div>
+
+
+    <div class="input-group">
+      <%= form_tag(users_path, method: "get") do %>
+      <%= label_tag :last_name, "姓" %><%= text_field_tag :last_name, params[:last_name] %>
+      <%= label_tag :first_name, "名" %><%= text_field_tag :first_name, params[:first_name] %>
+      <%= button_tag( class: " btn-primary") do %>
+      <%= content_tag :span, "", class: "glyphicon glyphicon-search" %>
+      <% end %>
+      <% end %>
     </div>
 
   </header>

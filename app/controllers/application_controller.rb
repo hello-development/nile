@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # ここ削除しないと、loginから管理者topに行けない？
   # before_action :authenticate_user!, except: [:last_name, :first_name, :last_name_kana, :first_name_kana, :phone_number, :email]
 
-  protect_from_forgery with: :exception
+    protect_from_forgery with: :exception
     before_action :configure_permitted_parameters, if: :devise_controller?
 
     def after_sign_in_path_for(resource)
@@ -12,8 +12,16 @@ class ApplicationController < ActionController::Base
         items_path
       else
         items_path
+      end
     end
-  end
+
+    def tax  #消費税の税率を設定しています。税率が変わったらここを変えて下さい。
+      # if purchase.purchased_date < 次回の税率変わる時
+        tax = 1.08
+      # else
+        # tax = 1.1
+      # end
+    end
 
 
   helper_method :current_cart

@@ -17,8 +17,14 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
+      <% if user_signed_in? %>
+          <span> こんにちは　<strong> <%= current_user.last_name %> <%= current_user.first_name %> </strong>　さん </span>
+      <% elsif admin_signed_in? %>
+          <span><strong>管理者</strong>としてログインしています</span>
+      <% end %>
+
       <nav class="nav">
-        <ul>
+        <ul class="ruled">
             <li class="li">
                 <%= link_to "アーティスト", artists_path %>
             </li>
@@ -26,14 +32,10 @@
                 <%= link_to "CD", items_path %>
             </li>
             <li class="li">
-                <%#= link_to "購入履歴一覧", new_purchase_purchase_datails_path %>
-                <%= link_to "購入履歴一覧" %>
+                <%= link_to "購入履歴一覧", purchases_path %>
             </li>
             <li class="li">
                 <%= link_to "商品登録", new_item_path %>
-            </li>
-            <li class="li">
-                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </li>
             <li class="li">
               <%= link_to "アーティスト管理", artists_admin_index_path %>
@@ -45,6 +47,9 @@
               <!-- リンク先が違う・・・ -->
               <%= link_to "ユーザー一覧", users_path %>
             </li>
+            <li class="li">
+                <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            </li>
         </ul>
       </nav>
 
@@ -52,7 +57,7 @@
 
     <div class="input-group">
       <%= form_tag(new_item_path, method: "get") do %>
-      <%= label_tag :item_name, "シングル/アルバム名" %><br><%= text_field_tag :item_name, params[:item_name] %>
+      <%= label_tag :item_name, "シングル/アルバム名" %><%= text_field_tag :item_name, params[:item_name] %>
       <%= label_tag :ジャンル, "ジャンル" %>
       <%= select_tag :genre_id, options_for_select(Item.genres), include_blank: true %>
       <%= label_tag :"レーベル" %>
@@ -72,6 +77,5 @@
         Copyright © Infratop Inc. All Rights Reserved.
       </footer>
 
-  </body>
-
-</html>
+    </body>
+    </html>

@@ -1,10 +1,10 @@
-<body>
-  <div class="container">
+
+  <div class="box">
     <div class="row">
       <strong><div class="search-results"><%= notice %></div></strong>
-      <div class="col-lg-5" style="">
-        <div class="item-registration-box">
-
+      <div  class="col-md-4 col-sm-4">
+      <h3> 商品登録</h3>
+      <div class="box2">
         <% if @item.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
           <h2  class="alert_h2"><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
@@ -16,63 +16,65 @@
         </div>
         <% end %>
 
-        <h3> 商品登録</h3>
-
         <%= form_for(@item) do |f| %>
 
         <%= f.label :"アーティスト" %><br>
-        <%= f.select :artist_id,Artist.all.collect { |p| [ p.artist_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+        <%= f.select :artist_id,Artist.all.collect { |p| [ p.artist_name, p.id ] }, {include_blank: true}, {class: 'data'} %><br>
 
         <%= f.label :"ジャンル" %><br>
-        <%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+        <%= f.select :genre_id,Genre.all.collect { |p| [ p.genre_name, p.id ] }, {include_blank: true}, {class: 'data'} %><br>
 
         <%= f.label :"レーベル" %><br>
-        <%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'artist_data'} %><br>
+        <%= f.select :label_id,Label.all.collect { |p| [ p.label_name, p.id ] }, {include_blank: true}, {class: 'data'} %><br>
 
         <%= f.label :"ジャケット写真" %><br>
-        <%= f.attachment_field :item_image, placeholder:"ジャケット画像", class:"item_data" %><br>
+        <%= f.attachment_field :item_image, placeholder:"ジャケット画像", class:"data" %><br>
 
         <%= f.label :"シングル/アルバム" %><br>
-        <%= f.text_field :item_name %><br>
+        <%= f.text_field :item_name, class:"data" %><br>
 
         <%= f.label :"商品説明" %><br>
-        <%= f.text_area :item_contents %><br>
+        <%= f.text_area :item_contents, class:"data" %><br>
 
         <%= f.label :"価格（税抜き）" %><br>
-        <%= f.text_field :price %><br>
+        <%= f.text_field :price, class:"data" %><br>
 
         <%= f.label :"在庫" %><br>
-        <%= f.text_field :inventory %><br>
+        <%= f.text_field :inventory, class:"data" %><br>
 
-        <p><%= f.submit '上記の内容で登録する', class:"btn btn-success active" %></p>
+        <p><%= f.submit '上記の内容で登録する', class:"btn btn-success active data" %></p>
 
         <% end %>
       </div>
 
       </div>
-      <div class="col-lg-7" style="">
-                <table  class="table-hover table">
-        <thead>
-          <tr>
-            <th>アルバム/シングル</th>
-            <th>価格</th>
-            <th>在庫</th>
-            <th></th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @items.each do |item| %>
-          <tr>
-            <td><%= item.item_name %></td>
-            <td><%= item.price %></td>
-            <td><%= item.inventory %></td>
-            <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
+      <div class="col-md-8 col-sm-8">
+        <h1> CD一覧</h1>
+        <div  class="over_2">
+          <table  class="table-hover table">
+            <thead>
+              <tr>
+                <th>アルバム/シングル</th>
+                <th>アーティスト</th>
+                <th>価格</th>
+                <th>在庫</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @items.each do |item| %>
+              <tr>
+                <td><%= link_to item_path(item.id) do %><%= item.item_name %><% end %></td>
+                <td><%= link_to artist_path(item.artist_id) do %><%= item.artist.artist_name %><% end %><br></td>
+                <td><%= item.price %></td>
+                <td><%= item.inventory %></td>
+                <td><%= link_to edit_item_path(item.id) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
       </div>
     </div>
   </div>
-</body>
+</div>

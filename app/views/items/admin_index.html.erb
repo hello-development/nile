@@ -1,40 +1,39 @@
-<body>
-  <div class="container">
+
+  <div class="box">
     <div class="row">
       <strong><div class="search-results"><%= notice %></div></strong>
-      <div class="col-lg-12" style="">
         <h2>商品検索</h2>
-        <table  class="table-hover table">
-          <thead>
-            <tr>
-              <th></th>
-              <th>商品名</th>
-              <th>アーティスト</th>
-              <th>ジャンル</th>
-              <th>レーベル</th>
-              <th>価格</th>
-              <th>在庫</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-            <% @items.each do |item| %>
-              <td></td>
-              <td><%= item.item_name %></td>
-              <td><% @artists.each do |artist| %><% if item.artist_id == artist.id %><%= artist.artist_name %><% end %><% end %></td>
-              <td><% @genres.each do |genre| %><% if item.genre_id == genre.id %><%= genre.genre_name %><% end %><% end %></td>
-              <td><% @labels.each do |label| %><% if item.label_id == label.id %><%= label.label_name %><% end %><% end %></td>
-              <td><%= item.price %></td>
-              <td><%= item.inventory %></td>
-              <td><button clabtn btn-default btn-danger><%= link_to "編集", edit_item_path(item.id) %></button></td>
-              <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button clabtn     btn-default   btn-danger">削除</button><% end %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+        <div  class="over_4">
+          <table  class="table-hover table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>商品名</th>
+                <th>アーティスト</th>
+                <th>ジャンル</th>
+                <th>レーベル</th>
+                <th>価格</th>
+                <th>在庫</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+              <% @items.each do |item| %>
+                <td></td>
+                <td><%= link_to item_path(item.id) do %><%= item.item_name %><% end %></td>
+                <td><%= link_to artist_path(item.artist.id) do %><%= item.artist.artist_name %><% end %></td>
+                <td><%= item.genre.genre_name %></td>
+                <td><%= item.label.label_name %></td>
+                <td><%= item.price %></td>
+                <td><%= item.inventory %></td>
+                <td><%= link_to edit_item_path(item.id) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
+                <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="btn btn-default btn-danger">削除</button><% end %></td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
     </div>
   </div>
-</body>
