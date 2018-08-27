@@ -1,40 +1,31 @@
 
-
-<!-- 	<div class="users_data">
-		<p>ユーザー検索</p>
-		<div class=search_box>
-	      <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-	      <form method="get" action="#" class="search_container">
-	        <input type="text" size="25" placeholder="ユーザー名">
-	        <input type="submit" value="&#xf002">
-	      </form>
-	    </div>
-	</div> -->
 <div class="box">
-	<strong><div class="search-results"><%= notice %></div></strong>
-	<div>
-		<table class="users_index_table" rules="rows">
-			<thread class="users_index_thread">
-				<tr>
-					<th class="users_index_thread_th" width="50px"> ID </th>
-					<th colspan="2" class="users_index_thread_th" width="150px"> ユーザー名 </th>
-					<th class="users_index_thread_th" width="200px"> メールアドレス </th>
-					<th colspan="2" class="users_index_thread_th"> </th>
-					<th colspan="2" class="users_index_thread_th"> </th>
-				</tr>
-			</thread>
-
-			<tbody class="test">
-				<% @users.each do |user| %>
-				<tr>
-					<td class="users_index_tbody_td" width="50px"> <%= user.id %> </td>
-					<td colspan="2" class="users_index_tbody_td" width="150px"> <%= link_to "#{user.last_name}" + "#{user.first_name}", user_path(user.id) %> </td>
-					<td class="users_index_tbody_td" width="200px"> <%= user.email %> </td>
-					<td colspan="2"> <%= link_to "編集", edit_user_path(user.id), class: 'btn btn-success' %> </td>
-					<td colspan="2"> <%= link_to "退会", user_path(user.id), class: 'btn btn-danger', method: :delete, "data-confirm" => "本当に退会させますか？" %> </td>
-				</tr>
-				<% end %>
-			</tbody>
-		</table>
+	<div class="row">
+		<strong><div class="search-results"><%= notice %></div></strong>
+		<h2> ユーザー一覧</h2>
+		<div  class="over_4">
+			<table class="table-hover table">
+				<thead class="users_index_thread">
+					<tr>
+						<th class="users_index_thread_th" width="50px"> ID </th>
+						<th colspan="2" class="users_index_thread_th" width="150px"> ユーザー名 </th>
+						<th class="users_index_thread_th" width="200px"> メールアドレス </th>
+						<th colspan="2" class="users_index_thread_th"> </th>
+						<th colspan="2" class="users_index_thread_th"> </th>
+					</tr>
+				</thead>
+				<tbody class="test">
+					<% @users.each do |user| %>
+					<tr>
+						<td class="users_index_tbody_td" width="50px"> <%= user.id %> </td>
+						<td colspan="2" class="users_index_tbody_td" width="150px"> <%= link_to "#{user.last_name}" + "#{user.first_name}", user_path(user.id) %> </td>
+						<td class="users_index_tbody_td" width="200px"> <%= user.email %> </td>
+						<td colspan="2"> <%= link_to "編集", edit_user_path(user.id), class: 'btn btn-success' %> </td>
+						<td colspan="2"> <%= link_to "退会", user_path(user.id), class: 'btn btn-danger', method: :delete, "data-confirm" => "本当に退会させますか？" %> </td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
 	</div>
 </div>

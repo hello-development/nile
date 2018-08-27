@@ -8,6 +8,7 @@
  border-color:#999;
  text-align: center;
  padding-bottom : 30px;
+ margin-bottom : 30px;
  }
  .artist_contents_box {
  border:1px;
@@ -95,4 +96,13 @@
  font-size: 30px;
  float: left;
  direction:ltr;
+ }
+
+ .over_4 {
+ width: 100%;
+ height: 600px;
+ overflow: scroll;
+ border-top: 6px dotted #add8e6;
+ padding-top: 10px;
+
  }

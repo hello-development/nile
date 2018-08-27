@@ -11,7 +11,6 @@ class UsersController < ApplicationController
   		# limit()で、表示する最大数を指定して
   		# pluck(:item_id)で:item_idカラムのみを取り出すように指定。
   		# Item.find(integer)最終的に、取り出される数値オブジェクトをアイテムのIDとすることで表示される
-		if admin_signed_in?
 		if params[:last_name].present?
 			@users = @users.get_by_last_name params[:last_name]
 		end
@@ -24,16 +23,19 @@ class UsersController < ApplicationController
 		if @users.count == 0
 			# usersの数が０の時
 			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-			render :action => :index
+			render :action => :index, layout: "user_index" and return
 			# renderにする事で変更された情報を維持しつつnoticeを表示させる
 		elsif @users.count > 0
           	flash.now[:notice] = "#{@users.count}件のユーザーがヒットしました。"
           	#{@users.count}で絞り込まれた数を表示させる
-          	render :action => :index
+          	render :action => :index, layout: "user_index" and return
           	# renderにする事で変更された情報を維持しつつnoticeを表示させる
 		end
 		end
 
+		render :index, layout: "user_index"
+
+		if admin_signed_in?
 		elsif user_signed_in?
 			redirect_to root_path
 		else
@@ -45,6 +47,7 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@artists = Artist.all
+		# @artist = Artist.find(params[:id])
 		@items = Item.all
 		@review = Review.new
 		# @reviews = Review.all
@@ -73,6 +76,7 @@ class UsersController < ApplicationController
 		# 	redirect_to root_path
 		# end
 		@user = User.find(params[:id])
+		@addresses = Address.all
 	end
 
 	def update
