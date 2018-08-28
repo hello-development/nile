@@ -21,6 +21,8 @@
         <%= f.text_field :song_name, class:"data" %>
         <%= f.submit '上記の内容で登録する', class:"data btn-primary btn" %>
         <% end %>
+        <%= link_to item_disks_path(@disk.item) do %><button class=class="btn btn-success"><%= @disk.item.item_name %> > DISK登録画面に戻る</button><% end %>
+                             
       </div>
       <button clabtn btn-default btn-danger><%= link_to "商品一覧へ", items_admin_index_path %></button>
     </div>

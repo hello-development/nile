@@ -54,8 +54,7 @@
             <td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
             <td><span> <%= rank.item_name %> </span></td>
             <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
-            <td><%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %><span>数量</span><%= f.number_field :units ,min:0 %></td>
-            <td><%= f.submit 'カートに入れる' %><% end %></td>
+            <td><%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %><span>数量</span><%= f.number_field :units ,min:0 %><%= f.submit 'カートに入れる' %><% end %></td>
           </tr>
           <% end %>
         </tbody>
