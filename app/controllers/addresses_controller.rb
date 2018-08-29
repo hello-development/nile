@@ -3,7 +3,7 @@ class AddressesController < ApplicationController
   def new
     @address = Address.new
     if admin_signed_in?
-      redirect_to items_admin_index_path
+      redirect_to new_item_path
     else
       if user_signed_in?
         if current_user.last_sign_in_at == current_user.current_sign_in_at

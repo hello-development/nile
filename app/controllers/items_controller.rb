@@ -133,46 +133,46 @@ class ItemsController < ApplicationController
 	end
 
 
-	def admin_index
-		if admin_signed_in? 
-			@items = Item.all
-			@item = Item.new
-			@artists = Artist.all
-			@genres = Genre.all
-			@labels = Label.all
-			if params[:genre_id].present?
-				@items = @items.get_by_genre_id params[:genre_id]
-			end
-			if params[:label_id].present?
-				@items = @items.get_by_label_id params[:label_id]
-			end
-			if params[:item_name].present?
-				@items = @items.get_by_item_name params[:item_name]
-			end
+	# def admin_index
+	# 	if admin_signed_in? 
+	# 		@items = Item.all
+	# 		@item = Item.new
+	# 		@artists = Artist.all
+	# 		@genres = Genre.all
+	# 		@labels = Label.all
+	# 		if params[:genre_id].present?
+	# 			@items = @items.get_by_genre_id params[:genre_id]
+	# 		end
+	# 		if params[:label_id].present?
+	# 			@items = @items.get_by_label_id params[:label_id]
+	# 		end
+	# 		if params[:item_name].present?
+	# 			@items = @items.get_by_item_name params[:item_name]
+	# 		end
 	
-			unless @items.count == Item.all.count
-				# itemsの数がitems.allから変わっているか確認する
-			if @items.count == 0
-				# itemsの数が０の時
-				@items = Item.all
-				flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
-				render :action => :admin_index, layout: "admin_item" and return
-				# admin_indexに戻りadmin_itemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
-			elsif @items.count > 0
+	# 		unless @items.count == Item.all.count
+	# 			# itemsの数がitems.allから変わっているか確認する
+	# 		if @items.count == 0
+	# 			# itemsの数が０の時
+	# 			@items = Item.all
+	# 			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
+	# 			render :action => :admin_index, layout: "admin_item" and return
+	# 			# admin_indexに戻りadmin_itemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
+	# 		elsif @items.count > 0
 	
-        	  	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
-        	  	#{@items.count}で絞り込まれた数を表示させる
+ #        	  	flash.now[:notice] = "#{@items.count}件のCDがヒットしました。"
+ #        	  	#{@items.count}で絞り込まれた数を表示させる
 	
-        	  	render :action => :admin_index, layout: "admin_item" and return
-        	  	# renderにする事で変更された情報を維持しつつnoticeを表示させる
-			end
-			end
-			render :admin_index, layout: "admin_item" and return
-			# admin_itemのレイアウトを適用させる。
-		else
-			redirect_to items_path and return
-		end 
-	end
+ #        	  	render :action => :admin_index, layout: "admin_item" and return
+ #        	  	# renderにする事で変更された情報を維持しつつnoticeを表示させる
+	# 		end
+	# 		end
+	# 		render :admin_index, layout: "admin_item" and return
+	# 		# admin_itemのレイアウトを適用させる。
+	# 	else
+	# 		redirect_to items_path and return
+	# 	end 
+	# end
 
 	def edit
 		if admin_signed_in? 
@@ -189,13 +189,13 @@ class ItemsController < ApplicationController
 	def update
 		@item = Item.find(params[:id])
 		@item.update(item_params)
-		redirect_to items_admin_index_path
+		redirect_to new_item_path
 	end
 
 	def destroy
 		@item = Item.find(params[:id])
 		@item.destroy
-		redirect_to items_admin_index_path
+		redirect_to new_item_path
 	end
 
 	private
