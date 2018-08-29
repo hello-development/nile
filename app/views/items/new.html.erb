@@ -70,7 +70,7 @@
                 <td><%= link_to item_path(item) do %><%= attachment_image_tag item, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
                 <td><%= link_to item.item_name, item_path(item) %><br>(<small><%= link_to item.artist.artist_name, artist_path(item.artist) %></small>)</td>
                 <td><%= item.item_contents %></td>
-                <td><%= item.price %></td>
+                <td><%= number_with_delimiter(item.price) %></td>
                 <td><%= item.inventory %></td>
                 <td><%= link_to edit_item_path(item.id) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
                 <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="btn btn-default btn-danger">削除</button><% end %></td>

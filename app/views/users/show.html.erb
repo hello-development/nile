@@ -35,15 +35,14 @@
         <%# if @user.item_id == genre.id %> <%#= genre.genre_name %>
         <div>
           <span>価格：￥</span>
-          <% @item.each do |item| %> <%= item.price %>
-          <% end %>
+          <% @item.each do |item| %> <%= number_with_delimiter(item.price) %>
         </div>
         <div>
           <% @item.each do |item| %>
           <%= attachment_image_tag item, :item_image, :fill, 150, 150, format: "jpg" %>
           <% end %>
         </div>
-      <% end %>
+      <% end %><% end %>
     </div>
     <div class="users_show_right_right">
       <h4 class="favorite_ranking"> <strong> いいねランキング </strong> </h4>
@@ -53,7 +52,7 @@
           <tr>
             <td><%= "#{i}位" %></td>
             <td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
-            <td><span> <%= link_to "#{rank.item_name}", item_path(rank) %> </span></td>
+            <td><span> <%= link_to "#{rank.item_name}", item_path(rank) %> </span><br><span>価格：￥<%= number_with_delimiter(rank.price) %></span></td>
             <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
             <td><%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %><span>数量</span><%= f.number_field :units ,min:0 %><%= f.submit 'カートに入れる' %><% end %></td>
           </tr>
@@ -96,7 +95,7 @@
                   商品名：<%= link_to datail.item.item_name, item_path(datail.item) %>
                 </div>
                 <div class="col-md-2" style="">
-                  単価：<%= datail.price %>円<br>
+                  単価：<%= number_with_delimiter(datail.price) %>円<br>
                   数量：<%= datail.quantity %>
                 </div>
                 <div class="col-md-3" style="">
@@ -118,7 +117,7 @@
                   <% end %>
                 </div>
                 <div class="col-md-3" style="">
-                  小計：<%= datail.quantity * datail.price %>円
+                  小計：<%= number_with_delimiter(datail.quantity * datail.price) %>円
                 </div>
               </div>
             </div>
@@ -140,7 +139,7 @@
                 <div class="col-md-9" style=""></div>
                 <div class="col-md-3" style="">
                   <div class="border">
-                    合計：<%= purchase.total_price %>円(税込)
+                    合計：<%= number_with_delimiter(purchase.total_price) %>円(税込)
                     配送状況：<%= purchase.status %>
                   </div>
                 </div>
