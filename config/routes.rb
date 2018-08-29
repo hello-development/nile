@@ -19,7 +19,7 @@ devise_for :users, controllers: {
   delete 'carts/:item_id/delete_item' => 'carts#delete_item', as: :carts_delete_item
   # get 'carts/confirmation'
   get 'artists/admin_index'
-  get 'items/admin_index'
+  # get 'items/admin_index'
   patch 'users/:id/favorite' => 'users#favorite', as: :user_favorite
   # get 'purchase/:purchase_id/confirmation' => 'purchase_datails#confirmation', as: :confirmation
 
