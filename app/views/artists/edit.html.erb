@@ -13,6 +13,7 @@
 					</ul>
 				</div>
 			<% end %>
+			<%= attachment_image_tag @artist, :artist_image, :fill, 200, 200, format: 'jpeg' %>
 			<%= form_for(@artist) do |f| %>
 			<h4> アーティスト名</h4>
 			<%= f.text_field :artist_name, autofocus:true, placeholder:"アーティスト名", class:"data" %>

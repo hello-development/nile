@@ -1,6 +1,7 @@
 class CartsController < ApplicationController
 	before_action :authenticate_user!
 	before_action :setup_cart_item!, only: [:add_item, :update_item, :delete_item]
+	before_action :reset_session_url!, only: [:add_item, :show]
 
 	def show
 	  @cart_items = current_cart.cart_items
@@ -38,6 +39,9 @@ class CartsController < ApplicationController
           @cart_item.save
         end
 	  end
+	  unless session[:url].blank?
+	  	session[:url] = nil
+	  end
 	  redirect_to user_carts_path(current_user)
 	end
 
@@ -54,7 +58,6 @@ class CartsController < ApplicationController
 	    if @cart_item.update(cart_item_params)
 	      redirect_to user_carts_path(current_user), notice: "更新しました！"
 	    else
-	  	  @items = Item.all
 	      @cart_items = current_cart.cart_items
 	  	  flash.now[:alert] = "数量が正しくなかったため更新できませんでした"
 	  	  render :show
@@ -78,12 +81,11 @@ class CartsController < ApplicationController
 
 	def register
 	  @purchase = Purchase.new
-	  sum = 0 #計算用のsumという変数(sumという名前じゃなくても良いです)の値を0に設定(初期化)しておきます
+	  @sum = 0 #計算用のsumという変数(sumという名前じゃなくても良いです)の値を0に設定(初期化)しておきます
 	  cart_items = current_cart.cart_items
 	  cart_items.each do |cart_item|
-	  	sum = cart_item.units * cart_item.item.price + sum #cart_itemを１つずつ取り出して小計を計算しsum(合計)に足しています
+	  	@sum += cart_item.units * cart_item.item.price #cart_itemを１つずつ取り出して小計を計算しsum(合計)に足しています
 	  end
-	  @sum = sum #sumに小計が全て足された値(つまり合計ですね!)が入っています。viewに値を渡せるようにインスタンス変数に代入しておきます。
 	end
 
 	private
@@ -91,6 +93,10 @@ class CartsController < ApplicationController
 	def setup_cart_item!
       # カートの中に入っている商品をitem_idで検索して代入しています。item_idと一致する商品が見つからない場合はnilが代入されます。
 	  @cart_item = current_cart.cart_items.find_by(item_id: params[:item_id])
+	end
+
+	def reset_session_url!
+	  session[:url] = nil
 	end
 
 	def cart_item_params

@@ -1,5 +1,5 @@
 class ArtistsController < ApplicationController
-	# before_action :authenticate_admin!, except: [:index, :show,]
+	before_action :reset_session_url!, only: [:index, :show,]
 
 	def admin_index
 		if admin_signed_in?
@@ -19,6 +19,7 @@ class ArtistsController < ApplicationController
 				# artistsの数がArtist.allから変わっているか確認する
 			if @artists.count == 0
 				# artistsの数が０の時
+				@artists = Artist.all
 				flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
         	    render :action => :admin_index, layout: "admin_artist" and return
 			elsif @artists.count > 0
@@ -61,6 +62,7 @@ class ArtistsController < ApplicationController
 			# artistsの数がArtist.allから変わっているか確認する
 		if @artists.count == 0
 			# artistsの数が０の時
+			@artists = Artist.all
 			flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
             render :action => :index, layout: "artist" and return
 		elsif @artists.count > 0
@@ -137,5 +139,9 @@ class ArtistsController < ApplicationController
 	private
 	def artist_params
 		params.require(:artist).permit(:artist_name, :artist_image, :artist_contents,:genre_id, :label_id)
+	end
+
+	def reset_session_url!
+	  session[:url] = nil
 	end
 end

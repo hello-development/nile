@@ -25,6 +25,7 @@ class ItemsController < ApplicationController
 	  # itemsの数がitems.allから変わっているか確認する
 		if @items.count == 0
 		# itemsの数が０の時
+		  @items = Item.all
 		  flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
 		  render :action => :index, layout: "item" and return
 		  # indexに戻りitemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
@@ -42,12 +43,21 @@ class ItemsController < ApplicationController
 
       if user_signed_in?
 	    if current_user.last_sign_in_at == current_user.current_sign_in_at
-		  unless Address.exists?(user_id: current_user.id)
+		  if Address.exists?(user_id: current_user.id)
+		  	unless session[:url].blank?
+		  	  redirect_to session[:url] and return
+		  	end
+		  else
 			redirect_to new_user_address_path(current_user)
 			flash[:notice]="住所を登録して下さい" and return
+          end
+        else
+          unless session[:url].blank?
+		  	redirect_to session[:url] and return
 		  end
-		end
+        end
 	  end
+
     end
 
 	def new
@@ -72,6 +82,7 @@ class ItemsController < ApplicationController
 				# itemsの数がitems.allから変わっているか確認する
 			if @items.count == 0
 				# itemsの数が０の時
+				@items = Item.all
 				flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
 				render :action => :new, layout: "item_new" and return
 				# newに戻りitem_newのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
@@ -114,6 +125,10 @@ class ItemsController < ApplicationController
 		@likes = Like.all
 		@rank = Item.find(Like.group(:item_id).order('count(item_id) desc').limit(20).pluck(:item_id))
 
+		unless user_signed_in?
+		  session[:url] = request.url
+		end
+
 
 	end
 
@@ -139,6 +154,7 @@ class ItemsController < ApplicationController
 				# itemsの数がitems.allから変わっているか確認する
 			if @items.count == 0
 				# itemsの数が０の時
+				@items = Item.all
 				flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
 				render :action => :admin_index, layout: "admin_item" and return
 				# admin_indexに戻りadmin_itemのレイアウトを適用させる。renderをもう一度使いたいためreturnする。
@@ -165,7 +181,7 @@ class ItemsController < ApplicationController
 			# @genres = Genre.find(params[:id])
 			# @labels = Label.find(params[:id])
 		else
-			redirect_to items_path 
+			redirect_to items_path
 		end
 	end
 

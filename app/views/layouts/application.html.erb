@@ -16,7 +16,11 @@
 
     <div class="header_upper">
 
+      <% if session[:url].blank? %>
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
+      <% else %>
+      <a href="http://localhost:3000/artists" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
+      <% end %>
 
       <% if user_signed_in? %>
           <span> こんにちは　<strong> <%= current_user.last_name %> <%= current_user.first_name %> </strong>　さん </span>
@@ -31,9 +35,11 @@
             <li class="li">
               <%= link_to "アーティスト", artists_path %>
             </li>
+            <% if session[:url].blank? %>
             <li class="li">
               <%= link_to "CD", items_path %>
             </li>
+            <% end %>
             <li class="li">
               <%= link_to "マイページ", user_path(current_user.id) %>
             </li>
@@ -43,6 +49,10 @@
             <% if Address.exists?(user_id: current_user.id) %>
             <li class="li">
               <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+            </li>
+            <% else %>
+            <li class="li">
+              <%= link_to "住所を登録", new_user_address_path(current_user.id) %>
             </li>
             <% end %>
 

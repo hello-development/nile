@@ -64,7 +64,7 @@
 				<div class="item-box directory">
 					<dl>
 						<dt><%= link_to item_path(item.id) do %><%= attachment_image_tag item, :item_image, :fill, 100, 100, format: 'jpeg' %><% end %></dt>
-						<dd><h4><%= item.item_name %></h4></dd>
+						<dd><h4><%= link_to item.item_name, item_path(item) %></h4></dd>
 						<dd><%= @artist.artist_name %></dd>
 						<dd><%= item.genre.genre_name %></dd>
 						<dd><%= item.label.label_name %></dd>
@@ -84,8 +84,8 @@
 						<tr>
 							<td><%= "#{i}位" %></td>
 							<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
-							<td><%= rank.item_name %></td>
-							<td><%= rank.artist.artist_name %></td>
+							<td><%= link_to "#{rank.item_name}", item_path(rank) %></td>
+							<td><%= link_to "#{rank.artist.artist_name}", artist_path(rank.artist) %></td>
 							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
 						</tr>
 						<% end %>
