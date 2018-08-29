@@ -27,7 +27,7 @@
 
 
 .users_show_left {
-	width: 20%;
+	width: 15%;
 	float: left;
 }
 
@@ -37,7 +37,7 @@
 }
 
 .users_show_right_right {
-	width: 45%;
+	width: 50%;
 	float: left;
 }
 
@@ -70,4 +70,12 @@
 }
 .border {
 	border-bottom: solid;
+}
+
+.favorite_artist_name {
+	font-size: 22px;
+}
+
+.btn-user-show {
+	width: 150px;
 }
