@@ -47,7 +47,7 @@
 						<tr>
 							<td><%= "#{i}位" %></td>
 							<td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
-							<td><%= link_to "#{rank.item_name}", item_path(rank) %></td>
+							<td><%= link_to "#{rank.item_name}", item_path(rank) %><br>価格：￥<%= number_with_delimiter(rank.price) %></td>
 							<td><%= link_to "#{rank.artist.artist_name}", artist_path(rank.artist) %></td>
 							<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
 						</tr>

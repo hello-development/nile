@@ -1,7 +1,7 @@
 <div class='box'>
   <div class='row'>
     <div  class="col-md-4 col-sm-4">
-      <h3> <%= @item.item_name %></h3>
+      <h3><%= link_to "#{@item.item_name}(#{@item.artist.artist_name})", edit_item_path(@item) %><br>ディスク登録および一覧画面</h3>
       <div class="box2">
       <% if @disk.errors.any? %>
         <div id="error_explanation" class="alert alert-danger">
@@ -18,9 +18,10 @@
       <%= f.submit 'ディスクを追加する', class:"data" %>
       <% end %>
       </div>
+     <button clabtn btn-default btn-danger><%= link_to "商品一覧へ", new_item_path %></button>
     </div>
       <div  class="col-md-8 col-sm-8">
-        <h3> ディスク</h3>
+        <h4>曲を登録したいディスクをクリックして下さい</h4>
         <div  class="over_2">
         <table  class="table-hover table">
           <tbody>
