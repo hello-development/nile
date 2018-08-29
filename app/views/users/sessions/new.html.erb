@@ -43,10 +43,6 @@
     <%#= render "users/shared/links" %>
   <% end %>
 
-   <!-- adminログアウト用です。あとで消して下さい -->
-   <% if admin_signed_in? %>
-   <%= link_to "adminログアウト", destroy_admin_session_path, method: :delete %>
-   <% end %>
 
   </div>
   </body>

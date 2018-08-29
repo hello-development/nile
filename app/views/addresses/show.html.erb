@@ -1,7 +1,7 @@
 <div class='box'>
 	<div class='row'>
 		<div  class="col-md-4 col-sm-4">
-			<h3> 住所変更およびお届け先追加<br>・住所を追加する</h3>
+			<h3>住所を追加する</h3>
 			<div class="box2">
 			<% if @address.errors.any? %>
 				<div id="error_explanation" class="alert alert-danger">
@@ -13,7 +13,7 @@
 				</div>
 				<% end %>
 				<%= form_for [@user, @address], url: user_addresses_path do |f| %>
-				<h4> お届け先名(ご登録されているお名前と異なる場合に入力して下さい)</h4>
+				<h4> お届け先名</h4><small>(未入力の場合は<%= @user.last_name + @user.first_name %>様で登録いたします)</small>
 				<%= f.text_field :address_name, class:"data" %>
 				<h4> 郵便番号(半角ハイフン無し)</h4>
 				<%= f.text_field :postal_code, class:"data" %>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 		<div  class="col-md-8 col-sm-8">
-			<h1> 住所一覧</h1>
+			<h3> 現在登録されている住所の一覧</h3>
 			<div  class="over_2">
 				<table  class="table-hover table">
 					<tbody>

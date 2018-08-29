@@ -17,3 +17,36 @@ border-bottom: 6px dashed #add8e6;
 	color: red;
 	font-size: 18px;
 }
+.register {
+	margin: 0 auto;
+	width: 500px;
+}
+.register-title {
+	margin-top: 5px;
+	font-size: 20px;
+}
+.register-delivery-box{
+	border: solid;
+    &:hover {
+      background-color: #EEE;
+    }
+}
+.radio-atena {
+	margin-left: 6px;
+}
+.register-delivery-content{
+	margin-left: 24px;
+}
+.register-footer {
+	text-align: right;
+}
+.register-taxincl {
+	color: red;
+	font-size: 16px;
+}
+.btn-register {
+	width: 120px;
+}
+.comfirm {
+	width: 120px;
+}

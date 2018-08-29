@@ -1,52 +1,41 @@
-<!-- <h1  class="artist_edit_headline">商品情報変更</h1> -->
-<div  class="container">
-  <div class="row">
-  	<div  class="box2">
-
-		<%= form_for (@purchase), url: purchases_path do |f| %>
-
-		    <% boolean = true %>
-
-		    <% n = 1 %>
-
-			<% current_user.addresses.each do |address| %>
-
-				<h3>宛先<%= n %><br></h3>
-
-				<% delivery_address = address.postal_code+","+address.address+","+address.address_name %>
-				<!-- 郵便番号,住所,宛名をまとめてdelivery_addressに入れています。,を境に入れているのはあとで使いやすくするためです。 -->
-
-			    <label><%= f.radio_button :delivery_address, delivery_address, {:checked => boolean } %><%= address.address_name %>様</label><br>
-
-			    <%= f.label :"郵便番号" %><br><%= address.postal_code %><br>
-
-			    <%= f.label :"お届け先" %><br><%= address.address %><br>
-
-			    <% n += 1 %>
-
-                <% if n ==  2 %>
-
-			      <% boolean = false %>
-
-			    <% end %>
-
-			 <% end %>
-
-			<%= link_to "お届け先を追加される方はこちらから", user_address_path(current_user, current_user.addresses.first) %><br>
-
-			合計<%= number_with_delimiter(@sum) %>円<br>
-
-			<% taxincl = @sum * 1.08 %>
-
-			(税込<%= number_with_delimiter(taxincl.round) %>円)<br>
-
-			<!-- このボタンを押すとpurchasesコントローラーのcreateが実行されます -->
-			<%= f.submit '購入確定' %><br>
-
-			<%= link_to "カートに戻る", user_carts_path(current_user) %>
-
-		<% end %>
-
-	</div>
+<div class="register">
+  <div class="register-box">
+    <label class="register-title">お届け先の選択</label><br>
+    <small>ご希望の宛先にチェックを入れて下さい</small>
   </div>
+  <%= form_for (@purchase), url: purchases_path do |f| %>
+    <% boolean = true %>
+　  <% n = 1 %>
+　  <% current_user.addresses.each do |address| %>
+    <% delivery_address = address.postal_code+","+address.address+","+address.address_name %>
+    <!-- 郵便番号,住所,宛名をまとめてdelivery_addressに入れています。,を境に入れているのはあとで使いやすくするためです。 -->
+    <div class="field register-delivery-box">
+      <label><%= f.radio_button :delivery_address, delivery_address, {:checked => boolean } %><strong>宛先<%= n %></strong></label><br>
+      <div class="register-delivery-content">
+      <%= f.label :宛名 %>：<%= f.label :"#{address.address_name}" %><br/>
+      <%= f.label :郵便番号 %>：<%= f.label :"#{address.postal_code}" %><br/>
+      <%= f.label :住所 %>：<%= f.label :"#{address.address}" %><br/>
+      </div>
+    </div>
+    <% n += 1 %>
+    <% if n ==  2 %>
+      <% boolean = false %>
+    <% end %>
+    <% end %>
+    <div class="register-footer">
+      <%= link_to "お届け先を追加される方はこちらから", user_address_path(current_user, current_user.addresses.first) %><br>
+
+      合計<%= number_with_delimiter(@sum) %>円
+
+      <% taxincl = @sum * 1.08 %>
+
+      <span class="register-taxincl">(税込<%= number_with_delimiter(taxincl.round) %>円)</span><br>
+
+      <!-- このボタンを押すとpurchasesコントローラーのcreateが実行されます -->
+
+
+
+      <div><%= link_to user_carts_path(current_user) do %><button class="btn btn-default btn-info btn-register">カートに戻る</button><% end %><br><%= f.submit '購入確定', class:"comfirm" %><br></div>
+    </div>
+  <% end %>
 </div>
