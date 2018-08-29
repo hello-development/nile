@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :reset_session_url!, only:[:show, :edit]
   before_action :cart_destroy!, only: [:destroy]
 
   def show
@@ -14,14 +15,19 @@ class UsersController < ApplicationController
     @cart_item =CartItem.new
     unless admin_signed_in?
       if user_signed_in?
-        if current_user.last_sign_in_at == current_user.current_sign_in_at
-          unless Address.exists?(user_id: current_user.id)
-            redirect_to new_user_address_path(current_user) and return
+          if current_user.last_sign_in_at == current_user.current_sign_in_at
+            if Address.exists?(user_id: current_user.id)
+              unless session[:url].blank?
+                redirect_to session[:url] and return
+              end
+            else
+              redirect_to new_user_address_path(current_user)
+              flash[:notice]="住所を登録して下さい" and return
+            end
           end
-        end
-        if @user.id != current_user.id
-          redirect_to user_path(current_user) and return
-        end
+          if @user.id != current_user.id
+            redirect_to user_path(current_user) and return
+          end
       else
       redirect_to new_user_session_path and return
       end
@@ -34,7 +40,8 @@ class UsersController < ApplicationController
       if user_signed_in?
         if current_user.last_sign_in_at == current_user.current_sign_in_at
           unless Address.exists?(user_id: current_user.id)
-            redirect_to new_user_address_path(current_user) and return
+            redirect_to new_user_address_path(current_user)
+            flash[:notice]="住所を登録して下さい" and return
           end
         end
         if @user.id != current_user.id
@@ -118,6 +125,7 @@ class UsersController < ApplicationController
       # @usersの数がUser.allから変わっているか確認する
         if @users.count == 0
         # usersの数が０の時
+          @users = User.all
           flash.now[:notice] = "ヒットしませんでした。検索ワードを変えてみて下さい。"
           render :action => :index, layout: "user_index" and return
           # renderにする事で変更された情報を維持しつつnoticeを表示させる
@@ -137,6 +145,10 @@ class UsersController < ApplicationController
   private
     def user_params
       params.require(:user).permit(:last_name,:first_name,:last_name_kana,:first_name_kana,:phone_number,:email,:artist_id)
+    end
+
+    def reset_session_url!
+      session[:url] = nil
     end
 
     def cart_destroy!

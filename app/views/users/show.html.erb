@@ -4,61 +4,47 @@
   <div class="users_show_upper clearfix" >
     <div class="users_show_left">
       <h4 class="users_names"> <strong> ユーザー名 </strong> </h4>
-      <div class="glyphicon glyphicon-user">
-        <span> <%= @user.last_name %> <%= @user.first_name %> さん </span>
-      </div><br>
-      <div> <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-success btn-user-show' %> </div><br>
+      <div> <%= @user.last_name %> <%= @user.first_name %> さん </div>
+      <div> <%= link_to "編集", edit_user_path(@user.id), class: 'btn btn-success btn-user-show' %> </div>
       <div> <%= link_to "登録住所を確認する", user_address_path(@user.id), class: 'btn btn-info btn-user-show' %> </div>
       <div> <%= link_to "退会", user_path, class: 'btn btn-danger btn-user-show', method: :'delete', "data-confirm" => "本当に退会しますか？" %> </div>
-     </div>
-
+    </div>
     <div class="users_show_right">
       <h4 class="favorite_artists"> <strong> お気に入りアーティスト </strong> </h4>
-
       <% if @user.artist_id.nil? %>
         <p> お気に入りアーティストは未登録です </p>
       <% end %>
-
       <% unless @user.artist_id.nil? %>
-      <div class="glyphicon glyphicon-paperclip"></div>
-      <span class="favorite_artist_name">
-        <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %>
-        <% end %>
-      </span>
       <div>
-        <%= attachment_image_tag @user.artist, :artist_image, :fill, 150, 150, format: "jpg" %> 
-      </div><br>
-
-      <div>
-        <strong> 最新のCD： </strong>
-      </div>
-
-      <div class="glyphicon glyphicon-paperclip"></div>
-      <span class="favorite_artist_name">
-        <% @item.each do |item| %> <%= item.item_name %><% end %>
-      </span>
-      <div>
-        <span>ジャンル：</span>
-        <% @genre.each do |genre| %> <%= genre.genre_name %>
+        <% if @user.artist_id == @user.artist.id %> <%=link_to "#{@user.artist.artist_name}", artist_path(@user.artist) %>
         <% end %>
       </div>
+      <div> <%= link_to artist_path(@user.artist) do %><%= attachment_image_tag @user.artist, :artist_image, :fill, 150, 150, format: "jpg" %><% end %> </div>
+        <span>
+          <strong> 最新のCD： </strong>
+        </span>
+        <span>
+          <% @item.each do |item| %> <%= link_to "#{item.item_name}", item_path(item) %>
+          <% end %>
+        </span>
+        <div>
+          <span>ジャンル：</span>
+          <% @genre.each do |genre| %> <%= genre.genre_name %>
+          <% end %>
+        </div>
         <%# if @user.item_id == genre.id %> <%#= genre.genre_name %>
-      <div>
-        <span>価格：￥</span>
-        <% @item.each do |item| %> <%= item.price %>
-        <% end %>
-      </div>
-      <div>
-        <% @item.each do |item| %>
-        <%= attachment_image_tag item, :item_image, :fill, 150, 150, format: "jpg" %>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
-
-
-
-
+        <div>
+          <span>価格：￥</span>
+          <% @item.each do |item| %> <%= item.price %>
+          <% end %>
+        </div>
+        <div>
+          <% @item.each do |item| %>
+          <%= attachment_image_tag item, :item_image, :fill, 150, 150, format: "jpg" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
     <div class="users_show_right_right">
       <h4 class="favorite_ranking"> <strong> いいねランキング </strong> </h4>
       <table  class="table-hover table">
@@ -67,10 +53,9 @@
           <tr>
             <td><%= "#{i}位" %></td>
             <td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
-            <td><span> <%= rank.item_name %> </span></td>
+            <td><span> <%= link_to "#{rank.item_name}", item_path(rank) %> </span></td>
             <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
-            <td><%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %><span>数量</span><%= f.number_field :units ,min:0 %></td>
-            <td><%= f.submit 'カートに入れる' %><% end %></td>
+            <td><%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %><span>数量</span><%= f.number_field :units ,min:0 %><%= f.submit 'カートに入れる' %><% end %></td>
           </tr>
           <% end %>
         </tbody>
@@ -108,7 +93,7 @@
                 </div>
                 <div class="col-md-2" style="">
                   アーティスト名：<%= link_to datail.item.artist.artist_name, artist_path(datail.item.artist.id) %><br>
-                  商品名：<%= datail.item.item_name %>
+                  商品名：<%= link_to datail.item.item_name, item_path(datail.item) %>
                 </div>
                 <div class="col-md-2" style="">
                   単価：<%= datail.price %>円<br>
