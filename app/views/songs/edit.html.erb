@@ -1,6 +1,6 @@
 <div  class="container">
 	<div  class="row">
-		<h1  class="artist_edit_headline"><%= @disk.item.item_name %> > <%= @disk.disk_number %></h1>
+		<h1  class="artist_edit_headline"><%= link_to "#{@disk.item.item_name}(#{@disk.item.artist.artist_name})", edit_item_path(@disk.item) %><br>=><%= link_to "ディスク#{@disk.disk_number}の曲です", item_disk_songs_path(@disk.item, @disk) %></h1>
 		<h4>曲情報変更</h4>
 		<div  class="box2">
 		<% if @song.errors.any? %>
