@@ -1,25 +1,31 @@
-<div  class="container">
-  	<div class="row">
-    	<h1  class="artist_edit_headline">住所の登録</h1>
-    	<div  class="box2">
-			<% if @address.errors.any? %>
-  				<div id="error_explanation" class="alert alert-danger">
-    				<ul>
-      				<% @address.errors.full_messages.each do |message| %>
-        				<li><%= message %></li>
-      				<% end %>
-    				</ul>
-  				</div>
-			<% end %>
-			<span class="alert-danger"><%= notice %></span><br>
-			新規会員登録(下記を入力して下さい)
-			<%= form_for [current_user, @address], url: user_addresses_path do |f| %>
-				郵便番号(半角ハイフン無し)<br>
-				<%= f.text_field :postal_code %><br>
-				住所<br>
-				<%= f.text_field :address %><br>
-				<%= f.submit "上記の内容で登録する" %>
-			<% end %>
-    	</div>
-  	</div>
+<div class="login_title">
+  <h3>新規会員住所の登録</h3>
+  <span class="alert-danger"><%= notice %></span>
+  <% if @address.errors.any? %>
+  <div id="error_explanation" class="alert alert-danger">
+    <ul>
+      <% @address.errors.full_messages.each do |message| %>
+      <li>
+        <%= message %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <%= form_for [current_user, @address], url: user_addresses_path do |f| %>
+  <div class="field">
+    <h4>郵便番号</h4>
+    <strong>(ハイフン無し半角7桁)</strong>
+    <br>
+    <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code", placeholder: "1234567" %>
+  </div>
+  <div class="field">
+    <h4>住所 </h4>
+    <%= f.text_area :address, autocomplete: "off", placeholder: "住所を入力" %>
+  </div>
+  <div class="actions">
+    <%= f.submit "上記の内容で登録する" %>
+  </div>
+  <% end %>
 </div>
