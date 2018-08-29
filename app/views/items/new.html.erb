@@ -54,10 +54,12 @@
           <table  class="table-hover table">
             <thead>
               <tr>
-                <th>アルバム/シングル</th>
-                <th>アーティスト</th>
+                <th>ジャケ画像</th>
+                <th>アルバム/シングル<br>(<small>アーティスト</small>)</th>
+                <th>商品説明</th>
                 <th>価格</th>
                 <th>在庫</th>
+                <th></th>
                 <th></th>
                 <th></th>
               </tr>
@@ -65,11 +67,13 @@
             <tbody>
               <% @items.each do |item| %>
               <tr>
-                <td><%= link_to item_path(item.id) do %><%= item.item_name %><% end %></td>
-                <td><%= link_to artist_path(item.artist_id) do %><%= item.artist.artist_name %><% end %><br></td>
+                <td><%= link_to item_path(item) do %><%= attachment_image_tag item, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
+                <td><%= link_to item.item_name, item_path(item) %><br>(<small><%= link_to item.artist.artist_name, artist_path(item.artist) %></small>)</td>
+                <td><%= item.item_contents %></td>
                 <td><%= item.price %></td>
                 <td><%= item.inventory %></td>
                 <td><%= link_to edit_item_path(item.id) do %><button class="btn btn-default btn-success">編集</button><% end %></td>
+                <td><%= link_to item_path(item.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %><button class="btn btn-default btn-danger">削除</button><% end %></td>
               </tr>
               <% end %>
             </tbody>

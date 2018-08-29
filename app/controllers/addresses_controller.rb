@@ -6,9 +6,17 @@ class AddressesController < ApplicationController
       redirect_to items_admin_index_path
     else
       if user_signed_in?
-        if Address.exists?(user_id: current_user.id)
-          redirect_to user_path(current_user)
+        if current_user.last_sign_in_at == current_user.current_sign_in_at
+          if Address.exists?(user_id: current_user.id)
+            unless session[:url].blank?
+              redirect_to session[:url] and return
+            end
+            redirect_to user_path(current_user) and return
+          end
         else
+          unless session[:url].blank?
+            redirect_to session[:url] and return
+          end
           @user = User.find(params[:user_id])
           if @user.id != current_user.id
             redirect_to new_user_address_path(current_user) and return
@@ -37,6 +45,9 @@ class AddressesController < ApplicationController
         redirect_to user_path(current_user)
       else
         if @address.save
+          unless session[:url].blank?
+            redirect_to session[:url] and return
+          end
           redirect_to user_path(current_user)
         else
           render :edit

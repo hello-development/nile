@@ -7,7 +7,7 @@
           <table  class="table-hover table">
             <thead>
               <tr>
-                <th></th>
+                <th>ジャケ写</th>
                 <th>商品名</th>
                 <th>アーティスト</th>
                 <th>ジャンル</th>
@@ -21,7 +21,7 @@
             <tbody>
               <tr>
               <% @items.each do |item| %>
-                <td></td>
+                <td><%= link_to item_path(item) do %><%= attachment_image_tag item, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
                 <td><%= link_to item_path(item.id) do %><%= item.item_name %><% end %></td>
                 <td><%= link_to artist_path(item.artist.id) do %><%= item.artist.artist_name %><% end %></td>
                 <td><%= item.genre.genre_name %></td>

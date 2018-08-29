@@ -16,15 +16,15 @@
       <% end %>
       <% unless @user.artist_id.nil? %>
       <div>
-        <% if @user.artist_id == @user.artist.id %> <%= @user.artist.artist_name %>
+        <% if @user.artist_id == @user.artist.id %> <%=link_to "#{@user.artist.artist_name}", artist_path(@user.artist) %>
         <% end %>
       </div>
-      <div> <%= attachment_image_tag @user.artist, :artist_image, :fill, 150, 150, format: "jpg" %> </div>
+      <div> <%= link_to artist_path(@user.artist) do %><%= attachment_image_tag @user.artist, :artist_image, :fill, 150, 150, format: "jpg" %><% end %> </div>
         <span>
           <strong> 最新のCD： </strong>
         </span>
         <span>
-          <% @item.each do |item| %> <%= item.item_name %>
+          <% @item.each do |item| %> <%= link_to "#{item.item_name}", item_path(item) %>
           <% end %>
         </span>
         <div>
@@ -53,7 +53,7 @@
           <tr>
             <td><%= "#{i}位" %></td>
             <td><%= link_to item_path(rank.id) do %><%= attachment_image_tag rank, :item_image, :fill, 50, 50, format: 'jpeg' %><% end %></td>
-            <td><span> <%= rank.item_name %> </span></td>
+            <td><span> <%= link_to "#{rank.item_name}", item_path(rank) %> </span></td>
             <td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span><%= rank.likes.count %></td>
             <td><%= form_for (@cart_item), url: carts_add_item_path(rank.id) do |f| %><span>数量</span><%= f.number_field :units ,min:0 %></td>
             <td><%= f.submit 'カートに入れる' %><% end %></td>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-md-2" style="">
                   アーティスト名：<%= link_to datail.item.artist.artist_name, artist_path(datail.item.artist.id) %><br>
-                  商品名：<%= datail.item.item_name %>
+                  商品名：<%= link_to datail.item.item_name, item_path(datail.item) %>
                 </div>
                 <div class="col-md-2" style="">
                   単価：<%= datail.price %>円<br>
@@ -127,7 +127,7 @@
           <% end %>
             <div class="container">
               <div class="row">
-                <!-- <div class="col-md-6" style=""></div> -->
+                <div class="col-md-6" style=""></div>
                 <div class="col-md-6" style="">
                   <% a = purchase.delivery_address.split(",") %>
                   <!-- .split(",")でdelivery_address内の文字列を,で区切った配列を作りaに入れています -->
