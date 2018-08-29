@@ -38,7 +38,7 @@
 		            <!-- <td><%#= f.select :status, [['受付', 0], ['商品準備中', 1],['出荷済', 2]] %></td> -->
 		            <!-- 帰宅してからもう一度挙動確認したら、上記だと動きませんでしたので下記の渡邉さんが記述してくれた方でセレクトを表示させます。上記の表示が下記で実現できます -->
 		          <td><%= f.select :status, Purchase.statuses.keys.to_a, {} %></td>
-		          <td><%= f.submit '更新', class:"btn btn-link active data" %></td>
+		          <td><%= f.submit '更新', class:"btn btn-default btn-success" %></td>
 		          <td><%= purchase.id %></td>
 		          <% end %>
 	          </tr>

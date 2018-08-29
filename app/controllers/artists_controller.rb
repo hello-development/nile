@@ -14,7 +14,6 @@ class ArtistsController < ApplicationController
 			if params[:artist_name].present?
 				@artists = @artists.get_by_artist_name params[:artist_name]
 			end
-	
 			unless @artists.count == Artist.all.count
 				# artistsの数がArtist.allから変わっているか確認する
 			if @artists.count == 0
