@@ -17,16 +17,13 @@
 
       <a href="http://localhost:3000" class="header_logo"> <img src="/assets/LOGO1.PNG" width="130" height="46"> </a>
 
-      <% if user_signed_in? %>
-          <span> こんにちは　<strong> <%= current_user.last_name %> <%= current_user.first_name %> </strong>　さん </span>
-      <% elsif admin_signed_in? %>
+      <% if admin_signed_in? %>
           <span><strong>管理者</strong>としてログインしています</span>
       <% end %>
 
       <nav class="nav">
         <ul class="ruled">
 
-          <% if admin_signed_in? %>
             <li class="li">
                 <%= link_to "アーティスト", artists_path %>
             </li>
@@ -52,38 +49,6 @@
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
             </li>
 
-
-          <% elsif user_signed_in? %>
-            <li class="li">
-              <%= link_to "アーティスト", artists_path %>
-            </li>
-            <li class="li">
-              <%= link_to "CD", items_path %>
-            </li>
-            <li class="li">
-              <%= link_to "マイページ", user_path(current_user.id) %>
-            </li>
-            <li class="li">
-              <%= link_to "カート", user_carts_path(current_user.id) %>
-            </li>
-            <li class="li">
-              <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-            </li>
-
-          <% else %>
-            <li class="li">
-              <%= link_to "アーティスト", artists_path %>
-            </li>
-            <li class="li">
-              <%= link_to "CD", items_path %>
-            </li>
-            <li class="li">
-              <%= link_to "Log in", new_user_session_path %>
-            </li>
-            <li class="li">
-              <%= link_to "Sign Up", new_user_registration_path %>
-            </li>
-          <% end %>
         </ul>
       </nav>
 
